@@ -1,0 +1,90 @@
+:root{
+    --light-blue:#e3f2fd;
+    --grey-blue:#112e41;
+    --blue:#0b466d;
+    --cyan:#0dcaf0;
+}
+.navbar{
+    background-color: var(--light-blue);
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+.col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.coll{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.rowsb{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.rows{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+.rowsa{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.margin{
+    margin: 3rem;
+}
+.reg{
+    width: 25rem;
+    margin-top: 1rem;
+}
+.reg-sec{
+    background: var(--light-blue);
+    padding: 5rem;
+    border-radius: 10px;
+}
+.reg-sec button{
+    font-size: 1.5rem;;
+}
+.card{
+    margin:2rem;
+}
+.form-check{
+    margin: 0.5rem;
+}
+h1,h2,h3,h4{
+    font-family: 'Poiret One', bold;
+}
+h4{
+    font-size: 1.2rem;
+    font-weight: bold;
+    align-self: flex-start;
+    margin-left: 1rem;
+}
+.rad-div{
+    align-self: flex-start;
+}
+body{
+    color: var(--blue);
+}
+.card-header{
+    background-color: var(--light-blue);
+}
+.time{
+    font-family: 'Poiret One', cursive;
+    font-weight: bold;
+    font-size: 1.5em;
+}.card-footer{
+    background-color: var(--light-blue);
+}.c-f-item{
+    margin-left: 0.5em;
+}.active{
+    background-color: var(--cyan);
+}.dropitem{
+    background-color: var(--cyan);
+}
