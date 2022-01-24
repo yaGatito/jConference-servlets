@@ -1,27 +1,27 @@
 package com.conference.bean;
 
-import javax.xml.crypto.Data;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
-
 public class Event {
-//    public static void main(String[] args) {
-//        Date date = Date.valueOf();
-//        LocalDate localDate = LocalDate.now();
-//    }
-
     private int id;
     private String topic;
     private String description;
-    private Time time;
-    private Date date;
+    private String time;
+    private String date;
     private boolean isOnline;
     private Location location;
-    private User speaker;
+    private int speaker;
 
+    public Event(int id, String topic, String description){
+        this.id = id;
+        this.topic = topic;
+        this.description = description;
+    }
 
-    public Event(int id, String topic, String description, Time time, Date date, boolean isOnline, String location, User speaker) {
+    public Event( String topic, String description){
+        this.topic = topic;
+        this.description = description;
+    }
+
+    public Event(int id, String topic, String description, int speaker, String time, String date, boolean isOnline, String location) {
         this.id = id;
         this.topic = topic;
         this.description = description;
@@ -36,7 +36,7 @@ public class Event {
         this.speaker = speaker;
     }
 
-    public Event(String topic, String description, Time time, Date date, boolean isOnline, String location, User speaker) {
+    public Event(String topic, String description, int speaker, String time, String date, boolean isOnline, String location) {
         this.topic = topic;
         this.description = description;
         this.time = time;
@@ -63,7 +63,7 @@ public class Event {
         }
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
@@ -79,19 +79,19 @@ public class Event {
         return description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public Location getLocation() {
-        return location;
+    public String getLocation() {
+        return location.getAddress();
     }
 
-    public User getSpeaker() {
+    public int getSpeaker() {
         return speaker;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -103,7 +103,7 @@ public class Event {
         this.description = description;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -111,7 +111,7 @@ public class Event {
         this.location = location;
     }
 
-    public void setSpeaker(User speaker) {
+    public void setSpeaker(int speaker) {
         this.speaker = speaker;
     }
 
