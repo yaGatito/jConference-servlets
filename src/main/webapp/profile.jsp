@@ -1,3 +1,6 @@
+<%@ page import="com.conference.bean.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.conference.dao.UserDAO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,16 +17,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nixie+One&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-    <title>jConf</title>
+
+  <link rel="stylesheet" href="styles.css">
+    <title>Profile</title>
 </head>
 <body>
   <nav class="container-xl navbar sticky-top rowsa">
     <!-- Navbar content -->
     <div>
-      <a class="btn btn-grey" href="">jConference</a>
+      <a class="btn btn-grey" href="homepage.jsp">jConference</a>
       <a class="btn btn-info" href="">FAQ</a>
-      <a class="btn btn-info" href="">Events</a>
+      <a class="btn btn-info" href="events.jsp">Events</a>
     </div>
     <div>
       <form class="d-flex">
@@ -32,10 +36,88 @@
       </form>
     </div>
     <div>
-      <a class="btn btn-info" href="">Profile</a>
+      <a class="btn btn-info" href="profile.jsp">Profile</a>
       <a class="btn btn-blue" href="">RU</a>
     </div>
   </nav>
+
+  <!-- Admin profile -->
+  <section class="container-xl col">
+    <div class="card border-info mb-3" style="width: 50rem;">
+      <h2>All users</h2>
+      <table class="table table-info table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">User</th>
+          <th scope="col">Role</th>
+          <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%!
+          List<User> users;
+          UserDAO dao = new UserDAO();
+        %>
+        <%
+          users = dao.selectAll();
+          for (User user : users) {%>
+          <tr>
+            <td scope="row"><%=user.getId() %></td>
+            <td><%=user.getName()+" "+user.getLastname() %></td>
+            <td><%=user.getRole()%></td>
+            <td>x v e</td>
+          </tr>
+        <%}%>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="container-xl col">
+    <div class="card border-info mb-3" style="width: 50rem;">
+      <h2>All events</h2>
+      <table class="table table-info table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Topic</th>
+          <th scope="col">Speaker</th>
+          <th scope="col">Date and time</th>
+          <th scope="col">Location</th>
+          <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Math</td>
+          <td>Otto fon Bismark</td>
+          <td>11.12.2020 11:43</td>
+          <td>m.Arnautskaya 12A</td>
+          <td>x v e</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>English</td>
+          <td>Mark Chern</td>
+          <td>11.12.2020 16:34</td>
+          <td>vk.com</td>
+          <td>x v e</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Physics</td>
+          <td>Nikita Lazovskyi</td>
+          <td>11.12.2021 14:43</td>
+          <td>m.Arnautskaya 56B</td>
+          <td>x v e</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
 
   <!--Speaker profile-->
   <section class="container-xl col">
@@ -100,6 +182,53 @@
           <div class="card-footer rows">
             <p class="c-f-item"><span class="iconify-inline" data-icon="bx:bx-time-five" data-width="1.1em"></span> 17:00</p>
               <p class="c-f-item"><span class="iconify-inline" data-icon="bx:bx-calendar" data-width="1.1em"></span> 12.12.2220</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col">
+      <a href="" class="btn btn-info" style="width: 10rem;">Add new event</a>
+    </div>
+  </section>
+
+  <!-- Listener -->
+  <section class="container-xl col">
+    <div class="card border-info mb-3" style="max-width: 50rem;">
+      <div class="card-header rowsb">
+        <h2 style="margin-left: 10px;">You registered for next conferences: </h2>
+      </div>
+      <div class="card-body text-secondary">
+
+        <div class="card border-info mb-3" style="width: 35rem;">
+          <div class="card-header rowsb">
+            <p style="margin-left: 10px;"><span class="iconify-inline" data-icon="pepicons:internet" data-width="1.1em"></span> <a class="link-info" href="vk.com">skype.com/asda</a></p>
+          </div>
+          <div class="card-body text-secondary">
+            <h5 class="card-title">English</h5>
+            <p class="card-text">Some qu make up the bulk of the card's content.</p>
+            <a href="" class="link-info">Join</a>
+          </div>
+          <div class="card-footer rows">
+            <p class="c-f-item"><span class="iconify-inline" data-icon="bx:bx-time-five" data-width="1.1em"></span> 16:00</p>
+            <p class="c-f-item"><span class="iconify-inline" data-icon="bx:bx-calendar" data-width="1.1em"></span> 12.12.2220</p>
+          </div>
+        </div>
+
+        <div class="card border-info mb-3" style="max-width: 35rem;">
+          <div class="card-header rowsb">
+            <p style="margin-left: 10px;"><span class="iconify-inline" data-icon="akar-icons:location" data-width="1.1em"></span> m.Arnautskaya str. 49B</p>
+
+          </div>
+          <div class="card-body text-secondary">
+            <h5 class="card-title">Math</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="" class="link-info">Join</a>
+          </div>
+          <div class="card-footer rows">
+            <p class="c-f-item"><span class="iconify-inline" data-icon="bx:bx-time-five" data-width="1.1em"></span> 17:00</p>
+            <p class="c-f-item"><span class="iconify-inline" data-icon="bx:bx-calendar" data-width="1.1em"></span> 12.12.2220</p>
           </div>
         </div>
 

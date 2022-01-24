@@ -87,4 +87,6 @@ body{
     background-color: var(--cyan);
 }.dropitem{
     background-color: var(--cyan);
+}.footer{
+    background-color: var(--light-blue);
 }

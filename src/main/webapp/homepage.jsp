@@ -14,16 +14,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nixie+One&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+
+  <link rel="stylesheet" href="styles.css">
     <title>jConf</title>
 </head>
 <body>
   <nav class="container-xl navbar sticky-top rowsa">
     <!-- Navbar content -->
     <div>
-      <a class="btn btn-grey" href="">jConference</a>
+      <a class="btn btn-grey" href="homepage.jsp">jConference</a>
       <a class="btn btn-info" href="">FAQ</a>
-      <a class="btn btn-info" href="">Events</a>
+      <a class="btn btn-info" href="events.jsp">Events</a>
     </div>
     <div>
       <form class="d-flex">
@@ -32,7 +33,7 @@
       </form>
     </div>
     <div>
-      <a class="btn btn-info" href="">Profile</a>
+      <a class="btn btn-info" href="profile.jsp">Profile</a>
       <a class="btn btn-blue" href="">RU</a>
     </div>
   </nav>
@@ -43,21 +44,21 @@
     <div class="margin col reg-sec">
       <h1 class="display-6">Welcome! Have not registered yet?</h1>
       <h4 style="width: 30rem;">If you already have one - <a href="" class="link-info">login</a></h4>
-        <form class="col margin" action="registrartion" method="post">
-          <input class="form-control reg" type="text" placeholder="Name" aria-label="Search" required>
-          <input class="form-control reg" type="text" placeholder="Lastname" aria-label="Search" required>
-          <input class="form-control reg" type="Email" placeholder="Email" aria-label="Search" required>
-          <input class="form-control reg" type="password" placeholder="Password" aria-label="Search" required>
+        <form class="col margin" action="${pageContext.request.contextPath}/Registration" method="post">
+          <input name="name" class="form-control reg" type="text" placeholder="Name" aria-label="Search" required>
+          <input name="lastname" class="form-control reg" type="text" placeholder="Lastname" aria-label="Search" required>
+          <input name="email" class="form-control reg" type="Email" placeholder="Email" aria-label="Search" required>
+          <input name="password" class="form-control reg" type="password" placeholder="Password" aria-label="Search" required>
           <input class="form-control reg" type="password" placeholder="Enter password again" aria-label="Search" required>
           <div class="rad-div">
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+              <input class="form-check-input" type="radio" name="role" value="3" id="flexRadioDefault1" checked>
               <label class="form-check-label" for="flexRadioDefault1">
                 User
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+              <input class="form-check-input" type="radio" name="role" value="2" id="flexRadioDefault2">
               <label class="form-check-label" for="flexRadioDefault2">
                 Speaker
               </label>
@@ -146,7 +147,7 @@
 
   <!--Footer-->
   <section class="container-xl rowsb">
-    <div id="reg-sec" class="margin col">
+    <div id="reg-sec" class="margin col footer">
       All rights reserved 
     </div>
   </section>

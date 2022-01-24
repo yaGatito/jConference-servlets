@@ -14,16 +14,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nixie+One&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-    <title>jConf</title>
+
+  <link rel="stylesheet" href="styles.css">
+    <title>Events</title>
 </head>
 <body>
   <nav class="container-xl navbar sticky-top rowsa">
     <!-- Navbar content -->
     <div>
-      <a class="btn btn-grey" href="homepage.html">jConference</a>
+      <a class="btn btn-grey" href="homepage.jsp">jConference</a>
       <a class="btn btn-info" href="">FAQ</a>
-      <a class="btn btn-info" href="events.html">Events</a>
+      <a class="btn btn-info" href="events.jsp">Events</a>
     </div>
     <div>
       <form class="d-flex">
@@ -32,7 +33,7 @@
       </form>
     </div>
     <div>
-      <a class="btn btn-info" href="profile.html">Profile</a>
+      <a class="btn btn-info" href="profile.jsp">Profile</a>
       <a class="btn btn-blue" href="">RU</a>
     </div>
   </nav>
