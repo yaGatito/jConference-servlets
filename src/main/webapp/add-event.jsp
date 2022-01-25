@@ -4,7 +4,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
-<jsp:include page="header.html"/>
+<jsp:include page="header.jsp"/>
+<%!List<User> speakers;%>
+<%speakers = new UserDAO().selectSpeakers();%>
 
   <section class="container-xl col">
     <!--Add event-->
@@ -22,10 +24,8 @@
           <div style="margin-top: 1rem; line-height: 0">
             <h4>Speaker</h4>
             <select name="speaker" class="form-control reg"  required>
-              <%!List<User> speakers;%>
-              <%speakers = new UserDAO().selectSpeakers();%>
               <%for (User speaker : speakers) {%>
-              <option value="<%=speaker.getId()%>"><%=speaker.getName() + " " + speaker.getLastname() + " " + speaker.getId()%></option>
+              <option value="<%=speaker.getId()%>"><%=speaker.getName() + " " + speaker.getLastname()%></option>
               <%}%>
             </select>
           </div>
@@ -43,14 +43,14 @@
           </div>
           <div style="margin-top: 1rem; line-height: 0">
             <div class="rad-div">
-              <div class="form-check">
-                <input value="online" class="form-check-input" type="radio" name="condition" id="flexRadioDefault1" checked>
+              <div class="form-check rows">
+                <input style="margin-right: 1rem" value="online" class="form-check-input" type="radio" name="condition" id="flexRadioDefault1" checked>
                 <label class="form-check-label" for="flexRadioDefault1">
                   Online meeting
                 </label>
               </div>
-              <div class="form-check">
-                <input value="offline" class="form-check-input" type="radio" name="condition" id="flexRadioDefault2">
+              <div class="form-check rows">
+                <input style="margin-right: 1rem" value="offline" class="form-check-input" type="radio" name="condition" id="flexRadioDefault2">
                 <label class="form-check-label" for="flexRadioDefault2">
                   Offline meeting
                 </label>

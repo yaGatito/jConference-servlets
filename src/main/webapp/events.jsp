@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
-<jsp:include page="header.html"/>
+<jsp:include page="header.jsp"/>
 <body>
   <section class="container-xl col">
     <div class="margin col">

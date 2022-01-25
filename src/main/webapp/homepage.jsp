@@ -1,13 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
-<jsp:include page="header.html"/>
+<jsp:include page="header.jsp"/>
 <body>
   <!--Registration-->
   <section class="container-xl col">
     <div class="margin col reg-sec">
       <h1 class="display-6">Welcome! Have not registered yet?</h1>
-      <h4 style="width: 30rem;">If you already have one - <a href="" class="link-info">login</a></h4>
+      <h4 style="width: 30rem;">If you already have one - <a href="login.jsp" class="link-info">login</a></h4>
         <form class="col margin" action="${pageContext.request.contextPath}/Registration" method="post">
           <input name="name" class="form-control reg" type="text" placeholder="Name" aria-label="Search" required>
           <input name="lastname" class="form-control reg" type="text" placeholder="Lastname" aria-label="Search" required>

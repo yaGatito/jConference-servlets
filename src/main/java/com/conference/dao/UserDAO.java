@@ -2,7 +2,6 @@ package com.conference.dao;
 
 import com.conference.bean.Role;
 import com.conference.bean.User;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ public class UserDAO {
         Connection connection;
         try {
             Class.forName(DRIVER);
-            connection = DriverManager.getConnection(URL,UNAME,UPASS);
+            connection = DriverManager.getConnection(FULL);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             connection = null;
@@ -34,7 +33,7 @@ public class UserDAO {
             "VALUES (default, ?, ?, ?, ?, ?)";
 
     public boolean insertUser(User user){
-        try (PreparedStatement statement = getConnection().prepareStatement(INSERT_USER)) {
+        try (Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(INSERT_USER)) {
             statement.setInt(1,user.getRoleID());
             statement.setString(2,user.getName());
             statement.setString(3,user.getLastname());
@@ -52,9 +51,10 @@ public class UserDAO {
 
     public List<User> selectAll(){
         List<User> users;
-        try (PreparedStatement statement = getConnection().prepareStatement(SELECT_ALL)) {
-            users = new ArrayList<>();
+        try (Connection con = getConnection();
+             PreparedStatement statement = con.prepareStatement(SELECT_ALL)) {
             ResultSet set = statement.executeQuery();
+            users = new ArrayList<>();
             while (set.next()){
                 int id = set.getInt("id");
                 int role = set.getInt("role");
@@ -64,6 +64,7 @@ public class UserDAO {
                 String password = set.getString("password");
                 users.add(new User(id,role,name,lastname,email,password));
             }
+            set.close();
         } catch (SQLException e) {
             e.printStackTrace();
             users = null;
@@ -74,7 +75,7 @@ public class UserDAO {
     private static final String GET_BY_ID = "SELECT * FROM users WHERE id = ?";
 
     public User getByID(int id){
-        try (PreparedStatement statement = getConnection().prepareStatement(GET_BY_ID)) {
+        try (Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(GET_BY_ID)) {
             statement.setInt(1,id);
             ResultSet set = statement.executeQuery();
             set.next();
@@ -84,20 +85,45 @@ public class UserDAO {
             String email = set.getString("email");
             String password = set.getString("password");
             User user = new User(role,name,lastname,email,password);
+            set.close();
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
+private static final String LOGGED_USER = "SELECT * FROM users WHERE email = ? AND password = ?";
+
+    public User loginUser(String email, String password){
+        User user = null;
+        try (Connection con = getConnection();
+             PreparedStatement statement = con.prepareStatement(LOGGED_USER)) {
+            statement.setString(1,email);
+            statement.setString(2,password);
+            ResultSet set = statement.executeQuery();
+            if(set.next()) {
+                int id = set.getInt("id");
+                int role = set.getInt("role");
+                String name = set.getString("name");
+                String lastname = set.getString("lastname");
+                user = new User(id, role, name, lastname, email, password);
+            }
+            set.close();
+        } catch (SQLException e) {
+            user = null;
+            e.printStackTrace();
+        }
+        return user;
+    }
 
     private static final String SELECT_SPEAKER = "SELECT * FROM users WHERE role = 2"; //2 - Speaker
 
     public List<User> selectSpeakers(){
         List<User> users;
-        try (PreparedStatement statement = getConnection().prepareStatement(SELECT_SPEAKER)) {
-            users = new ArrayList<>();
+        try (Connection con = getConnection();
+             PreparedStatement statement = con.prepareStatement(SELECT_SPEAKER)) {
             ResultSet set = statement.executeQuery();
+            users = new ArrayList<>();
             while (set.next()){
                 int id = set.getInt("id");
                 int role = set.getInt("role");
@@ -107,6 +133,7 @@ public class UserDAO {
                 String password = set.getString("password");
                 users.add(new User(id,role,name,lastname,email,password));
             }
+            set.close();
         } catch (SQLException e) {
             e.printStackTrace();
             users = null;

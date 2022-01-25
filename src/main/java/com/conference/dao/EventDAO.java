@@ -1,7 +1,6 @@
 package com.conference.dao;
 
 import com.conference.bean.Event;
-import com.conference.bean.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class EventDAO {
         Connection connection;
         try {
             Class.forName(DRIVER);
-            connection = DriverManager.getConnection(URL,UNAME,UPASS);
+            connection = DriverManager.getConnection(FULL);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             connection = null;
@@ -33,7 +32,7 @@ public class EventDAO {
                     "VALUES (default, ?, ?)";
 
     public boolean createTopic(Event event){
-        try (PreparedStatement statement = getConnection().prepareStatement(CREATE_TOPIC)) {
+        try (Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(CREATE_TOPIC)) {
             statement.setString(1,event.getTopic());
             statement.setString(2,event.getDescription());
             statement.executeUpdate();
@@ -49,13 +48,14 @@ public class EventDAO {
                     "VALUES (default, ?, ?, ?, ?, ?, ?, ?)";
 
     public boolean createEvent(Event event){
-        try (PreparedStatement statement = getConnection().prepareStatement(CREATE_EVENT)) {
+        try (Connection con = getConnection();
+             PreparedStatement statement = con.prepareStatement(CREATE_EVENT)) {
             statement.setString(1,event.getTopic());
             statement.setString(2,event.getDescription());
             statement.setString(3,event.getTime());
             statement.setString(4,event.getDate());
             statement.setBoolean(5,event.getCondition());
-            statement.setString(6,event.getLocation());
+            statement.setString(6,event.getLocation().getAddress());
             statement.setInt(7,event.getSpeaker());
             statement.executeUpdate();
             return true;
@@ -69,9 +69,10 @@ public class EventDAO {
 
     public List<Event> selectAllReady(){
         List<Event> events;
-        try (PreparedStatement statement = getConnection().prepareStatement(SELECT_ALL_READY)) {
-            events = new ArrayList<>();
+        try (Connection con = getConnection();
+             PreparedStatement statement = con.prepareStatement(SELECT_ALL_READY)) {
             ResultSet set = statement.executeQuery();
+            events = new ArrayList<>();
             while (set.next()){
                 int id = set.getInt("id");
                 String topic = set.getString("topic");
@@ -83,6 +84,7 @@ public class EventDAO {
                 int speaker = set.getInt("speaker");
                 events.add(new Event(id,topic,description,speaker,time,date,online,location));
             }
+            set.close();
         } catch (SQLException e) {
             e.printStackTrace();
             events = null;

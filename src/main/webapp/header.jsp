@@ -29,7 +29,14 @@
         </form>
     </div>
     <div>
-        <a class="btn btn-info" href="profile.jsp">Profile</a>
-        <a class="btn btn-blue" href="">RU</a>
+        <%if (request.getSession().getAttribute("user")==null){%>
+            <a class="btn btn-info" href="homepage.jsp">Sign up</a>
+            <a class="btn btn-info" href="login.jsp">Log in</a>
+            <a class="btn btn-blue" href="">RU</a>
+        <%}else {%>
+            <a class="btn btn-info" href="profile.jsp">Profile</a>
+            <a class="btn btn-info" href="logout.jsp">Log out</a>
+            <a class="btn btn-blue" href="">RU</a>
+        <%}%>
     </div>
 </nav>

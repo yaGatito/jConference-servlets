@@ -9,6 +9,7 @@ public class Event {
     private boolean isOnline;
     private Location location;
     private int speaker;
+//    private int status;
 
     public Event(int id, String topic, String description){
         this.id = id;
@@ -83,8 +84,8 @@ public class Event {
         return date;
     }
 
-    public String getLocation() {
-        return location.getAddress();
+    public Location getLocation() {
+        return location;
     }
 
     public int getSpeaker() {
