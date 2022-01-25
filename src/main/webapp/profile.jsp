@@ -116,6 +116,9 @@
         </tbody>
       </table>
     </div>
+    <div class="rowsb">
+      <a href="" class="btn btn-info" style="width: 10rem; margin-right: 10rem">Add new event</a><a href="" class="btn btn-info" style="width: 10rem;">Add new topic</a>
+    </div>
   </section>
 
 
@@ -186,10 +189,6 @@
         </div>
 
       </div>
-    </div>
-
-    <div class="col">
-      <a href="" class="btn btn-info" style="width: 10rem;">Add new event</a>
     </div>
   </section>
 

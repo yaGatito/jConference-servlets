@@ -41,39 +41,12 @@
   <section class="container-xl col">
     <!--Add event-->
     <div id="addevent" class="margin col reg-sec">
-      <h1 class="display-6">Create event</h1>
+      <h1 class="display-6">Add topic</h1>
         <form id="event-form" class="col margin" action="registrartion" method="post">
           <h4>Topic</h4>
           <input name="topic" class="form-control reg" type="text" placeholder="" aria-label="Search" required>
           <h4>Description</h4>
           <textarea class="form-control reg" rows="4" cols="50" name="description" form="event-form"></textarea>
-          <h4>Speaker</h4>
-          <select class="form-control reg" name="speaker">
-            <option title="asdas">Iran</option>
-            <option>Turkey</option>
-            <option>China</option>
-            <option>Germany</option>
-        </select>
-        <h4>Date</h4>
-          <input name="date" class="form-control reg" type="date" placeholder="" aria-label="Search" min="11/10/2021" required>
-          <h4>Time</h4>
-          <input name="time" class="form-control reg" type="time" placeholder="" aria-label="Search" required>
-          <h4>Address</h4>
-          <input name="location" class="form-control reg" type="text" placeholder="" aria-label="Search" required>
-          <div class="rad-div">
-            <div class="form-check">
-              <input value="online" class="form-check-input" type="radio" name="condition" id="flexRadioDefault1" checked>
-              <label class="form-check-label" for="flexRadioDefault1">
-                Online meeting
-              </label>
-            </div>
-            <div class="form-check">
-              <input value="offline" class="form-check-input" type="radio" name="condition" id="flexRadioDefault2">
-              <label class="form-check-label" for="flexRadioDefault2">
-                Offline meeting
-              </label>
-            </div>
-          </div>
           <p></p> <button class="btn btn-info" type="submit">Confirm</button>
         </form>
     </div>

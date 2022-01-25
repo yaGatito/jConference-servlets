@@ -41,19 +41,10 @@
   <section class="container-xl col">
     <!--Add event-->
     <div id="addevent" class="margin col reg-sec">
-      <h1 class="display-6">Create event</h1>
+      <h1 class="display-6">Offer</h1>
         <form id="event-form" class="col margin" action="registrartion" method="post">
-          <h4>Topic</h4>
-          <input name="topic" class="form-control reg" type="text" placeholder="" aria-label="Search" required>
-          <h4>Description</h4>
-          <textarea class="form-control reg" rows="4" cols="50" name="description" form="event-form"></textarea>
-          <h4>Speaker</h4>
-          <select class="form-control reg" name="speaker">
-            <option title="asdas">Iran</option>
-            <option>Turkey</option>
-            <option>China</option>
-            <option>Germany</option>
-        </select>
+          <p class="form-control reg">Math</p>
+            <p class="form-control reg">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         <h4>Date</h4>
           <input name="date" class="form-control reg" type="date" placeholder="" aria-label="Search" min="11/10/2021" required>
           <h4>Time</h4>

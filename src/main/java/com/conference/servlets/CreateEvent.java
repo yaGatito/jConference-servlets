@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "CreateEvent", value = "/CreateEvent")
+@WebServlet("/CreateEvent")
 public class CreateEvent extends HttpServlet {
 
     @Override
