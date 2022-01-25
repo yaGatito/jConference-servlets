@@ -1,6 +1,8 @@
 <%@ page import="com.conference.bean.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.conference.dao.UserDAO" %>
+<%@ page import="com.conference.bean.Event" %>
+<%@ page import="com.conference.dao.EventDAO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,35 +91,27 @@
         </tr>
         </thead>
         <tbody>
+        <%!List<Event> events;%>
+        <%events = new EventDAO().selectAllReady();%>
+        <%for (Event event : events) {%>
         <tr>
-          <th scope="row">1</th>
-          <td>Math</td>
-          <td>Otto fon Bismark</td>
-          <td>11.12.2020 11:43</td>
-          <td>m.Arnautskaya 12A</td>
+          <th scope="row"><%=event.getId()%></th>
+          <td><%=event.getTopic()%></td>
+          <td><%=dao.getByID(event.getSpeaker()).toString()%></td>
+          <td><%=event.getDate() + " " + event.getTime()%></td>
+          <%if (event.getCondition()){%>
+          <td><a href="<%=event.getLocation()%>"></a></td>
+          <%}else {%>
+          <td><%=event.getLocation()%></td>
+          <%}%><
           <td>x v e</td>
         </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>English</td>
-          <td>Mark Chern</td>
-          <td>11.12.2020 16:34</td>
-          <td>vk.com</td>
-          <td>x v e</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Physics</td>
-          <td>Nikita Lazovskyi</td>
-          <td>11.12.2021 14:43</td>
-          <td>m.Arnautskaya 56B</td>
-          <td>x v e</td>
-        </tr>
+        <%}%>
         </tbody>
       </table>
     </div>
     <div class="rowsb">
-      <a href="" class="btn btn-info" style="width: 10rem; margin-right: 10rem">Add new event</a><a href="" class="btn btn-info" style="width: 10rem;">Add new topic</a>
+      <a href="addevent.jsp" class="btn btn-info" style="width: 10rem; margin-right: 10rem">Add new event</a><a href="" class="btn btn-info" style="width: 10rem;">Add new topic</a>
     </div>
   </section>
 

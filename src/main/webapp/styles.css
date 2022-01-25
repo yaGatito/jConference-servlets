@@ -58,7 +58,7 @@
     margin: 0.5rem;
 }
 h1,h2,h3,h4{
-    font-family: 'Poiret One', bold;
+    font-family: 'Poiret One', cursive;
 }
 h4{
     font-size: 1.2rem;
@@ -80,13 +80,13 @@ body{
     font-weight: bold;
     font-size: 1.5em;
 }.card-footer{
-    background-color: var(--light-blue);
+     background-color: var(--light-blue);
 }.c-f-item{
-    margin-left: 0.5em;
+      margin-left: 0.5em;
 }.active{
-    background-color: var(--cyan);
+       background-color: var(--cyan);
 }.dropitem{
-    background-color: var(--cyan);
-}.footer{
-    background-color: var(--light-blue);
-}
+        background-color: var(--cyan);
+}.block{
+    margin-top: 1vw;
+     }
