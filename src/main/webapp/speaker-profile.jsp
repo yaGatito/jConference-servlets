@@ -20,21 +20,17 @@
           <h2 style="margin-left: 10px;">We are looking for speakers for next topics:</h2>
       </div>
       <div class="card-body text-secondary">
-        <div class="card border-info mb-3" style="width: 35rem;">
-          <div class="card-body text-secondary">
-            <h5 class="card-title">English</h5>
-            <p class="card-text">Some qu make up the bulk of the card's content.</p>
-            <a href="" class="link-info">Offer<span class="iconify-inline" data-icon="ic:outline-local-offer"></span></a>
+        <%
+          events = edao.selectByStatus(1);
+          for (Event event : events){%>
+          <div class="card border-info mb-3" style="width: 35rem;">
+            <div class="card-body text-secondary">
+              <h5 class="card-title"><%=event.getTopic()%></h5>
+              <p class="card-text"><%=event.getDescription()%></p>
+              <a href="" class="link-info">Offer<span class="iconify-inline" data-icon="ic:outline-local-offer"></span></a>
+            </div>
           </div>
-        </div>
-
-        <div class="card border-info mb-3" style="width: 35rem;">
-          <div class="card-body text-secondary">
-            <h5 class="card-title">Math</h5>
-            <p class="card-text">Some qu make up the bulk of the card's content. Some qu make up the bulk of the card's content.</p>
-            <a href="" class="link-info">Offer<span class="iconify-inline" data-icon="ic:outline-local-offer"></span></a>
-          </div>
-        </div>
+        <%}%>
 
         <div class="col">
           <a href="" class="btn btn-info" style="width: 10rem;">More</a>

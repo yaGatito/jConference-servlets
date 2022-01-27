@@ -24,39 +24,28 @@
           <div style="margin-top: 1rem; line-height: 0">
             <h4>Speaker</h4>
             <select name="speaker" class="form-control reg"  required>
+              <option value="-99">Free to choose</option>
               <%for (User speaker : speakers) {%>
               <option value="<%=speaker.getId()%>"><%=speaker.getName() + " " + speaker.getLastname()%></option>
               <%}%>
             </select>
           </div>
-          <div style="margin-top: 1rem; line-height: 0">
-            <h4>Date</h4>
-            <input name="date" class="form-control reg" type="date" placeholder="" aria-label="Search" required>
-          </div>
-          <div style="margin-top: 1rem; line-height: 0">
-            <h4>Time</h4>
-            <input name="time" class="form-control reg" type="time" placeholder="" aria-label="Search" required>
-          </div>
-          <div style="margin-top: 1rem; line-height: 0">
-            <h4>Address</h4>
-            <input name="location" class="form-control reg" type="text" placeholder="" aria-label="Search" required>
-          </div>
-          <div style="margin-top: 1rem; line-height: 0">
-            <div class="rad-div">
-              <div class="form-check rows">
-                <input style="margin-right: 1rem" value="online" class="form-check-input" type="radio" name="condition" id="flexRadioDefault1" checked>
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Online meeting
-                </label>
-              </div>
-              <div class="form-check rows">
-                <input style="margin-right: 1rem" value="offline" class="form-check-input" type="radio" name="condition" id="flexRadioDefault2">
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Offline meeting
-                </label>
-              </div>
-            </div>
-          </div>
+<%--          <div style="margin-top: 1rem; line-height: 0">--%>
+<%--            <h4>Date</h4>--%>
+<%--            <input name="date" class="form-control reg" type="date" placeholder="" aria-label="Search" required>--%>
+<%--          </div>--%>
+<%--          <div style="margin-top: 1rem; line-height: 0">--%>
+<%--            <h4>From</h4>--%>
+<%--            <input name="fromtime" class="form-control reg" type="time" placeholder="" aria-label="Search" required>--%>
+<%--          </div>--%>
+<%--          <div style="margin-top: 1rem; line-height: 0">--%>
+<%--            <h4>To</h4>--%>
+<%--            <input name="totime" class="form-control reg" type="time" placeholder="" aria-label="Search" required>--%>
+<%--          </div>--%>
+<%--          <div style="margin-top: 1rem; line-height: 0">--%>
+<%--            <h4>Address</h4>--%>
+<%--            <input name="location" class="form-control reg" type="text" placeholder="" aria-label="Search" required>--%>
+<%--          </div>--%>
           <p></p> <button class="btn btn-info" type="submit">Confirm</button>
         </form>
     </div>

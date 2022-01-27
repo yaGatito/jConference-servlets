@@ -7,6 +7,7 @@ public final class Role {
     private final boolean asListener;
     private final boolean asSpeaker;
     private final boolean asModerator;
+    public final String name;
 
     private static Role MODER;
     private static Role SPEAKER;
@@ -15,25 +16,26 @@ public final class Role {
     public static Role getInstance(int role_id){
         switch (role_id){
             case 1: if (MODER == null){
-                        MODER = new Role(false,false,true);
+                        MODER = new Role(false,false,true, "Moder");
                         MODER.setRoleID(role_id);
                     }return MODER;
             case 2: if (SPEAKER == null){
-                        SPEAKER = new Role(true,true,false);
+                        SPEAKER = new Role(true,true,false, "Speaker");
                         SPEAKER.setRoleID(role_id);
                     }return SPEAKER;
             case 3: if (LISTENER == null){
-                        LISTENER = new Role(true,false,false);
+                        LISTENER = new Role(true,false,false, "Listener");
                         LISTENER.setRoleID(role_id);
                     }return LISTENER;
             default:return null;
         }
     }
 
-    private Role(boolean asListener, boolean asSpeaker, boolean asModerator) {
+    private Role(boolean asListener, boolean asSpeaker, boolean asModerator, String name) {
         this.asListener = asListener;
         this.asSpeaker = asSpeaker;
         this.asModerator = asModerator;
+        this.name = name;
     }
 
     public int getRoleID() {
@@ -66,5 +68,10 @@ public final class Role {
     @Override
     public int hashCode() {
         return Objects.hash(role_id);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

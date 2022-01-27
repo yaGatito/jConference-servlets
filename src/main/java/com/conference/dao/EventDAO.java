@@ -27,36 +27,21 @@ public class EventDAO {
         return connection;
     }
 
-    private static final String CREATE_TOPIC =
-            "INSERT INTO events (id, topic, description) " +
-                    "VALUES (default, ?, ?)";
-
-    public boolean createTopic(Event event){
-        try (Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(CREATE_TOPIC)) {
-            statement.setString(1,event.getTopic());
-            statement.setString(2,event.getDescription());
-            statement.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     private static final String CREATE_EVENT =
-            "INSERT INTO events (id, topic, description, time, date, online, location, speaker) " +
-                    "VALUES (default, ?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO events (id, topic, description,speaker,date,fromtime,totime,location,status) " +
+                    "VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     public boolean createEvent(Event event){
         try (Connection con = getConnection();
              PreparedStatement statement = con.prepareStatement(CREATE_EVENT)) {
             statement.setString(1,event.getTopic());
             statement.setString(2,event.getDescription());
-            statement.setString(3,event.getTime());
+            statement.setInt(3,event.getSpeaker());
             statement.setString(4,event.getDate());
-            statement.setBoolean(5,event.getCondition());
-            statement.setString(6,event.getLocation().getAddress());
-            statement.setInt(7,event.getSpeaker());
+            statement.setString(5,event.getFromtime());
+            statement.setString(6,event.getTotime());
+            statement.setString(7,event.getLocation().getAddress());
+            statement.setInt(8,event.getStatus());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -65,24 +50,25 @@ public class EventDAO {
         }
     }
 
-    private static final String SELECT_ALL_READY = "SELECT * FROM events WHERE location IS NOT NULL AND time IS NOT NULL AND date IS NOT NULL";
+    private static final String SELECT_BY_STATUS = "SELECT * FROM events WHERE status = ?";
 
-    public List<Event> selectAllReady(){
+    public List<Event> selectByStatus(int status){
         List<Event> events;
         try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement(SELECT_ALL_READY)) {
+             PreparedStatement statement = con.prepareStatement(SELECT_BY_STATUS)) {
+            statement.setInt(1,status);
             ResultSet set = statement.executeQuery();
             events = new ArrayList<>();
             while (set.next()){
                 int id = set.getInt("id");
                 String topic = set.getString("topic");
                 String description = set.getString("description");
-                String time = set.getString("time");
+                String fromtime = set.getString("fromtime");
+                String totime = set.getString("totime");
                 String date = set.getString("date");
-                boolean online = set.getBoolean("online");
                 String location = set.getString("location");
                 int speaker = set.getInt("speaker");
-                events.add(new Event(id,topic,description,speaker,time,date,online,location));
+                events.add(new Event(id,topic,description,speaker,fromtime,totime,date,location));
             }
             set.close();
         } catch (SQLException e) {

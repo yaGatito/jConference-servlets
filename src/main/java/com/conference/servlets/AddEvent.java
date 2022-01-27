@@ -18,11 +18,10 @@ public class AddEvent extends HttpServlet {
         String description = request.getParameter("description");
         int speaker = Integer.parseInt(request.getParameter("speaker"));
         String date = request.getParameter("date");
-        String time = request.getParameter("time");
+        String fromtime = request.getParameter("fromtime");
+        String totime = request.getParameter("totime");
         String location = request.getParameter("location");
-        String condition = request.getParameter("condition");
-        boolean isOnline = condition.equals("online");
-        Event event = new Event(topic,description,speaker,time,date,isOnline,location);
+        Event event = new Event(topic,description,speaker,fromtime,totime,date,location);
         new EventDAO().createEvent(event);
         response.sendRedirect("profile.jsp");
     }

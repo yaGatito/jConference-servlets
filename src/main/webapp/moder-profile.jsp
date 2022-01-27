@@ -33,7 +33,7 @@
           <tr>
             <td scope="row"><%=user.getId() %></td>
             <td><%=user.getName() + " " + user.getLastname() %></td>
-            <td><%=user.getRole()%></td>
+            <td><%=user.getRole().toString()%></td>
             <td>x v e</td>
           </tr>
         <%}%>
@@ -57,13 +57,13 @@
         </tr>
         </thead>
         <tbody>
-        <%events = edao.selectAllReady();%>
+        <%events = edao.selectByStatus(3);%>
         <%for (Event event : events) {%>
         <tr>
           <th scope="row"><%=event.getId()%></th>
           <td><%=event.getTopic()%></td>
           <td><%=udao.getByID(event.getSpeaker()).toString()%></td>
-          <td><%=event.getDate() + " " + event.getTime()%></td>
+          <td><%=event.getDate() + " " + event.getFromtime()+"-"+event.getTotime()%></td>
           <%if (event.getCondition()){%>
             <td><a href="<%=event.getLocation().getAddress()%>" target="_blank"><%=event.getLocation().getShortName()%></a></td>
           <%}%>
@@ -77,6 +77,6 @@
       </table>
     </div>
     <div class="rowsb">
-      <a href="add-event.jsp" class="btn btn-info" style="width: 10rem; margin-right: 10rem">Add new event</a><a href="" class="btn btn-info" style="width: 10rem;">Add new topic</a>
+      <a href="add-event.jsp" class="btn btn-info" style="width: 10rem; margin-right: 10rem">Add new event</a>
     </div>
   </section>

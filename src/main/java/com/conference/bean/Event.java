@@ -4,69 +4,59 @@ public class Event {
     private int id;
     private String topic;
     private String description;
-    private String time;
+    private String fromtime;
+    private String totime;
     private String date;
     private boolean isOnline;
     private Location location;
     private int speaker;
-//    private int status;
+    private int status;
 
-    public Event(int id, String topic, String description){
+    public Event(int id, String topic, String description, int speaker, String fromtime, String totime, String date, String location) {
         this.id = id;
-        this.topic = topic;
-        this.description = description;
+        setTopic(topic);
+        setDescription(description);
+        setTotime(totime);
+        setFromtime(fromtime);
+        setDate(date);
+        setLocation(location);
+        setSpeaker(speaker);
+        checkStatus();
     }
 
-    public Event( String topic, String description){
-        this.topic = topic;
-        this.description = description;
+    public Event(String topic, String description, int speaker, String fromtime, String totime, String date, String location) {
+        setTopic(topic);
+        setDescription(description);
+        setTotime(totime);
+        setFromtime(fromtime);
+        setDate(date);
+        setLocation(location);
+        setSpeaker(speaker);
+        checkStatus();
     }
 
-    public Event(int id, String topic, String description, int speaker, String time, String date, boolean isOnline, String location) {
-        this.id = id;
-        this.topic = topic;
-        this.description = description;
-        this.time = time;
-        this.date = date;
-        this.isOnline = isOnline;
-        if (isOnline){
-            this.location = Location.ONLINE(location);
+    private void checkStatus(){
+        if (!this.date.equals("n/a") && !this.location.getAddress().equals("n/a")){
+            this.status = 3;
+        }else if(this.speaker != -99 && this.speaker != 0){
+            this.status = 2;
         }else{
-            this.location = Location.OFFLINE(location);
+            this.status = 1;
         }
-        this.speaker = speaker;
     }
 
-    public Event(String topic, String description, int speaker, String time, String date, boolean isOnline, String location) {
-        this.topic = topic;
-        this.description = description;
-        this.time = time;
-        this.date = date;
-        this.isOnline = isOnline;
-        if (isOnline){
-            this.location = Location.ONLINE(location);
-        }else{
-            this.location = Location.OFFLINE(location);
-        }
-        this.speaker = speaker;
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public boolean getCondition() {
         return isOnline;
     }
 
-    public void setCondition(boolean isOnline) {
-        this.isOnline = isOnline;
-        if (isOnline){
-            this.location = Location.ONLINE(location.getAddress());
-        }else{
-            this.location = Location.OFFLINE(location.getAddress());
-        }
-    }
-
-    public String getTime() {
-        return time;
-    }
 
     public int getId() {
         return id;
@@ -92,24 +82,47 @@ public class Event {
         return speaker;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public String getFromtime() {
+        return fromtime;
+    }
+
+    public String getTotime() {
+        return totime;
+    }
+
+    public void setFromtime(String fromtime) {
+        fromtime = checkString(fromtime);
+        this.fromtime = fromtime;
+    }
+
+    public void setTotime(String totime) {
+        totime = checkString(totime);
+        this.totime = totime;
     }
 
     public void setTopic(String topic) {
+        topic = checkString(topic);
         this.topic = topic;
     }
 
     public void setDescription(String description) {
+        description = checkString(description);
         this.description = description;
     }
 
     public void setDate(String date) {
+        date = checkString(date);
         this.date = date;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocation(String location) {
+        location = checkString(location);
+        this.isOnline = location.contains("http") || location.contains("www");
+        if (isOnline){
+            this.location = Location.ONLINE(location);
+        }else{
+            this.location = Location.OFFLINE(location);
+        }
     }
 
     public void setSpeaker(int speaker) {
@@ -119,5 +132,12 @@ public class Event {
     @Override
     public String toString() {
         return topic+" by "+speaker;
+    }
+
+    private String checkString(String s){
+        if (s == null){
+            s = "n/a";
+        }
+        return s;
     }
 }
