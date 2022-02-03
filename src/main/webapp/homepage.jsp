@@ -1,10 +1,17 @@
+<%@ page import="com.conference.bean.User" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="header.jsp"/>
+
 <body>
   <!--Registration-->
   <section class="container-xl col">
+
+    <%
+      User user = (User) request.getSession().getAttribute("user");
+      if(user == null){
+    %>
     <div class="margin col reg-sec">
       <h1 class="display-6">Welcome! Have not registered yet?</h1>
       <h4 style="width: 30rem;">If you already have one - <a href="login.jsp" class="link-info">login</a></h4>
@@ -31,6 +38,7 @@
           <p></p> <button class="btn btn-info" type="submit">Sign up</button>
         </form>
     </div>
+    <%}%>
     <div class="margin col">
       <!--Events of reg-->
 

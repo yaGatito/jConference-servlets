@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="header.jsp"/>
+<jsp:include page="onlyForUser.jsp"/>
 <%!List<User> speakers;%>
 <%speakers = new UserDAO().selectSpeakers();%>
 
@@ -30,22 +31,6 @@
               <%}%>
             </select>
           </div>
-<%--          <div style="margin-top: 1rem; line-height: 0">--%>
-<%--            <h4>Date</h4>--%>
-<%--            <input name="date" class="form-control reg" type="date" placeholder="" aria-label="Search" required>--%>
-<%--          </div>--%>
-<%--          <div style="margin-top: 1rem; line-height: 0">--%>
-<%--            <h4>From</h4>--%>
-<%--            <input name="fromtime" class="form-control reg" type="time" placeholder="" aria-label="Search" required>--%>
-<%--          </div>--%>
-<%--          <div style="margin-top: 1rem; line-height: 0">--%>
-<%--            <h4>To</h4>--%>
-<%--            <input name="totime" class="form-control reg" type="time" placeholder="" aria-label="Search" required>--%>
-<%--          </div>--%>
-<%--          <div style="margin-top: 1rem; line-height: 0">--%>
-<%--            <h4>Address</h4>--%>
-<%--            <input name="location" class="form-control reg" type="text" placeholder="" aria-label="Search" required>--%>
-<%--          </div>--%>
           <p></p> <button class="btn btn-info" type="submit">Confirm</button>
         </form>
     </div>

@@ -3,6 +3,7 @@
 <%@ page import="com.conference.dao.UserDAO" %>
 <%@ page import="com.conference.bean.Event" %>
 <%@ page import="com.conference.dao.EventDAO" %>
+<%@ page import="com.conference.dao.SELECT" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
   if(request.getSession().getAttribute("user") == null){
@@ -44,7 +45,7 @@
 
   <section class="container-xl col">
     <div class="card border-info mb-3" style="width: 50rem;">
-      <h2>All events</h2>
+      <h2>Need your agree:</h2>
       <table class="table table-info table-striped">
         <thead>
         <tr>
@@ -57,7 +58,7 @@
         </tr>
         </thead>
         <tbody>
-        <%events = edao.selectByStatus(3);%>
+        <%events = edao.selectBy(SELECT.STATUS,3);%>
         <%for (Event event : events) {%>
         <tr>
           <th scope="row"><%=event.getId()%></th>

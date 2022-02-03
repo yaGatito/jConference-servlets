@@ -35,13 +35,13 @@ public class Event {
         checkStatus();
     }
 
-    private void checkStatus(){
-        if (!this.date.equals("n/a") && !this.location.getAddress().equals("n/a")){
-            this.status = 3;
+    public void checkStatus(){
+        if (this.date.equals("n/a") && this.location.getAddress().equals("n/a") && (this.speaker == -99 || this.speaker == 0)){
+            this.status = 1;
         }else if(this.speaker != -99 && this.speaker != 0){
             this.status = 2;
         }else{
-            this.status = 1;
+            this.status = 3;
         }
     }
 

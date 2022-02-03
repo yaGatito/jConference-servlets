@@ -4,18 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="header.jsp"/>
-
-<%
-  int role = 0;
-  User user = (User) request.getSession().getAttribute("user");
-  if(user == null){
-    response.sendRedirect("restricted-access.jsp");
-  }else{
-    role = user.getRoleID();
-  }
-  request.setAttribute("role",role);
-%>
-
+<jsp:include page="onlyForUser.jsp"/>;
 <body>
 <c:choose>
   <c:when test="${role==1}">

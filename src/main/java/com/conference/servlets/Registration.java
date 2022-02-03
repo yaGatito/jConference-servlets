@@ -18,7 +18,9 @@ public class Registration extends HttpServlet {
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        new UserDAO().insertUser(new User(role,name,lastname,email,password));
+        User user = new User(role,name,lastname,email,password);
+        new UserDAO().insertUser(user);
+        request.getSession().setAttribute("user",user);
         response.sendRedirect("profile.jsp");
     }
 }

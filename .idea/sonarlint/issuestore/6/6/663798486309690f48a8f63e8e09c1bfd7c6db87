@@ -1,0 +1,32 @@
+
+[
+java:S1124
+"EReorder the modifiers to comply with the Java Language Specification.(¬•É„
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(å¯Õï
+Y
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(òÅ
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(–µô¬ùÿÿÿÿ
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(èÔ‚Ü
+H
+java:S4925"-Remove this "Class.forName()", it is useless.(İˆùÿÿÿÿ
+K
+java:S1128"5Remove this unused import 'com.conference.bean.Role'.(ñå¿Í
+^
+java:S1192@"IDefine a constant instead of duplicating this literal "password" 3 times.(¾Ñ–:
+a
+java:S1192?"FDefine a constant instead of duplicating this literal "email" 3 times.(œç¹êøÿÿÿÿ
+d
+java:S1192>"IDefine a constant instead of duplicating this literal "lastname" 4 times.(şŠğ†ùÿÿÿÿ
+\
+java:S22597"AA "NullPointerException" could be thrown; "con" is nullable here.(µúİıÿÿÿÿ
+W
+java:S2259d"AA "NullPointerException" could be thrown; "con" is nullable here.(ÖèÓ
+V
+java:S2259$"AA "NullPointerException" could be thrown; "con" is nullable here.(£¤ñm
+\
+java:S2259N"AA "NullPointerException" could be thrown; "con" is nullable here.(²¸ı·üÿÿÿÿ
+\
+java:S2259|"AA "NullPointerException" could be thrown; "con" is nullable here.(İÒŠúÿÿÿÿ

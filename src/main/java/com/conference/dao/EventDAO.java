@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventDAO {
+
     private final static String URL = "jdbc:postgresql://localhost:5432/conf";
     private final static String UNAME = "postuser";
     private final static String UPASS = "root";
 
     private final static String FULL = URL + "?user=" + UNAME + "&password=" + UPASS;
     private final static String DRIVER = "org.postgresql.Driver";
-
 
     private Connection getConnection(){
         Connection connection;
@@ -50,13 +50,34 @@ public class EventDAO {
         }
     }
 
-    private static final String SELECT_BY_STATUS = "SELECT * FROM events WHERE status = ?";
+    private static final String UPDATE_EVENT =
+            "UPDATE events SET date = ?, fromtime = ?, totime = ?, location = ?,speaker = ?,status = ? WHERE id = ?";
 
-    public List<Event> selectByStatus(int status){
+    public boolean updateEvent(Event event){
+        try (Connection con = getConnection();
+             PreparedStatement statement = con.prepareStatement(UPDATE_EVENT)) {
+            statement.setString(1,event.getDate());
+            statement.setString(2,event.getFromtime());
+            statement.setString(3,event.getTotime());
+            statement.setString(4,event.getLocation().getAddress());
+            statement.setInt(5,event.getSpeaker());
+            statement.setInt(6,event.getStatus());
+            statement.setInt(7,event.getId());
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public List<Event> selectBy(SELECT select, int value) throws IllegalAccessException {
+
         List<Event> events;
         try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement(SELECT_BY_STATUS)) {
-            statement.setInt(1,status);
+             PreparedStatement statement = con.prepareStatement(select.toString())) {
+            statement.setInt(1,value);
             ResultSet set = statement.executeQuery();
             events = new ArrayList<>();
             while (set.next()){
