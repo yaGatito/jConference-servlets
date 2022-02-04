@@ -47,12 +47,39 @@ public class UserDAO {
         }
     }
 
-    private static final String SELECT_ALL = "SELECT * FROM users";
+    private static final String SELECT_ALL = "SELECT * FROM users ";
 
     public List<User> selectAll(){
         List<User> users;
         try (Connection con = getConnection();
              PreparedStatement statement = con.prepareStatement(SELECT_ALL)) {
+            ResultSet set = statement.executeQuery();
+            users = new ArrayList<>();
+            while (set.next()){
+                int id = set.getInt("id");
+                int role = set.getInt("role");
+                String name = set.getString("name");
+                String lastname = set.getString("lastname");
+                String email = set.getString("email");
+                String password = set.getString("password");
+                users.add(new User(id,role,name,lastname,email,password));
+            }
+            set.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            users = null;
+        }
+        return users;
+    }
+
+    private static final String SELECT_LIMIT = "SELECT * FROM users LIMIT ? OFFSET ?";
+
+    public List<User> selectLimit(int amount,int page){
+        List<User> users;
+        try (Connection con = getConnection();
+             PreparedStatement statement = con.prepareStatement(SELECT_LIMIT)) {
+            statement.setInt(1,amount);
+            statement.setInt(2,amount*page);
             ResultSet set = statement.executeQuery();
             users = new ArrayList<>();
             while (set.next()){

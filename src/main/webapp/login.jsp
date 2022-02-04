@@ -8,7 +8,7 @@
     <!--Login-->
     <div class="margin col reg-sec">
       <h1 class="display-6">Log in</h1>
-        <form class="col margin" action="Login" method="post">
+        <form class="col margin" action="Profile" method="post">
           <input name="email" class="form-control reg" type="Email" placeholder="Email" aria-label="Search" required>
           <input name="password" class="form-control reg" type="password" placeholder="Password" aria-label="Search" required>
           <p></p> <button class="btn btn-info" type="submit">Confirm</button>

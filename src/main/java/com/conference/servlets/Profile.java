@@ -8,8 +8,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Profile")
+public class Profile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().setAttribute("user",null);
@@ -23,5 +23,10 @@ public class Login extends HttpServlet {
         }else{
             request.getRequestDispatcher("wrong-pass.jsp").forward(request,response);
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("profile.jsp").forward(request,response);
     }
 }

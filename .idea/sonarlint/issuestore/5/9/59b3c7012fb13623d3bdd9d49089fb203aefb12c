@@ -1,9 +1,0 @@
-
-l	java:S116"RRename this field "role_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßÊ…¥úÿÿÿÿ
-k
-java:S3008"PRename this field "MODER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…ÞçÖþÿÿÿÿ
-m
-java:S3008"RRename this field "SPEAKER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÛØŠ·üÿÿÿÿ
-n
-java:S3008"SRename this field "LISTENER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³ü¦‡ýÿÿÿÿ
-f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ê¹™Ö

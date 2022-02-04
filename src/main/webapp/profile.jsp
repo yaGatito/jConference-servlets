@@ -5,7 +5,7 @@
 <html lang="en">
 <jsp:include page="header.jsp"/>
 <jsp:include page="onlyForUser.jsp"/>;
-<body>
+<body style="height: 100vh">
 <c:choose>
   <c:when test="${role==1}">
     <jsp:include page="moder-profile.jsp"/>
