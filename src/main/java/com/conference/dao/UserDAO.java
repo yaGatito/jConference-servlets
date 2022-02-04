@@ -72,6 +72,23 @@ public class UserDAO {
         return users;
     }
 
+    private static final String SELECT_COUNT = "SELECT COUNT(*) FROM users ";
+
+    public int getCount(){
+        int count;
+        try (Connection con = getConnection();
+             PreparedStatement statement = con.prepareStatement(SELECT_COUNT)) {
+            ResultSet set = statement.executeQuery();
+            set.next();
+            count = set.getInt("count");
+            set.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            count = 0;
+        }
+        return count;
+    }
+
     private static final String SELECT_LIMIT = "SELECT * FROM users LIMIT ? OFFSET ?";
 
     public List<User> selectLimit(int amount,int page){
@@ -79,7 +96,7 @@ public class UserDAO {
         try (Connection con = getConnection();
              PreparedStatement statement = con.prepareStatement(SELECT_LIMIT)) {
             statement.setInt(1,amount);
-            statement.setInt(2,amount*page);
+            statement.setInt(2,amount*(page-1));
             ResultSet set = statement.executeQuery();
             users = new ArrayList<>();
             while (set.next()){
