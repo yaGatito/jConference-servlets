@@ -7,12 +7,15 @@
 <%@ page import="java.util.Optional" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%!List<User> users;%>
-<%!List<Event> events;%>
-<%!UserDAO udao = new UserDAO();%>
-<%!EventDAO edao = new EventDAO();%>
+<%!
+    List<User> users;
+    List<Event> events;
+    UserDAO udao = new UserDAO();
+    EventDAO edao = new EventDAO();
+%>
 <%
-    if (request.getSession().getAttribute("user") == null) {
+    User currentUser = (User) request.getSession().getAttribute("user");
+    if (currentUser == null) {
         response.sendRedirect("restricted-access.jsp");
     }
 
@@ -28,8 +31,8 @@
         offset = 1;
     }
 
-    String[] buttons = new String[]{"profile", "users", "events", "setting"};
-    String item = Optional.ofNullable(request.getParameter("item")).orElse("profile");
+    final String[] buttons = new String[]{"Profile", "Users", "Events", "Setting"};
+    String item = Optional.ofNullable(request.getParameter("item")).orElse(buttons[0]);
     boolean flag = false;
     for (int i = 0; i < buttons.length; i++) {
         if (item.equals(buttons[i])) {
@@ -39,91 +42,169 @@
     if (!flag) item = "profile";
 
     users = udao.selectLimit((int) maxItems, offset);
-    events = edao.selectBy(SELECT.STATUS, 3);
+    events = edao.selectBy(SELECT.STATUS, 2);
 %>
 <!-- Admin profile -->
 
-
-<div class="d-flex align-items-start container-xl" style="width: 80%">
+<body>
+<div class="d-flex align-items-start container-xl margin" style="width: 80%">
     <div class="nav flex-column nav-pills me-3 coll" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <%for (String button : buttons) {%>
         <a class="btn btn-blue <%= item.equals(button) ? " active" : ""%>" href="Profile?item=<%=button%>"><%=button%>
         </a>
         <%}%>
     </div>
-    <%if (item.equals("users")) { %>
-    <div class="col" style="width: 50rem; background-color: white">
-        <table class="table table-info table-striped">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">User</th>
-                <th scope="col">Role</th>
-                <th scope="col">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%for (User user : users) {%>
-            <tr>
-                <td scope="row"><%=user.getId() %>
-                </td>
-                <td><%=user.getName() + " " + user.getLastname() %>
-                </td>
-                <td><%=user.getRole().toString()%>
-                </td>
-                <td>x v e</td>
-            </tr>
-            <%}%>
-            </tbody>
-        </table>
-        <nav aria-label="...">
-            <ul class="pagination pagination-sm">
-                <%for (int i = 1; i <= amount; i++) {%>
-                <li class="page-item<%= i == offset ? " active" : ""%>"><a class="page-link" href="Profile?item=users&page=<%=i%>"><%=i%>
-                </a></li>
+    <%
+        switch (item) {
+            case "Profile":
+    %>
+    <div class="col">
+        <div class="reg-sec distance">
+            <form action="UpdateUser" method="post" class="container-xl col" style="margin-top: 3rem;width: 30rem;">
+                <div class="input-group distance">
+                    <span class="input-group-text">First name</span>
+                    <input type="text" aria-label="Search" class="form-control" name="name"
+                           value="<%=currentUser.getName()%>">
+                </div>
+                <div class="input-group distance">
+                    <span class="input-group-text">Last name</span>
+                    <input type="text" aria-label="Search" class="form-control" name="lastname"
+                           value="<%=currentUser.getLastname()%>">
+                </div>
+                <div class="input-group distance">
+                    <span class="input-group-text">Email</span>
+                    <input type="text" aria-label="First name" class="form-control" name="email"
+                           value="<%=currentUser.getEmail()%>">
+                </div>
+                <div class="form-check form-switch distance">
+                    <input class="form-check-input" type="checkbox" name="notify" role="switch" id="flexSwitchCheckDefault" <%if (currentUser.getNotify()) {%> checked <%}%> >
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Receive email notifications</label>
+                </div>
+                <div class="input-group distance">
+                    <button type="submit" class="btn btn-info">Save</button>
+                </div>
+                <div class="input-group distance">
+                    <a class="btn btn-info" href="">Change password</a>
+                </div>
+            </form>
+        </div>
+        <%
+                break;
+            case "Users":
+        %>
+        <div class="col distance" style=" background-color: white">
+            <table class="table table-info table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%for (User user : users) {%>
+                <tr>
+                    <td scope="row"><%=user.getId() %>
+                    </td>
+                    <td><%=user.getName() + " " + user.getLastname() %>
+                    </td>
+                    <td><%=User.getNameRole(user.getRole())%>
+                    </td>
+                    <td>
+                        <a href="Controller?upgrade=<%=user.getId()%>"><span class="iconify-inline" data-icon="grommet-icons:upgrade" style="color: #005;" data-width="24"></span></a>
+                        <a href="Controller?downgrade=<%=user.getId()%>"><span class="iconify-inline" data-icon="grommet-icons:upgrade" style="color: #005;" data-width="24" data-rotate="180deg"></span></a>
+                        <a href="Controller?delete=<%=user.getId()%>"><span class="iconify-inline" data-icon="bi:x-circle" style="color: #005;" data-width="24"></span></a>
+                    </td>
+                </tr>
                 <%}%>
-            </ul>
-        </nav>
-    </div>
+                </tbody>
+            </table>
+            <%if (amount > 1) {%>
+            <nav aria-label="...">
+                <ul class="pagination pagination-sm">
+                    <%for (int i = 1; i <= amount; i++) {%>
+                    <li class="page-item<%= i == offset ? " active" : ""%>"><a class="page-link"
+                                                                               href="Profile?item=<%=buttons[1]%>&page=<%=i%>"><%=i%>
+                    </a></li>
+                    <%}%>
+                </ul>
+            </nav>
+            <%}%>
+        </div>
+        <%
+                break;
+            case "Events":
+        %>
+        <div class="col distance">
+            <div class="rowsa">
+                <div class="distance dropdown">
+                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort events
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                        <li><a class="dropdown-item" href="#">by date</a></li>
+                        <li><a class="dropdown-item" href="#">by name of speaker</a></li>
+                        <li><a class="dropdown-item" href="#">by name of events</a></li>
+                    </ul>
+                </div>
+                <div class="distance">
+                    <a class="btn btn-info" href="add-topic.jsp">Add topic</a>
+                </div>
 
-    <%} else if (item.equals("events")) {%>
-    <div>
-        <table class="table table-info table-striped">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Topic</th>
-                <th scope="col">Speaker</th>
-                <th scope="col">Date and time</th>
-                <th scope="col">Location</th>
-                <th scope="col">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%for (Event event : events) {%>
-            <tr>
-                <th scope="row"><%=event.getId()%>
-                </th>
-                <td><%=event.getTopic()%>
-                </td>
-                <td><%=udao.getByID(event.getSpeaker()).toString()%>
-                </td>
-                <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%>
-                </td>
-                <%if (event.getCondition()) {%>
-                <td><a href="<%=event.getLocation().getAddress()%>"
-                       target="_blank"><%=event.getLocation().getShortName()%>
-                </a></td>
+                <div class="distance">
+                    <a class="btn btn-info" href="add-event.jsp">Add event</a>
+                </div>
+            </div>
+            <table class="table table-info table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Topic</th>
+                    <th scope="col">Speaker</th>
+                    <th scope="col">Date and time</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%for (Event event : events) {%>
+                <tr>
+                    <th scope="row"><%=event.getId()%></th>
+                    <td><%=event.getTopic()%></td>
+                    <%!String speaker;%>
+                    <%
+                        try {
+                            speaker = udao.getByID(event.getSpeaker()).toString();
+                        }catch (NullPointerException e){
+                            speaker = "deleted";
+                        }
+                    %>
+                    <td><%=speaker%></td>
+                    <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%></td>
+                    <%if (event.getCondition()) {%>
+                    <td><a href="<%=event.getLocation().getAddress()%>"
+                           target="_blank"><%=event.getLocation().getShortName()%>
+                    </a></td>
+                    <%}%>
+                    <%if (!event.getCondition()) {%>
+                    <td><%=event.getLocation().getShortName()%>
+                    </td>
+                    <%}%>
+                    <td>
+                        <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line" style="color: #005;" data-width="24"></span></a>
+                        <a href=""><span class="iconify-inline" data-icon="feather:x-square" style="color: #005;" data-width="24"></span></a>
+                    </td>
+                </tr>
                 <%}%>
-                <%if (!event.getCondition()) {%>
-                <td><%=event.getLocation().getShortName()%>
-                </td>
-                <%}%>
-                <td>x v e</td>
-            </tr>
-            <%}%>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <%
+                    break;
+            }
+        %>
     </div>
-    <%}%>
 </div>
+
+</body>

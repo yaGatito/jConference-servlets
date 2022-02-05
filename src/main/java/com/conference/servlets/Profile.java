@@ -21,7 +21,7 @@ public class Profile extends HttpServlet {
             request.getSession().setAttribute("user",user);
             request.getRequestDispatcher("profile.jsp").forward(request,response);
         }else{
-            request.getRequestDispatcher("wrong-pass.jsp").forward(request,response);
+            response.sendRedirect("Error?message=Wrong_password");
         }
     }
 

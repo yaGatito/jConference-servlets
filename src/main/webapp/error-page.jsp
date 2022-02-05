@@ -6,10 +6,9 @@
   <section class="container-xl col">
     <!--Login-->
     <div class="margin col reg-sec" style="width: 50rem">
-      <h2 class="display-10">Error.</h2>
-      <h4><%=request.getParameter("message")%></h4>
+      <h2 class="display-10"><%=(String)request.getAttribute("message")%></h2>
     </div>
   </section>
-<jsp:include page="footer.html"/>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

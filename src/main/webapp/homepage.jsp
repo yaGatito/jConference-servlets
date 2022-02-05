@@ -21,20 +21,6 @@
           <input name="email" class="form-control reg" type="Email" placeholder="Email" aria-label="Search" required>
           <input name="password" class="form-control reg" type="password" placeholder="Password" aria-label="Search" required>
           <input class="form-control reg" type="password" placeholder="Enter password again" aria-label="Search" required>
-          <div class="rad-div">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="role" value="3" id="flexRadioDefault1" checked>
-              <label class="form-check-label" for="flexRadioDefault1">
-                User
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="role" value="2" id="flexRadioDefault2">
-              <label class="form-check-label" for="flexRadioDefault2">
-                Speaker
-              </label>
-            </div>
-          </div>
           <p></p> <button class="btn btn-info" type="submit">Sign up</button>
         </form>
     </div>
@@ -116,6 +102,6 @@
 
     </div>
   </section>
-<jsp:include page="footer.html"/>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

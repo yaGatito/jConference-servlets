@@ -2,15 +2,16 @@ package com.conference.bean;
 
 public class User {
     private int id;
-    private Role role;
+    private int role;
     private String name;
     private String lastname;
     private String email;
     private String password;
+    private boolean notifications = true;
 
     public User(int id, int role, String name, String lastname, String email, String password) {
         this.id = id;
-        this.role = Role.getInstance(role);
+        this.role = role;
         this.name = name;
         this.lastname = lastname;
         this.email = email;
@@ -18,15 +19,36 @@ public class User {
     }
 
     public User(int role, String name, String lastname, String email, String password) {
-        this.role = Role.getInstance(role);
+        this.role = role;
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
     }
 
+    public static String getNameRole(int i){
+        switch (i){
+            case 1:
+                return "Moder";
+            case 2:
+                return "Speaker";
+            case 3:
+                return "Listener";
+            default:
+                return "Undefined role";
+        }
+    }
+
+    public boolean getNotify() {
+        return notifications;
+    }
+
+    public void setNotify(boolean notifications) {
+        this.notifications = notifications;
+    }
+
     public void setRole(int role) {
-        this.role = Role.getInstance(role);
+        this.role = role;
     }
 
     public void setName(String name) {
@@ -49,15 +71,10 @@ public class User {
         return id;
     }
 
-    public int getRoleID() {
-        return role.getRoleID();
-    }
-    public Role getRole() {
+    public int getRole() {
         return role;
     }
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public String getLastname() {
         return lastname;

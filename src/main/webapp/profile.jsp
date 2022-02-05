@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="header.jsp"/>
-<jsp:include page="onlyForUser.jsp"/>;
+<jsp:include page="onlyForUser.jsp"/>
 <body style="height: 100vh">
 <c:choose>
   <c:when test="${role==1}">
@@ -17,6 +17,6 @@
   </c:when>
 </c:choose>
 
-<jsp:include page="footer.html"/>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

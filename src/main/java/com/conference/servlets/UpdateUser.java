@@ -8,18 +8,21 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet("/Registration")
-public class Registration extends HttpServlet {
+@WebServlet(name = "UpdateUser", value = "/UpdateUser")
+public class UpdateUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        User user = (User) request.getSession().getAttribute("user");
         String name = request.getParameter("name");
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        User user = new User(3,name,lastname,email,password);
-        new UserDAO().insertUser(user);
-        request.getSession().setAttribute("user",user);
-        response.sendRedirect("profile.jsp");
+        String notify = request.getParameter("notify");
+        user.setName(name);
+        user.setLastname(lastname);
+        user.setEmail(email);
+        user.setNotify(notify != null);
+        new UserDAO().updateUser(user);
+        response.sendRedirect("Profile");
     }
 }

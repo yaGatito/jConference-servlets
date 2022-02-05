@@ -10,6 +10,6 @@
       <h2 class="display-10">Successful logged out</h2>
     </div>
   </section>
-<jsp:include page="footer.html"/>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

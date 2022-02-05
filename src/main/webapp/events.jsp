@@ -1,7 +1,18 @@
+<%@ page import="com.conference.dao.EventDAO" %>
+<%@ page import="com.conference.dao.UserDAO" %>
+<%@ page import="com.conference.bean.Event" %>
+<%@ page import="com.conference.bean.User" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="header.jsp"/>
+<%!
+  List<User> users;
+  List<Event> events;
+  UserDAO udao = new UserDAO();
+  EventDAO edao = new EventDAO();
+%>
 <body>
   <section class="container-xl col">
     <div class="margin col">
@@ -98,6 +109,6 @@
 
     </div>
   </section>
-<jsp:include page="footer.html"/>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

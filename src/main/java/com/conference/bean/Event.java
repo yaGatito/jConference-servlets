@@ -36,12 +36,12 @@ public class Event {
     }
 
     public void checkStatus(){
-        if (this.date.equals("n/a") && this.location.getAddress().equals("n/a") && (this.speaker == -99 || this.speaker == 0)){
-            this.status = 1;
-        }else if(this.speaker != -99 && this.speaker != 0){
+        if (!this.date.equals("n/a") && !this.location.getAddress().equals("n/a") && !(this.speaker == -99 || this.speaker == 0)){
             this.status = 2;
+        }else if(this.speaker == 0){
+            this.status = 0;
         }else{
-            this.status = 3;
+            this.status = 1;
         }
     }
 

@@ -10,6 +10,6 @@
       <a href="homepage.jsp">register</a> if you haven't logged yet.</h4>
     </div>
   </section>
-<jsp:include page="footer.html"/>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

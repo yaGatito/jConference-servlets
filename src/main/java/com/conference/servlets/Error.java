@@ -9,7 +9,13 @@ import java.io.IOException;
 public class Error extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getParameter("message");
+        String message = request.getParameter("message");
+        if (message!=null) {
+            message = String.join(" ", message.split("_"));
+        }else{
+            message = "404";
+        }
+        request.setAttribute("message",message);
         request.getRequestDispatcher("error-page.jsp").forward(request,response);
     }
 }

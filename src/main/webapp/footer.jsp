@@ -1,5 +1,5 @@
 <!--Footer-->
-<section class="container-xl rowsb footer">
+<section class="container-xl rowsb" id="footer">
     <div class="margin col">
         All rights reserved
     </div>

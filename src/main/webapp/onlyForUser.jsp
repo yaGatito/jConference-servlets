@@ -5,7 +5,7 @@
     if(user == null){
         response.sendRedirect("restricted-access.jsp");
     }else{
-        role = user.getRoleID();
+        role = user.getRole();
     }
     request.setAttribute("role",role);
 %>

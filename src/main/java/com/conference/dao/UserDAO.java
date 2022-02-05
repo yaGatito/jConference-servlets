@@ -1,6 +1,5 @@
 package com.conference.dao;
 
-import com.conference.bean.Role;
 import com.conference.bean.User;
 import java.sql.*;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class UserDAO {
 
     public boolean insertUser(User user){
         try (Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(INSERT_USER)) {
-            statement.setInt(1,user.getRoleID());
+            statement.setInt(1,user.getRole());
             statement.setString(2,user.getName());
             statement.setString(3,user.getLastname());
             statement.setString(4,user.getEmail());
@@ -116,19 +115,65 @@ public class UserDAO {
         return users;
     }
 
+    private static final String DELETE_BY_ID = "DELETE FROM users WHERE id = ?";
+
+    public boolean deleteById(int id){
+        try(Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(DELETE_BY_ID)){
+            statement.setInt(1,id);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private static final String UPDATE_BY_ID = "UPDATE users SET name = ?, lastname = ?, email = ?, notify = ? WHERE id = ?";
+
+    public boolean updateUser(User user){
+        try(Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(UPDATE_BY_ID)){
+            statement.setString(1,user.getName());
+            statement.setString(2,user.getLastname());
+            statement.setString(3,user.getEmail());
+            statement.setBoolean(4,user.getNotify());
+            statement.setInt(5,user.getId());
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private static final String SET_ROLE = "UPDATE users SET role = ? WHERE id = ?";
+
+    public boolean setRole(int role, int id){
+        try(Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(SET_ROLE)){
+            statement.setInt(1,role);
+            statement.setInt(2,id);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     private static final String GET_BY_ID = "SELECT * FROM users WHERE id = ?";
 
     public User getByID(int id){
         try (Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(GET_BY_ID)) {
             statement.setInt(1,id);
             ResultSet set = statement.executeQuery();
-            set.next();
-            int role = set.getInt("role");
-            String name = set.getString("name");
-            String lastname = set.getString("lastname");
-            String email = set.getString("email");
-            String password = set.getString("password");
-            User user = new User(role,name,lastname,email,password);
+            User user = null;
+            while (set.next()) {
+                int role = set.getInt("role");
+                String name = set.getString("name");
+                String lastname = set.getString("lastname");
+                String email = set.getString("email");
+                String password = set.getString("password");
+                user = new User(role, name, lastname, email, password);
+            }
             set.close();
             return user;
         } catch (SQLException e) {
