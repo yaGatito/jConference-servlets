@@ -140,4 +140,17 @@ public class Event {
         }
         return s;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Event)) return false;
+        Event event = (Event) o;
+        return this.id == event.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id;
+    }
 }

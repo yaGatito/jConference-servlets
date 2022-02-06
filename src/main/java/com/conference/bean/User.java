@@ -35,7 +35,7 @@ public class User {
             case 3:
                 return "Listener";
             default:
-                return "Undefined role";
+                throw new IllegalArgumentException();
         }
     }
 
@@ -93,12 +93,12 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return getId() == user.getId();
+        return this.id == user.id;
     }
 
     @Override
     public int hashCode() {
-        return getId();
+        return this.id;
     }
 
     @Override

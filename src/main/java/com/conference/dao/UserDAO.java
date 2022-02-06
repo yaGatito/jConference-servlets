@@ -88,7 +88,7 @@ public class UserDAO {
         return count;
     }
 
-    private static final String SELECT_LIMIT = "SELECT * FROM users LIMIT ? OFFSET ?";
+    private static final String SELECT_LIMIT = "SELECT * FROM users ORDER BY id LIMIT ? OFFSET ?";
 
     public List<User> selectLimit(int amount,int page){
         List<User> users;

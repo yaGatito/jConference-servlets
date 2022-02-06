@@ -5,6 +5,7 @@
 <%@ page import="com.conference.dao.EventDAO" %>
 <%@ page import="com.conference.dao.SELECT" %>
 <%@ page import="java.util.Optional" %>
+<%@ page import="com.conference.dao.ListenersDAO" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%!
@@ -12,6 +13,7 @@
     List<Event> events;
     UserDAO udao = new UserDAO();
     EventDAO edao = new EventDAO();
+    ListenersDAO ldao = new ListenersDAO();
 %>
 <%
     User currentUser = (User) request.getSession().getAttribute("user");
@@ -31,7 +33,7 @@
         offset = 1;
     }
 
-    final String[] buttons = new String[]{"Profile", "Users", "Events", "Setting"};
+    final String[] buttons = new String[]{"Profile", "Your participation", "Your events", "Free events", "Users", "Events Control Panel", "Setting"};
     String item = Optional.ofNullable(request.getParameter("item")).orElse(buttons[0]);
     boolean flag = false;
     for (int i = 0; i < buttons.length; i++) {
@@ -41,8 +43,7 @@
     }
     if (!flag) item = "profile";
 
-    users = udao.selectLimit((int) maxItems, offset);
-    events = edao.selectBy(SELECT.STATUS, 2);
+
 %>
 <!-- Admin profile -->
 
@@ -90,7 +91,197 @@
         </div>
         <%
                 break;
+            case "Your participation":
+                events = ldao.selectEventsOfListeners(currentUser.getId());
+        %>
+        <div class="col distance">
+            <div class="rowsa">
+                <div class="distance dropdown">
+                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort events
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                        <li><a class="dropdown-item" href="#">by date</a></li>
+                        <li><a class="dropdown-item" href="#">by name of speaker</a></li>
+                        <li><a class="dropdown-item" href="#">by name of events</a></li>
+                    </ul>
+                </div>
+                <div class="distance">
+                    <a class="btn btn-info" href="add-topic.jsp">Add topic</a>
+                </div>
+
+                <div class="distance">
+                    <a class="btn btn-info" href="add-event.jsp">Add event</a>
+                </div>
+            </div>
+            <table class="table table-info table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Topic</th>
+                    <th scope="col">Speaker</th>
+                    <th scope="col">Date and time</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%for (Event event : events) {%>
+                <tr>
+                    <th scope="row"><%=event.getId()%></th>
+                    <td><%=event.getTopic()%></td>
+                    <%!String speaker2;%>
+                    <%
+                        try {
+                            speaker2 = udao.getByID(event.getSpeaker()).toString();
+                        }catch (NullPointerException e){
+                            speaker2 = "deleted";
+                        }
+                    %>
+                    <td><%=speaker2%></td>
+                    <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%></td>
+                    <%if (event.getCondition()) {%>
+                    <td><a href="<%=event.getLocation().getAddress()%>"
+                           target="_blank"><%=event.getLocation().getShortName()%>
+                    </a></td>
+                    <%}%>
+                    <%if (!event.getCondition()) {%>
+                    <td><%=event.getLocation().getShortName()%>
+                    </td>
+                    <%}%>
+                    <td>
+                        <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line" style="color: #005;" data-width="24"></span></a>
+                        <a href="ParticipateController?action=unjoin&event=<%=event.getId()%>"><span class="iconify-inline" data-icon="feather:x-square" style="color: #005;" data-width="24"></span></a>
+                    </td>
+                </tr>
+                <%}%>
+                </tbody>
+            </table>
+        </div>
+        <%
+                break;
+            case "Your events":
+                events = edao.selectBy(SELECT.SPEAKER, currentUser.getId());
+        %>
+        <div class="col distance">
+            <div class="rowsa">
+                <div class="distance dropdown">
+                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort events
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
+                        <li><a class="dropdown-item" href="#">by date</a></li>
+                        <li><a class="dropdown-item" href="#">by name of speaker</a></li>
+                        <li><a class="dropdown-item" href="#">by name of events</a></li>
+                    </ul>
+                </div>
+                <div class="distance">
+                    <a class="btn btn-info" href="add-topic.jsp">Add topic</a>
+                </div>
+
+                <div class="distance">
+                    <a class="btn btn-info" href="add-event.jsp">Add event</a>
+                </div>
+            </div>
+            <table class="table table-info table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Topic</th>
+                    <th scope="col">Speaker</th>
+                    <th scope="col">Date and time</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%for (Event event : events) {%>
+                <tr>
+                    <th scope="row"><%=event.getId()%></th>
+                    <td><%=event.getTopic()%></td>
+                    <%!String speaker1;%>
+                    <%
+                        try {
+                            speaker1 = udao.getByID(event.getSpeaker()).toString();
+                        }catch (NullPointerException e){
+                            speaker1 = "deleted";
+                        }
+                    %>
+                    <td><%=speaker1%></td>
+                    <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%></td>
+                    <%if (event.getCondition()) {%>
+                    <td><a href="<%=event.getLocation().getAddress()%>"
+                           target="_blank"><%=event.getLocation().getShortName()%>
+                    </a></td>
+                    <%}%>
+                    <%if (!event.getCondition()) {%>
+                    <td><%=event.getLocation().getShortName()%>
+                    </td>
+                    <%}%>
+                    <td>
+                        <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line" style="color: #005;" data-width="24"></span></a>
+                    </td>
+                </tr>
+                <%}%>
+                </tbody>
+            </table>
+        </div>
+        <%
+                break;
+            case "Free events":
+                events = edao.selectBy(SELECT.STATUS, 0);
+        %>
+        <div class="col distance">
+            <div class="rowsa">
+                <div class="distance dropdown">
+                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort events
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
+                        <li><a class="dropdown-item" href="#">by date</a></li>
+                        <li><a class="dropdown-item" href="#">by name of speaker</a></li>
+                        <li><a class="dropdown-item" href="#">by name of events</a></li>
+                    </ul>
+                </div>
+                <div class="distance">
+                    <a class="btn btn-info" href="add-topic.jsp">Add topic</a>
+                </div>
+
+                <div class="distance">
+                    <a class="btn btn-info" href="add-event.jsp">Add event</a>
+                </div>
+            </div>
+            <table class="table table-info table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">
+                        <table>
+                            <tr><td>Topic</td></tr>
+                            <tr><td></td></tr>
+                        </table>
+                    </th>
+                    <th scope="col">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%for (Event event : events) {%>
+                <tr>
+                    <td>
+                        <table>
+                            <tr><td><%=event.getTopic()%></td></tr>
+                            <tr><td><a href="">Take</a></td></tr>
+                        </table>
+                    </td>
+                    <td><%=event.getDescription()%></td>
+                </tr>
+                <%}%>
+                </tbody>
+            </table>
+        </div>
+        <%
+                break;
             case "Users":
+                users = udao.selectLimit((int) maxItems, offset);
         %>
         <div class="col distance" style=" background-color: white">
             <table class="table table-info table-striped">
@@ -125,7 +316,7 @@
                 <ul class="pagination pagination-sm">
                     <%for (int i = 1; i <= amount; i++) {%>
                     <li class="page-item<%= i == offset ? " active" : ""%>"><a class="page-link"
-                                                                               href="Profile?item=<%=buttons[1]%>&page=<%=i%>"><%=i%>
+                                                                               href="Profile?item=Users&page=<%=i%>"><%=i%>
                     </a></li>
                     <%}%>
                 </ul>
@@ -134,7 +325,8 @@
         </div>
         <%
                 break;
-            case "Events":
+            case "Events Control Panel":
+                events = edao.selectBy(SELECT.STATUS, 2);
         %>
         <div class="col distance">
             <div class="rowsa">

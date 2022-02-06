@@ -6,12 +6,12 @@
 <jsp:include page="onlyForUser.jsp"/>
 <body style="height: 100vh">
 <c:choose>
-  <c:when test="${role==1}">
+  <c:when test="${role==1 || role==2}">
     <jsp:include page="moder-profile.jsp"/>
   </c:when>
-  <c:when test="${role==2}">
-    <jsp:include page="speaker-profile.jsp"/>
-  </c:when>
+<%--  <c:when test="${role==2}">--%>
+<%--    <jsp:include page="speaker-profile.jsp"/>--%>
+<%--  </c:when>--%>
   <c:when test="${role==3}">
     <jsp:include page="listener-profile.jsp"/>
   </c:when>
