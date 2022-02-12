@@ -1,38 +1,12 @@
 package com.conference.dao;
 
 import com.conference.bean.Event;
-import com.conference.bean.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListenersDAO {
-    private final static String URL = "jdbc:postgresql://localhost:5432/conf";
-    private final static String UNAME = "postuser";
-    private final static String UPASS = "root";
-
-    private final static String FULL = URL + "?user=" + UNAME + "&password=" + UPASS;
-    private final static String DRIVER = "org.postgresql.Driver";
-
-
-
-    private Connection getConnection(){
-        Connection connection;
-        try {
-            Class.forName(DRIVER);
-            connection = DriverManager.getConnection(FULL);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            connection = null;
-        }
-        return connection;
-    }
-
-    static class Listener{
-        int event;
-        int user;
-    }
+public class ListenersDAO extends DAO {
 
     private static final String CREATE_LISTENER = "\n" +
             "INSERT INTO listeners (event, listener) " +
@@ -45,7 +19,6 @@ public class ListenersDAO {
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -73,13 +46,31 @@ public class ListenersDAO {
             List<Event> events = new ArrayList<>();
             EventDAO edao = new EventDAO();
             while (set.next()){
-                events.addAll(edao.selectBy(SELECT.ID, set.getInt(1)));
+                events.addAll(edao.select("id", set.getInt(1), "all", 0,"id"));
             }
             set.close();
             return events;
         } catch (SQLException | IllegalAccessException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    private static final String SELECT_COUNT_OF_LISTENERS = "SELECT COUNT(listener) FROM listeners WHERE event = ?";
+
+    public int selectCountOfListeners(int event){
+        try (Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(SELECT_COUNT_OF_LISTENERS)) {
+            statement.setInt(1,event);
+            ResultSet set = statement.executeQuery();
+            int amountOfListeners = 0;
+            while (set.next()){
+                amountOfListeners = set.getInt(1);
+            }
+            set.close();
+            return amountOfListeners;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
         }
     }
 }

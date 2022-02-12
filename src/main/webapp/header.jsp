@@ -18,9 +18,9 @@
 <nav class="container-xl navbar sticky-top rowsa">
     <!-- Navbar content -->
     <div>
-        <a class="btn btn-grey" href="homepage.jsp">jConference</a>
+        <a class="btn btn-grey" href="Homepage">jConference</a>
         <a class="btn btn-info" href="">FAQ</a>
-        <a class="btn btn-info" href="events.jsp">Events</a>
+        <a class="btn btn-info" href="Events">Events</a>
     </div>
     <div>
         <form class="d-flex">
@@ -30,10 +30,10 @@
     </div>
     <div>
         <%if (request.getSession().getAttribute("user")==null){%>
-            <a class="btn btn-info" href="homepage.jsp">Sign up</a>
+            <a class="btn btn-info" href="Homepage">Sign up</a>
             <a class="btn btn-info" href="login.jsp">Log in</a>
         <%}else {%>
-            <a class="btn btn-info" href="profile.jsp">Profile</a>
+            <a class="btn btn-info" href="Profile">Profile</a>
             <a class="btn btn-info" href="logout.jsp">Log out</a>
         <%}%>
         <a class="btn btn-blue" href="">RU</a>

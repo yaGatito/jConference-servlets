@@ -3,7 +3,7 @@
 <%@ page import="com.conference.dao.UserDAO" %>
 <%@ page import="com.conference.bean.Event" %>
 <%@ page import="com.conference.dao.EventDAO" %>
-<%@ page import="com.conference.dao.SELECT" %>
+<%@ page import="com.conference.util.SELECT" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%!List<User> users;%>
 <%!List<Event> events;%>
@@ -22,7 +22,7 @@
           <h2 style="margin-left: 10px;">We are looking for speakers for next topics:</h2>
       </div>
       <div class="card-body text-secondary">
-        <%events = edao.selectBy(SELECT.STATUS,1);
+        <%events = edao.select(SELECT.STATUS,1);
           for (Event event : events){%>
 
           <div class="card border-info mb-3" style="width: 35rem;">
@@ -48,7 +48,7 @@
       <div class="card-body text-secondary">
 
 
-        <%events = edao.selectBy(SELECT.SPEAKER,user.getId());
+        <%events = edao.select(SELECT.SPEAKER,user.getId());
           for (Event event : events){%>
         <div class="card border-info mb-3" style="width: 35rem;">
           <div class="card-header rowsb">

@@ -22,7 +22,10 @@ public class AddEvent extends HttpServlet {
         String totime = request.getParameter("totime");
         String location = request.getParameter("location");
         Event event = new Event(topic,description,speaker,fromtime,totime,date,location);
-        new EventDAO().createEvent(event);
-        response.sendRedirect("profile.jsp");
+        if(new EventDAO().createEvent(event)) {
+            response.sendRedirect("profile.jsp");
+        }else {
+            response.sendRedirect("Error?message=Wrong_input");
+        }
     }
 }

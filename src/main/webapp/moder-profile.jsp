@@ -3,7 +3,6 @@
 <%@ page import="com.conference.dao.UserDAO" %>
 <%@ page import="com.conference.bean.Event" %>
 <%@ page import="com.conference.dao.EventDAO" %>
-<%@ page import="com.conference.dao.SELECT" %>
 <%@ page import="java.util.Optional" %>
 <%@ page import="com.conference.dao.ListenersDAO" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -161,7 +160,7 @@
         <%
                 break;
             case "Your events":
-                events = edao.selectBy(SELECT.SPEAKER, currentUser.getId());
+                events = edao.select("speaker", currentUser.getId(), "all",0,"date, fromtime");
         %>
         <div class="col distance">
             <div class="rowsa">
@@ -229,7 +228,7 @@
         <%
                 break;
             case "Free events":
-                events = edao.selectBy(SELECT.STATUS, 0);
+                events = edao.select("status", 0, "all", 0, "date, fromtime");
         %>
         <div class="col distance">
             <div class="rowsa">
@@ -326,7 +325,7 @@
         <%
                 break;
             case "Events Control Panel":
-                events = edao.selectBy(SELECT.STATUS, 2);
+                events = edao.select("status", 2, "all", 0, "date, fromtime");
         %>
         <div class="col distance">
             <div class="rowsa">

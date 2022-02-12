@@ -6,26 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventDAO {
-
-    private final static String URL = "jdbc:postgresql://localhost:5432/conf";
-    private final static String UNAME = "postuser";
-    private final static String UPASS = "root";
-
-    private final static String FULL = URL + "?user=" + UNAME + "&password=" + UPASS;
-    private final static String DRIVER = "org.postgresql.Driver";
-
-    private Connection getConnection(){
-        Connection connection;
-        try {
-            Class.forName(DRIVER);
-            connection = DriverManager.getConnection(FULL);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            connection = null;
-        }
-        return connection;
-    }
+public class EventDAO extends DAO {
 
     private static final String CREATE_EVENT =
             "INSERT INTO events (id, topic, description,speaker,date,fromtime,totime,location,status) " +
@@ -42,6 +23,21 @@ public class EventDAO {
             statement.setString(6,event.getTotime());
             statement.setString(7,event.getLocation().getAddress());
             statement.setInt(8,event.getStatus());
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private static final String DELETE_EVENT =
+            "DELETE FROM events WHERE id = ?";
+
+    public boolean deleteEvent(int id){
+        try (Connection con = getConnection();
+             PreparedStatement statement = con.prepareStatement(DELETE_EVENT)) {
+            statement.setInt(1,id);
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -71,13 +67,13 @@ public class EventDAO {
         }
     }
 
-
-    public List<Event> selectBy(SELECT select, int value) throws IllegalAccessException {
+    public List<Event> select(String where, int value, String limit, int offset, String order) throws IllegalAccessException {
 
         List<Event> events;
         try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement(select.toString())) {
+             PreparedStatement statement = con.prepareStatement("SELECT * FROM events WHERE " + where + " = ?  ORDER BY " + order + " LIMIT " + limit + " OFFSET ?")) {
             statement.setInt(1,value);
+            statement.setInt(2,offset);
             ResultSet set = statement.executeQuery();
             events = new ArrayList<>();
             while (set.next()){
@@ -97,5 +93,9 @@ public class EventDAO {
             events = null;
         }
         return events;
+    }
+
+    public static void main(String[] args) throws IllegalAccessException {
+        System.out.println(new EventDAO().select("status", 2,"5", 0, "date"));
     }
 }

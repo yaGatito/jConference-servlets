@@ -5,27 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
-    private final static String URL = "jdbc:postgresql://localhost:5432/conf";
-    private final static String UNAME = "postuser";
-    private final static String UPASS = "root";
-
-    private final static String FULL = URL + "?user=" + UNAME + "&password=" + UPASS;
-    private final static String DRIVER = "org.postgresql.Driver";
-
-
-
-    private Connection getConnection(){
-        Connection connection;
-        try {
-            Class.forName(DRIVER);
-            connection = DriverManager.getConnection(FULL);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            connection = null;
-        }
-        return connection;
-    }
+public class UserDAO extends DAO {
 
     private static final String INSERT_USER = "\n" +
             "INSERT INTO users (id, role, name, lastname, email, password) " +
