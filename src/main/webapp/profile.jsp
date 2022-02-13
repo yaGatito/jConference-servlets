@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="header.jsp"/>
-<jsp:include page="onlyForUser.jsp"/>
 <body style="height: 100vh">
 <c:choose>
   <c:when test="${role==1 || role==2}">

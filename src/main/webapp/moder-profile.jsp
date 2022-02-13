@@ -118,7 +118,6 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Topic</th>
-                    <th scope="col">Speaker</th>
                     <th scope="col">Date and time</th>
                     <th scope="col">Location</th>
                     <th scope="col">Action</th>
@@ -129,15 +128,6 @@
                 <tr>
                     <th scope="row"><%=event.getId()%></th>
                     <td><%=event.getTopic()%></td>
-                    <%!String speaker2;%>
-                    <%
-                        try {
-                            speaker2 = udao.getByID(event.getSpeaker()).toString();
-                        }catch (NullPointerException e){
-                            speaker2 = "deleted";
-                        }
-                    %>
-                    <td><%=speaker2%></td>
                     <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%></td>
                     <%if (event.getCondition()) {%>
                     <td><a href="<%=event.getLocation().getAddress()%>"
@@ -187,7 +177,6 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Topic</th>
-                    <th scope="col">Speaker</th>
                     <th scope="col">Date and time</th>
                     <th scope="col">Location</th>
                     <th scope="col">Action</th>
@@ -198,15 +187,6 @@
                 <tr>
                     <th scope="row"><%=event.getId()%></th>
                     <td><%=event.getTopic()%></td>
-                    <%!String speaker1;%>
-                    <%
-                        try {
-                            speaker1 = udao.getByID(event.getSpeaker()).toString();
-                        }catch (NullPointerException e){
-                            speaker1 = "deleted";
-                        }
-                    %>
-                    <td><%=speaker1%></td>
                     <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%></td>
                     <%if (event.getCondition()) {%>
                     <td><a href="<%=event.getLocation().getAddress()%>"
@@ -352,7 +332,6 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Topic</th>
-                    <th scope="col">Speaker</th>
                     <th scope="col">Date and time</th>
                     <th scope="col">Location</th>
                     <th scope="col">Action</th>
@@ -363,15 +342,6 @@
                 <tr>
                     <th scope="row"><%=event.getId()%></th>
                     <td><%=event.getTopic()%></td>
-                    <%!String speaker;%>
-                    <%
-                        try {
-                            speaker = udao.getByID(event.getSpeaker()).toString();
-                        }catch (NullPointerException e){
-                            speaker = "deleted";
-                        }
-                    %>
-                    <td><%=speaker%></td>
                     <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%></td>
                     <%if (event.getCondition()) {%>
                     <td><a href="<%=event.getLocation().getAddress()%>"

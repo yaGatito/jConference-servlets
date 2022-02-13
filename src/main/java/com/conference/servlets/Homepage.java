@@ -17,11 +17,7 @@ public class Homepage extends HttpServlet {
         List<Event> events = null;
         UserDAO udao = new UserDAO();
         EventDAO edao = new EventDAO();
-        try {
-            events = edao.select("status", 2,"5", 0, "date, fromtime");
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        events = edao.select("status", 2,"5", 0, "date, fromtime");
         request.setAttribute("udao",udao);
         request.setAttribute("events",events);
         request.getRequestDispatcher("homepage.jsp").forward(request,response);

@@ -9,40 +9,31 @@ public class Event {
     private String date;
     private boolean isOnline;
     private Location location;
-    private int speaker;
+    /**
+     * 0 - past event
+     * 1 - future event
+     */
     private int status;
 
-    public Event(int id, String topic, String description, int speaker, String fromtime, String totime, String date, String location) {
+    public Event(int id, String topic, String description, String fromtime, String totime, String date, String location, int status) {
         this.id = id;
-        setTopic(topic);
-        setDescription(description);
-        setTotime(totime);
-        setFromtime(fromtime);
-        setDate(date);
+        this.topic = topic;
+        this.description = description;
+        this.fromtime = fromtime;
+        this.totime = totime;
+        this.date = date;
         setLocation(location);
-        setSpeaker(speaker);
-        checkStatus();
+        this.status = status;
     }
 
-    public Event(String topic, String description, int speaker, String fromtime, String totime, String date, String location) {
-        setTopic(topic);
-        setDescription(description);
-        setTotime(totime);
-        setFromtime(fromtime);
-        setDate(date);
+    public Event(String topic, String description, String fromtime, String totime, String date, String location, int status) {
+        this.topic = topic;
+        this.description = description;
+        this.fromtime = fromtime;
+        this.totime = totime;
+        this.date = date;
         setLocation(location);
-        setSpeaker(speaker);
-        checkStatus();
-    }
-
-    public void checkStatus(){
-        if (!this.date.equals("n/a") && !this.location.getAddress().equals("n/a") && !(this.speaker == -99 || this.speaker == 0)){
-            this.status = 2;
-        }else if(this.speaker == 0){
-            this.status = 0;
-        }else{
-            this.status = 1;
-        }
+        this.status = status;
     }
 
     public int getStatus() {
@@ -76,10 +67,6 @@ public class Event {
 
     public Location getLocation() {
         return location;
-    }
-
-    public int getSpeaker() {
-        return speaker;
     }
 
     public String getFromtime() {
@@ -125,13 +112,9 @@ public class Event {
         }
     }
 
-    public void setSpeaker(int speaker) {
-        this.speaker = speaker;
-    }
-
     @Override
     public String toString() {
-        return topic+" by "+speaker;
+        return topic;
     }
 
     private String checkString(String s){

@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="header.jsp"/>
-<jsp:include page="onlyForUser.jsp"/>
 <%!List<User> speakers;%>
 <%speakers = new UserDAO().selectSpeakers();%>
 <body>

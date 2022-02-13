@@ -50,7 +50,7 @@ public class ListenersDAO extends DAO {
             }
             set.close();
             return events;
-        } catch (SQLException | IllegalAccessException e) {
+        } catch (SQLException  e) {
             e.printStackTrace();
             return null;
         }

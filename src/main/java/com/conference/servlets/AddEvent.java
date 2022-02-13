@@ -16,12 +16,11 @@ public class AddEvent extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String topic = request.getParameter("topic");
         String description = request.getParameter("description");
-        int speaker = Integer.parseInt(request.getParameter("speaker"));
         String date = request.getParameter("date");
         String fromtime = request.getParameter("fromtime");
         String totime = request.getParameter("totime");
         String location = request.getParameter("location");
-        Event event = new Event(topic,description,speaker,fromtime,totime,date,location);
+        Event event = new Event(topic,description,fromtime,totime,date,location,1);
         if(new EventDAO().createEvent(event)) {
             response.sendRedirect("profile.jsp");
         }else {

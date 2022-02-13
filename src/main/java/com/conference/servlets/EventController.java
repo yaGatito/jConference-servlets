@@ -24,25 +24,21 @@ public class EventController extends HttpServlet {
             EventDAO edao = new EventDAO();
             String action = request.getParameter("action");
             Event e = null;
-            try {
-                int event = Integer.parseInt(request.getParameter("event"));
-                e = edao.select("id", event, "all", 0, "id").get(0);
-            } catch (IllegalAccessException ex) {
-                ex.printStackTrace();
-            }
+            int event = Integer.parseInt(request.getParameter("event"));
+            e = edao.select("id", event, "all", 0, "id").get(0);
             switch (action){
                 case "update":
                     e.setDate(request.getParameter("date"));
                     e.setFromtime(request.getParameter("fromtime"));
                     e.setTotime(request.getParameter("totime"));
                     e.setLocation(request.getParameter("location"));
-                    e.checkStatus();
+//                    e.checkStatus();
                     edao.updateEvent(e);
                     response.sendRedirect("Profile?item=Your%20events");
                     break;
                 case "bind":
-                    e.setSpeaker(user.getId());
-                    e.checkStatus();
+//                    e.setSpeaker(user.getId());
+//                    e.checkStatus();
                     edao.updateEvent(e);
                     response.sendRedirect("Profile?item=Your%20events");
                     break;

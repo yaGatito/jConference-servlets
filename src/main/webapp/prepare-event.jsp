@@ -7,7 +7,7 @@
 <jsp:include page="header.jsp"/>
 <%
   int event_id = Integer.parseInt(request.getParameter("event"));
-  Event event = new EventDAO().select(SELECT.ID,event_id).get(0);
+  Event event = new EventDAO().select("id",event_id,"all",0,"date, fromtime").get(0);
   boolean prepared = event.getStatus() > 1;
   request.getSession().setAttribute("event",event);
 %>

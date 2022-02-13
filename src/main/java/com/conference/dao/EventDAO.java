@@ -9,20 +9,18 @@ import java.util.List;
 public class EventDAO extends DAO {
 
     private static final String CREATE_EVENT =
-            "INSERT INTO events (id, topic, description,speaker,date,fromtime,totime,location,status) " +
-                    "VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO events (id, topic, description,date,fromtime,totime,location) " +
+                    "VALUES (default, ?, ?, ?, ?, ?, ?)";
 
     public boolean createEvent(Event event){
         try (Connection con = getConnection();
              PreparedStatement statement = con.prepareStatement(CREATE_EVENT)) {
             statement.setString(1,event.getTopic());
             statement.setString(2,event.getDescription());
-            statement.setInt(3,event.getSpeaker());
-            statement.setString(4,event.getDate());
-            statement.setString(5,event.getFromtime());
-            statement.setString(6,event.getTotime());
-            statement.setString(7,event.getLocation().getAddress());
-            statement.setInt(8,event.getStatus());
+            statement.setString(3,event.getDate());
+            statement.setString(4,event.getFromtime());
+            statement.setString(5,event.getTotime());
+            statement.setString(6,event.getLocation().getAddress());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -47,7 +45,7 @@ public class EventDAO extends DAO {
     }
 
     private static final String UPDATE_EVENT =
-            "UPDATE events SET date = ?, fromtime = ?, totime = ?, location = ?,speaker = ?,status = ? WHERE id = ?";
+            "UPDATE events SET date = ?, fromtime = ?, totime = ?, location = ?,status = ? WHERE id = ?";
 
     public boolean updateEvent(Event event){
         try (Connection con = getConnection();
@@ -56,9 +54,8 @@ public class EventDAO extends DAO {
             statement.setString(2,event.getFromtime());
             statement.setString(3,event.getTotime());
             statement.setString(4,event.getLocation().getAddress());
-            statement.setInt(5,event.getSpeaker());
-            statement.setInt(6,event.getStatus());
-            statement.setInt(7,event.getId());
+            statement.setInt(5,event.getStatus());
+            statement.setInt(6,event.getId());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -67,13 +64,11 @@ public class EventDAO extends DAO {
         }
     }
 
-    public List<Event> select(String where, int value, String limit, int offset, String order) throws IllegalAccessException {
+    public List<Event> select(String where, int value, String limit, int offset, String order) {
 
         List<Event> events;
         try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement("SELECT * FROM events WHERE " + where + " = ?  ORDER BY " + order + " LIMIT " + limit + " OFFSET ?")) {
-            statement.setInt(1,value);
-            statement.setInt(2,offset);
+             PreparedStatement statement = con.prepareStatement("SELECT * FROM events WHERE " + where + " = " + value + "  ORDER BY " + order + " LIMIT " + limit + " OFFSET " + offset)) {
             ResultSet set = statement.executeQuery();
             events = new ArrayList<>();
             while (set.next()){
@@ -84,8 +79,8 @@ public class EventDAO extends DAO {
                 String totime = set.getString("totime");
                 String date = set.getString("date");
                 String location = set.getString("location");
-                int speaker = set.getInt("speaker");
-                events.add(new Event(id,topic,description,speaker,fromtime,totime,date,location));
+                int status = set.getInt("status");
+                events.add(new Event(id,topic,description,fromtime,totime,date,location, status));
             }
             set.close();
         } catch (SQLException e) {
@@ -96,6 +91,6 @@ public class EventDAO extends DAO {
     }
 
     public static void main(String[] args) throws IllegalAccessException {
-        System.out.println(new EventDAO().select("status", 2,"5", 0, "date"));
+        System.out.println(new EventDAO().select("status", 1,"5", 0, "date"));
     }
 }

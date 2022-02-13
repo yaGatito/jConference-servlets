@@ -2,6 +2,11 @@ package com.conference.bean;
 
 public class User {
     private int id;
+    /**
+     * 1 - moder
+     * 2 - speaker
+     * 3 - listener
+     */
     private int role;
     private String name;
     private String lastname;

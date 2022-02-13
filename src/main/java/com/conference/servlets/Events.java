@@ -19,12 +19,7 @@ public class Events extends HttpServlet {
         List<Event> events = new ArrayList<>();
         UserDAO udao = new UserDAO();
         EventDAO edao = new EventDAO();
-        try {
-            events = edao.select("status", 2,"all",0,"id");
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            request.getRequestDispatcher("Error?message=Wrong_request");
-        }
+        events = edao.select("status", 2,"all",0,"id");
         request.setAttribute("events", events);
         request.setAttribute("udao", udao);
         request.getRequestDispatcher("events.jsp").forward(request,response);
