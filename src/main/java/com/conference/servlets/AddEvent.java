@@ -6,6 +6,7 @@ import com.conference.dao.EventDAO;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import java.beans.Transient;
 import java.io.IOException;
 
 @WebServlet("/AddEvent")

@@ -21,7 +21,8 @@ public class Profile extends HttpServlet {
             request.getSession().setAttribute("user",user);
             request.getRequestDispatcher("profile.jsp").forward(request,response);
         }else{
-            response.sendRedirect("Error?message=Wrong_password");
+            request.setAttribute("message", "Wrong password");
+            request.getRequestDispatcher("error-page.jsp").forward(request,response);
         }
     }
 
@@ -29,7 +30,8 @@ public class Profile extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null){
-            response.sendRedirect("Error?message=please_login");
+            request.setAttribute("message", "Please log in");
+            request.getRequestDispatcher("error-page.jsp").forward(request,response);
         }else{
             request.getRequestDispatcher("profile.jsp").forward(request,response);
         }

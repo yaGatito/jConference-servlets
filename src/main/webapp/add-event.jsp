@@ -23,15 +23,15 @@
                 <textarea name="description" class="form-control reg" rows="4" cols="50" form="event-form"
                           required></textarea>
             </div>
-            <div style="margin-top: 1rem; line-height: 0">
-                <h4>Speaker</h4>
-                <select name="speaker" class="form-control reg" required>
-                    <%for (User speaker : speakers) {%>
-                    <option value="<%=speaker.getId()%>"><%=speaker.getName() + " " + speaker.getLastname()%>
-                    </option>
-                    <%}%>
-                </select>
-            </div>
+<%--            <div style="margin-top: 1rem; line-height: 0">--%>
+<%--                <h4>Speaker</h4>--%>
+<%--                <select name="speaker" class="form-control reg" required>--%>
+<%--                    <%for (User speaker : speakers) {%>--%>
+<%--                    <option value="<%=speaker.getId()%>"><%=speaker.getName() + " " + speaker.getLastname()%>--%>
+<%--                    </option>--%>
+<%--                    <%}%>--%>
+<%--                </select>--%>
+<%--            </div>--%>
             <div style="margin-top: 1rem; line-height: 0">
                 <h4>Date</h4>
                 <input name="date" class="form-control reg" type="date" placeholder="" aria-label="Search" min="<%=LocalDate.now().toString()%>" required>

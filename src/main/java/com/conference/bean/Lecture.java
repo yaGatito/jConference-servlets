@@ -62,9 +62,7 @@ public class Lecture {
 
     @Override
     public String toString() {
-        return "Lecture{" +
-                "topic='" + topic + '\'' +
-                '}';
+        return "["+id+"] " + topic;
     }
 
     @Override
