@@ -8,36 +8,35 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet("/Controller")
-public class Controller extends HttpServlet {
+@WebServlet("/UserController")
+public class UserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User currentUser = (User) request.getSession().getAttribute("user");
         if (currentUser == null || currentUser.getRole() != 1){
-            response.sendRedirect("Error?message=You_have_not_any_permissions_for_it");
+            request.setAttribute("message","You have not any permission for it");
+            request.getRequestDispatcher("error-page.jsp").forward(request, response);
         }
         UserDAO dao = new UserDAO();
         String upgrade = request.getParameter("upgrade");
         String downgrade = request.getParameter("downgrade");
-        String delete = request.getParameter("delete");
         if (upgrade!=null){
             int id = Integer.parseInt(upgrade);
             User user = dao.getByID(id);
             if (user == null){
-                response.sendRedirect("Error?message=Wrong_user");
+                request.setAttribute("message","Wrong user");
+                request.getRequestDispatcher("error-page.jsp").forward(request, response);
             }else if (user.getRole()==3){
                 dao.setRole(2,id);
             }else if(user.getRole()==2){
                 dao.setRole(1,id);
             }
-        }else if (delete!=null){
-            int id = Integer.parseInt(delete);
-            dao.deleteById(id);
         }else if(downgrade!=null){
             int id = Integer.parseInt(downgrade);
             User user = dao.getByID(id);
             if (user == null){
-                response.sendRedirect("Error?message=Wrong_user");
+                request.setAttribute("message","Wrong user");
+                request.getRequestDispatcher("error-page.jsp").forward(request, response);
             }else if (user.getRole()==2){
                 dao.setRole(3,id);
             }else if(user.getRole()==1){
