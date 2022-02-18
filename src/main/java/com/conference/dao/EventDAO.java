@@ -90,7 +90,5 @@ public class EventDAO extends DAO {
         return events;
     }
 
-    public static void main(String[] args) throws IllegalAccessException {
-        System.out.println(new EventDAO().select("id",7,"1",0,"date, fromtime"));
-    }
+
 }

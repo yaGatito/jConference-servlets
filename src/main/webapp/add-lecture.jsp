@@ -16,7 +16,7 @@
     <!--Add event-->
     <div class="margin col reg-sec addevent">
       <h1 class="display-6">Create topic</h1>
-        <form id="event-form" class="col margin" action="${pageContext.request.contextPath}/AddLecture" method="post">
+        <form id="event-form" class="col margin" action="${pageContext.request.contextPath}/Service?command=addlecture" method="post">
           <div style="margin-top: 1rem; line-height: 0">
             <h4>Topic</h4>
             <input name="topic" class="form-control reg" type="text" placeholder="" aria-label="Search" required>

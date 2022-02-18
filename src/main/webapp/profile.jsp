@@ -136,9 +136,11 @@
                     <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%>
                     </td>
                     <%if (event.getCondition()) {%>
-                    <td><a href="<%=event.getLocation().getAddress()%>"
+                    <td>
+                        <a href="<%=event.getLocation().getAddress()%>"
                            target="_blank"><%=event.getLocation().getShortName()%>
-                    </a></td>
+                        </a>
+                    </td>
                     <%}%>
                     <%if (!event.getCondition()) {%>
                     <td><%=event.getLocation().getShortName()%>
@@ -161,8 +163,8 @@
         <div class="col distance" style=" background-color: white">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="btn btn-blue active" id="pills-home-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                    <button class="btn btn-blue active" id="pills-lectures-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-lectures" type="button" role="tab" aria-controls="pills-lectures"
                             aria-selected="true">Lectures
                     </button>
                 </li>
@@ -173,8 +175,8 @@
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="btn btn-blue" id="pills-contact-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                    <button class="btn btn-blue" id="pills-requests-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-requests" type="button" role="tab" aria-controls="pills-requests"
                             aria-selected="false">Requests
                     </button>
                 </li>
@@ -185,7 +187,8 @@
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="tab-pane fade show active" id="pills-lectures" role="tabpanel"
+                     aria-labelledby="pills-lectures-tab">
                     <%lectures = lecdao.selectBySpeaker(3, currentUser.getId());%>
                     <table class="table table-info table-striped">
                         <thead>
@@ -220,8 +223,8 @@
                             </td>
                             <%}%>
                             <td>
-                                <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line"
-                                                 style="color: #005;" data-width="24"></span></a>
+<%--                                <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line"--%>
+<%--                                                 style="color: #005;" data-width="24"></span></a>--%>
                             </td>
                         </tr>
                         <%}%>
@@ -263,7 +266,9 @@
                             </td>
                             <%}%>
                             <td>
-                                <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line"
+                                <a href=""><span class="iconify-inline" data-icon="clarity:success-standard-line"
+                                                 style="color: #005;" data-width="24"></span></a>
+                                <a href=""><span class="iconify-inline" data-icon="carbon:close-outline"
                                                  style="color: #005;" data-width="24"></span></a>
                             </td>
                         </tr>
@@ -271,7 +276,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <div class="tab-pane fade" id="pills-requests" role="tabpanel" aria-labelledby="pills-requests-tab">
                     <%lectures = lecdao.selectBySpeaker(1, currentUser.getId());%>
                     <table class="table table-info table-striped">
                         <thead>
@@ -349,7 +354,7 @@
                             </td>
                             <%}%>
                             <td>
-                                <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line"
+                                <a href=""><span class="iconify-inline" data-icon="clarity:success-standard-line"
                                                  style="color: #005;" data-width="24"></span></a>
                             </td>
                         </tr>
@@ -471,8 +476,6 @@
                     <%}%>
                     <td>
                         <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line" style="color: #005;"
-                                         data-width="24"></span></a>
-                        <a href=""><span class="iconify-inline" data-icon="feather:x-square" style="color: #005;"
                                          data-width="24"></span></a>
                     </td>
                 </tr>

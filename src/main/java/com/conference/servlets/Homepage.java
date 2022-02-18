@@ -2,8 +2,8 @@ package com.conference.servlets;
 
 import com.conference.bean.Event;
 import com.conference.dao.EventDAO;
+import com.conference.dao.LectureDAO;
 import com.conference.dao.UserDAO;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -14,12 +14,13 @@ import java.util.List;
 public class Homepage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Event> events = null;
         UserDAO udao = new UserDAO();
         EventDAO edao = new EventDAO();
-        events = edao.select("status", 2,"5", 0, "date, fromtime");
+        List<Event> events = edao.select("status", 1,"5", 0, "date, fromtime");
         request.setAttribute("udao",udao);
         request.setAttribute("events",events);
+        LectureDAO lecdao = new LectureDAO();
+        request.setAttribute("lecdao", lecdao);
         request.getRequestDispatcher("homepage.jsp").forward(request,response);
     }
 }
