@@ -1,4 +1,4 @@
-package com.conference.bean;
+package com.conference.entity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

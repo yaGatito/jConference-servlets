@@ -16,7 +16,7 @@
     <!--Add event-->
     <div class="margin col reg-sec addevent">
       <h1 class="display-6">Create topic</h1>
-        <form id="event-form" class="col margin" action="${pageContext.request.contextPath}/Service?command=addlecture" method="post">
+        <form id="event-form" class="col margin" action="${pageContext.request.contextPath}/OfferController?command=addRequest" method="post">
           <div style="margin-top: 1rem; line-height: 0">
             <h4>Topic</h4>
             <input name="topic" class="form-control reg" type="text" placeholder="" aria-label="Search" required>
@@ -28,21 +28,6 @@
                 <option value="<%=event.getId()%>"><%=event.getTopic() + "[" + event.getDate() + "]"%></option>
               <%}%>
             </select>
-          </div>
-          <div style="margin-top: 1rem; line-height: 0">
-            <h4>Speaker</h4>
-            <select name="speaker" class="form-control reg"  required>
-              <option value="0">Free to choose</option>
-              <%for (User speaker : speakers) {%>
-              <option value="<%=speaker.getId()%>"><%=speaker.getName() + " " + speaker.getLastname()%></option>
-              <%}%>
-            </select>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="offer" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              As offer
-            </label>
           </div>
           <p></p> <button class="btn btn-info" type="submit">Confirm</button>
         </form>

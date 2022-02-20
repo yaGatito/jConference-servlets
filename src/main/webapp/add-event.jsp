@@ -1,4 +1,4 @@
-<%@ page import="com.conference.bean.User" %>
+<%@ page import="com.conference.entity.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.conference.dao.UserDAO" %>
 <%@ page import="java.time.LocalDate" %>

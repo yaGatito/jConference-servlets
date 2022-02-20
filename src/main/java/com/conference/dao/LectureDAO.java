@@ -1,6 +1,6 @@
 package com.conference.dao;
 
-import com.conference.bean.Lecture;
+import com.conference.entity.Lecture;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -93,6 +93,41 @@ public class LectureDAO extends DAO {
         }
     }
 
+    public List<Lecture> selectNotRequested(int speaker) {
+        List<Lecture> lectures = new ArrayList<>();
+        try (Connection c = getConnection();
+             PreparedStatement ps = c.prepareStatement(
+                     "SELECT * FROM lectures WHERE status = 0 ORDER BY id");
+             PreparedStatement req = c.prepareStatement(
+                     "SELECT lecture FROM requests WHERE speaker = ?")
+        ){
+            req.setInt(1,speaker);
+            ResultSet requestedSet = req.executeQuery();
+            List<Integer> requestedLectures = new ArrayList<>();
+            while (requestedSet.next()){
+                requestedLectures.add(requestedSet.getInt(1));
+            }
+            ResultSet set = ps.executeQuery();
+            while (set.next()) {
+                int id = set.getInt("id");
+                if (!requestedLectures.contains(id)) {
+                    lectures.add(new Lecture(
+                            id,
+                            set.getString("topic"),
+                            set.getInt("status"),
+                            set.getInt("event"),
+                            set.getInt("speaker")
+                    ));
+                }
+            }
+            set.close();
+            return lectures;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public List<Lecture> selectBySpeaker(int status, int speaker) {
         List<Lecture> lectures = new ArrayList<>();
         try (Connection c = getConnection();
@@ -138,8 +173,29 @@ public class LectureDAO extends DAO {
         }
     }
 
-    public static void main(String[] args) {
-        List lectures = new LectureDAO().selectBySpeaker(3, 28);
-        System.out.println(lectures);
+    public boolean rejectOffer(int lecture){
+        try(Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(
+            "UPDATE lectures SET status = -1 WHERE id = ?")){
+            ps.setInt(1,lecture);
+            ps.executeUpdate();
+            return true;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean acceptOffer(int lecture){
+        try(Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(
+                    "UPDATE lectures SET status = 3 WHERE id = ?")){
+            ps.setInt(1,lecture);
+            ps.executeUpdate();
+            return true;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 }

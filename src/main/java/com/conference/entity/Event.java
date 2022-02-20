@@ -1,4 +1,4 @@
-package com.conference.bean;
+package com.conference.entity;
 
 public class Event {
     private int id;

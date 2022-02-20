@@ -1,10 +1,9 @@
 package com.conference.servlets;
 
-import com.conference.bean.User;
+import com.conference.entity.User;
 import com.conference.dao.UserDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -33,7 +32,5 @@ public class Registration extends HttpServlet {
             request.setAttribute("message","Wrong registration");
             request.getRequestDispatcher("error-page.jsp").forward(request,response);
         }
-
-
     }
 }

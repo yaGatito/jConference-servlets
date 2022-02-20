@@ -1,6 +1,6 @@
 package com.conference.servlets;
 
-import com.conference.bean.User;
+import com.conference.entity.User;
 import com.conference.dao.ListenersDAO;
 
 import javax.servlet.*;
@@ -27,9 +27,10 @@ public class ParticipateController extends HttpServlet {
                     event = Integer.parseInt(request.getParameter("event"));
                     res = new ListenersDAO().createListener(event,listener);
                     if (res){
-                        response.sendRedirect("events.jsp");
+                        response.sendRedirect("Events");
                     }else{
-                        request.getRequestDispatcher("Error?message=You_already_taking_part_in_this_event").forward(request, response);
+                        request.setAttribute("message","You already participate on event");
+                        request.getRequestDispatcher("error-page.jsp").forward(request, response);
                     }
                     break;
                 case "unjoin":
@@ -38,7 +39,8 @@ public class ParticipateController extends HttpServlet {
                     if (res){
                         response.sendRedirect("Profile?item=Your%20participation");
                     }else{
-                        request.getRequestDispatcher("Error?message=You_already_undo_following_for_this_event").forward(request, response);
+                        request.setAttribute("message","You already undo following for this event");
+                        request.getRequestDispatcher("error-page.jsp").forward(request, response);
                     }
                     break;
                 default:

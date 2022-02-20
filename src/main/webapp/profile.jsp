@@ -1,12 +1,9 @@
-<%@ page import="com.conference.bean.User" %>
+<%@ page import="com.conference.entity.User" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.conference.dao.UserDAO" %>
-<%@ page import="com.conference.bean.Event" %>
-<%@ page import="com.conference.dao.EventDAO" %>
+<%@ page import="com.conference.entity.Event" %>
 <%@ page import="java.util.Optional" %>
-<%@ page import="com.conference.dao.ListenersDAO" %>
-<%@ page import="com.conference.dao.LectureDAO" %>
-<%@ page import="com.conference.bean.Lecture" %>
+<%@ page import="com.conference.entity.Lecture" %>
+<%@ page import="com.conference.dao.*" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -17,6 +14,8 @@
   List<User> users;
   List<Event> events;
   List<Lecture> lectures;
+  List<User> speakers;
+  RequestDAO rdao = new RequestDAO();
   UserDAO udao = new UserDAO();
   EventDAO edao = new EventDAO();
   LectureDAO lecdao = new LectureDAO();
@@ -67,7 +66,7 @@
             case "Profile":
     %>
     <div class="col">
-        <div class="reg-sec distance">
+        <div  style="background-color: #fff"  class="reg-sec distance">
             <form action="UpdateUser" method="post" class="container-xl col" style="margin-top: 3rem;width: 30rem;">
                 <div class="input-group distance">
                     <span class="input-group-text">First name</span>
@@ -102,20 +101,9 @@
             case "Participation":
                 events = ldao.selectEventsOfListeners(currentUser.getId());
         %>
-        <div class="col distance">
-            <div class="rowsa">
-                <div class="distance dropdown">
-                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton3"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                        Sort events
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                        <li><a class="dropdown-item" href="#">by date</a></li>
-                        <li><a class="dropdown-item" href="#">by name of speaker</a></li>
-                        <li><a class="dropdown-item" href="#">by name of events</a></li>
-                    </ul>
-                </div>
-            </div>
+
+        <div  style="background-color: #fff"  class="col distance">
+            <%if (events.size() > 0) {%>
             <table class="table table-info table-striped">
                 <thead>
                 <tr>
@@ -155,7 +143,11 @@
                 <%}%>
                 </tbody>
             </table>
+            <%} else {%>
+            <h2>You don't have any participation now</h2>
+            <%}%>
         </div>
+
         <%
                 break;
             case "Lectures":
@@ -186,10 +178,13 @@
                     </button>
                 </li>
             </ul>
+            <%---------------------------SECURED---------------------%>
             <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-lectures" role="tabpanel"
+
+                <div  style="background-color: #fff"  class="tab-pane fade show active" id="pills-lectures" role="tabpanel"
                      aria-labelledby="pills-lectures-tab">
                     <%lectures = lecdao.selectBySpeaker(3, currentUser.getId());%>
+                    <%if (lectures.size() > 0) {%>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -223,16 +218,21 @@
                             </td>
                             <%}%>
                             <td>
-<%--                                <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line"--%>
-<%--                                                 style="color: #005;" data-width="24"></span></a>--%>
+                                <%--                                <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line"--%>
+                                <%--                                                 style="color: #005;" data-width="24"></span></a>--%>
                             </td>
                         </tr>
                         <%}%>
                         </tbody>
                     </table>
+                    <%} else {%>
+                    <h2>You don't have any lectures </h2>
+                    <%}%>
                 </div>
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <%---------------------------OFFERS---------------------%>
+                <div  style="background-color: #fff"  class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <%lectures = lecdao.selectBySpeaker(2, currentUser.getId());%>
+                    <%if (lectures.size() > 0) {%>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -266,18 +266,26 @@
                             </td>
                             <%}%>
                             <td>
-                                <a href=""><span class="iconify-inline" data-icon="clarity:success-standard-line"
-                                                 style="color: #005;" data-width="24"></span></a>
-                                <a href=""><span class="iconify-inline" data-icon="carbon:close-outline"
-                                                 style="color: #005;" data-width="24"></span></a>
+                                <a href="OfferController?command=accept&id=<%=lecture.getId()%>"><span
+                                        class="iconify-inline" data-icon="clarity:success-standard-line"
+                                        style="color: #005;" data-width="24"></span></a>
+                                <a href="OfferController?command=reject&id=<%=lecture.getId()%>"><span
+                                        class="iconify-inline" data-icon="carbon:close-outline"
+                                        style="color: #005;" data-width="24"></span></a>
                             </td>
                         </tr>
                         <%}%>
                         </tbody>
                     </table>
+                    <%} else {%>
+                    <h2>You don't have any offers </h2>
+                    <%}%>
                 </div>
-                <div class="tab-pane fade" id="pills-requests" role="tabpanel" aria-labelledby="pills-requests-tab">
+                <%---------------------------REQUESTS---------------------%>
+                <div style="background-color: #fff" class="tab-pane fade" id="pills-requests" role="tabpanel"
+                     aria-labelledby="pills-requests-tab">
                     <%lectures = lecdao.selectBySpeaker(1, currentUser.getId());%>
+                    <%if (lectures.size() > 0) {%>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -286,13 +294,12 @@
                             <th scope="col">Lecture</th>
                             <th scope="col">Date and time</th>
                             <th scope="col">Location</th>
-                            <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <%for (Lecture lecture : lectures) {%>
                         <tr>
-                            <th scope="row"><%=lecture.getId()%>
+                            <th scope="row"><%=lecture.getEvent()%>
                             </th>
                             <% Event event = edao.select("id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
                             <td><%=event.getTopic()%>
@@ -310,17 +317,25 @@
                             <td><%=event.getLocation().getShortName()%>
                             </td>
                             <%}%>
-                            <td>
-                                <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line"
-                                                 style="color: #005;" data-width="24"></span></a>
-                            </td>
                         </tr>
                         <%}%>
                         </tbody>
                     </table>
+                    <%} else {%>
+                    <h2>You didn't make request to give a lecture </h2>
+                    <%}%>
+                    <div class="distance">
+                        <a class="btn btn-info" href="AddRequest">Make request</a>
+                    </div>
+
                 </div>
-                <div class="tab-pane fade" id="pills-free" role="tabpanel" aria-labelledby="pills-free-tab">
-                    <%lectures = lecdao.selectByStatus(0);%>
+
+                <%---------------------------FREE---------------------%>
+                <div style="background-color: #fff" class="tab-pane fade" id="pills-free" role="tabpanel"
+                     aria-labelledby="pills-free-tab">
+                    <%lectures = lecdao.selectNotRequested(currentUser.getId());%>
+                    <%if (lectures.size() > 0) {%>
+                    <h2>Not requested</h2>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -335,7 +350,7 @@
                         <tbody>
                         <%for (Lecture lecture : lectures) {%>
                         <tr>
-                            <th scope="row"><%=lecture.getId()%>
+                            <th scope="row"><%=lecture.getEvent()%>
                             </th>
                             <% Event event = edao.select("id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
                             <td><%=event.getTopic()%>
@@ -354,13 +369,59 @@
                             </td>
                             <%}%>
                             <td>
-                                <a href=""><span class="iconify-inline" data-icon="clarity:success-standard-line"
-                                                 style="color: #005;" data-width="24"></span></a>
+                                <a href="OfferController?command=request&id=<%=lecture.getId()%>"><span
+                                        class="iconify-inline" data-icon="clarity:success-standard-line"
+                                        style="color: #005;" data-width="24"></span></a>
                             </td>
                         </tr>
                         <%}%>
                         </tbody>
                     </table>
+                    <%} else {%>
+                    <h2>There aren't any free lectures </h2>
+                    <%}%>
+
+                    <%lectures = rdao.selectLecturesFromRequests(currentUser.getId());%>
+                    <%if (lectures.size() > 0) {%>
+                    <h2>Already requested</h2>
+                    <table class="table table-info table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Event</th>
+                            <th scope="col">Lecture</th>
+                            <th scope="col">Date and time</th>
+                            <th scope="col">Location</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%for (Lecture lecture : lectures) {%>
+                        <tr>
+                            <th scope="row"><%=lecture.getEvent()%>
+                            </th>
+                            <% Event event = edao.select("id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <td><%=event.getTopic()%>
+                            </td>
+                            <td><%=lecture.getTopic()%>
+                            </td>
+                            <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%>
+                            </td>
+                            <%if (event.getCondition()) {%>
+                            <td><a href="<%=event.getLocation().getAddress()%>"
+                                   target="_blank"><%=event.getLocation().getShortName()%>
+                            </a></td>
+                            <%}%>
+                            <%if (!event.getCondition()) {%>
+                            <td><%=event.getLocation().getShortName()%>
+                            </td>
+                            <%}%>
+                        </tr>
+                        <%}%>
+                        </tbody>
+                    </table>
+                    <%} else {%>
+                    <h2>You didn't make request on free lectures</h2>
+                    <%}%>
                 </div>
             </div>
         </div>
@@ -370,6 +431,7 @@
                 users = udao.selectLimit((int) maxItems, offset);
         %>
         <div class="col distance" style=" background-color: white">
+            <%if (users.size() > 0) {%>
             <table class="table table-info table-striped">
                 <thead>
                 <tr>
@@ -402,6 +464,9 @@
                 <%}%>
                 </tbody>
             </table>
+            <%} else {%>
+            <h2>There aren't any users </h2>
+            <%}%>
             <%if (amount > 1) {%>
             <nav aria-label="...">
                 <ul class="pagination pagination-sm">
@@ -420,68 +485,222 @@
                 events = edao.select("status", 1, "all", 0, "date, fromtime");
         %>
         <div class="col distance">
-            <div class="rowsa">
-                <div class="distance dropdown">
-                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                        Sort events
+            <ul class="nav nav-pills mb-3" id="pills-tab1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="btn btn-blue active" id="pills-events-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-events" type="button" role="tab" aria-controls="pills-home"
+                            aria-selected="true">
+                        Events
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                        <li><a class="dropdown-item" href="#">by date</a></li>
-                        <li><a class="dropdown-item" href="#">by name of speaker</a></li>
-                        <li><a class="dropdown-item" href="#">by name of events</a></li>
-                    </ul>
-                </div>
-                <div class="distance">
-                    <a class="btn btn-info" href="AddLecture">Add lecture</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="btn btn-blue" id="pills-free-lectures-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-free-lectures" type="button" role="tab" aria-controls="pills-profile"
+                            aria-selected="false">
+                        Free lectures
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="btn btn-blue" id="pills-requested-lectures-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-requested-lectures" type="button" role="tab"
+                            aria-controls="pills-contact" aria-selected="false">
+                        Requests
+                    </button>
+                </li>
+            </ul>
+
+
+            <div class="tab-content" id="pills-tabContent1">
+                <!------------------------Events-------------------------------->
+                <div style="background-color: #fff" class="tab-pane fade show active" id="pills-events" role="tabpanel"
+                     aria-labelledby="pills-events-tab">
+                    <%if (events.size() > 0) {%>
+                    <table class="table table-info table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Topic</th>
+                            <th scope="col">Lectures</th>
+                            <th scope="col">Listeners</th>
+                            <th scope="col">Date and time</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%for (Event event : events) {%>
+                        <tr>
+                            <th scope="row"><%=event.getId()%>
+                            </th>
+                            <td><%=event.getTopic()%>
+                            </td>
+                            <td><%=lecdao.selectCount(event.getId(), 3)%>
+                            </td>
+                            <td><%=ldao.selectCountOfListeners(event.getId())%>
+                            </td>
+                            <td><%=event.getDate() %> <br> <%=event.getFromtime() + "-" + event.getTotime()%>
+                            </td>
+                            <%if (event.getCondition()) {%>
+                            <td><a href="<%=event.getLocation().getAddress()%>"
+                                   target="_blank"><%=event.getLocation().getShortName()%>
+                            </a></td>
+                            <%}%>
+                            <%if (!event.getCondition()) {%>
+                            <td><%=event.getLocation().getShortName()%>
+                            </td>
+                            <%}%>
+                            <td>
+                                <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line"
+                                                 style="color: #005;"
+                                                 data-width="24"></span></a>
+                            </td>
+                        </tr>
+                        <%}%>
+                        </tbody>
+                    </table>
+                    <%} else {%>
+                    <h2>There aren't any events </h2>
+                    <%}%>
+                    <div class="rowsa">
+                        <div class="distance dropdown">
+                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                Sort events
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                <li><a class="dropdown-item" href="#">by date</a></li>
+                                <li><a class="dropdown-item" href="#">by name of speaker</a></li>
+                                <li><a class="dropdown-item" href="#">by name of events</a></li>
+                            </ul>
+                        </div>
+                        <div class="distance">
+                            <a class="btn btn-info" href="AddLecture">Add lecture</a>
+                        </div>
+                        <div class="distance">
+                            <a class="btn btn-info" href="AddEvent">Add event</a>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="distance">
-                    <a class="btn btn-info" href="add-event.jsp">Add event</a>
+                <!------------------------Free lectures-------------------------------->
+
+                <div style="background-color: #fff" class="tab-pane fade" id="pills-free-lectures" role="tabpanel"
+                     aria-labelledby="pills-free-lectures-tab">
+                    <%lectures = lecdao.selectByStatus(0);%>
+                    <%if (lectures.size() > 0) {%>
+                    <table class="table table-info table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Event</th>
+                            <th scope="col">Lecture</th>
+                            <th scope="col">Date and time</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Speaker</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%for (Lecture lecture : lectures) {%>
+                        <tr>
+                            <th scope="row"><%=lecture.getEvent()%>
+                            </th>
+                            <% Event event = edao.select("id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <td><%=event.getTopic()%>
+                            </td>
+                            <td><%=lecture.getTopic()%>
+                            </td>
+                            <td><%=event.getDate() %> <br> <%=event.getFromtime() + "-" + event.getTotime()%>
+                            </td>
+                            <%if (event.getCondition()) {%>
+                            <td><a href="<%=event.getLocation().getAddress()%>"
+                                   target="_blank"><%=event.getLocation().getShortName()%>
+                            </a></td>
+                            <%}%>
+                            <%if (!event.getCondition()) {%>
+                            <td><%=event.getLocation().getShortName()%>
+                            </td>
+                            <%}%>
+                            <%speakers = rdao.selectSpeakersFromRequests(lecture.getId());%>
+                            <td>
+                                <form class="rowsb" action="">
+                                    <select name="speaker" class="form-control" required>
+                                        <option>Select speaker</option>
+                                        <%for (User speaker : speakers) {%>
+                                        <option value="<%=speaker.getId()%>"><%=speaker.getName() + " " + speaker.getLastname()%>
+                                        </option>
+                                        <%}%>
+                                    </select>
+                                    <button class="btn btn-blue active" type="submit"><span
+                                            class="iconify-inline" data-icon="clarity:success-standard-line"
+                                            style="color: #005;" data-width="24"></span></button>
+                                </form>
+                            </td>
+                        </tr>
+                        <%}%>
+                        </tbody>
+                    </table>
+                    <%} else {%>
+                    <h2>There aren't any free lectures </h2>
+                    <%}%>
+                </div>
+                <!------------------------Requests-------------------------------->
+                <div style="background-color: #fff" class="tab-pane fade" id="pills-requested-lectures" role="tabpanel"
+                     aria-labelledby="pills-requested-lectures-tab">
+                    <%lectures = lecdao.selectByStatus(1);%>
+                    <%if (lectures.size() > 0) {%>
+                    <table class="table table-info table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Event</th>
+                            <th scope="col">Speaker</th>
+                            <th scope="col">Lecture</th>
+                            <th scope="col">Date and time</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Action</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%for (Lecture lecture : lectures) {%>
+                        <tr>
+                            <th scope="row"><%=lecture.getEvent()%>
+                            </th>
+                            <% Event event = edao.select("id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <td><%=event.getTopic()%>
+                            </td>
+                            <td><%=udao.getByID(lecture.getSpeaker()).toString()%>
+                            </td>
+                            <td><%=lecture.getTopic()%>
+                            </td>
+                            <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%>
+                            </td>
+                            <%if (event.getCondition()) {%>
+                            <td><a href="<%=event.getLocation().getAddress()%>"
+                                   target="_blank"><%=event.getLocation().getShortName()%>
+                            </a></td>
+                            <%}%>
+                            <%if (!event.getCondition()) {%>
+                            <td><%=event.getLocation().getShortName()%>
+                            </td>
+                            <%}%>
+                            <td class="rowsb">
+                                <a href="OfferController?command=acceptRequest&id=<%=lecture.getId()%>"><span
+                                        class="iconify-inline" data-icon="clarity:success-standard-line"
+                                        style="color: #005;" data-width="24"></span></a>
+                                <a href="OfferController?command=rejectRequest&id=<%=lecture.getId()%>"><span
+                                        class="iconify-inline" data-icon="carbon:close-outline"
+                                        style="color: #005;" data-width="24"></span></a>
+                            </td>
+                        </tr>
+                        <%}%>
+                        </tbody>
+                    </table>
+                    <%} else {%>
+                    <h2>There aren't any requests to give a lecture</h2>
+                    <%}%>
                 </div>
             </div>
-            <table class="table table-info table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Topic</th>
-                    <th scope="col">Lectures</th>
-                    <th scope="col">Listeners</th>
-                    <th scope="col">Date and time</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <%for (Event event : events) {%>
-                <tr>
-                    <th scope="row"><%=event.getId()%>
-                    </th>
-                    <td><%=event.getTopic()%>
-                    </td>
-                    <td><%=lecdao.selectCount(event.getId(), 3)%>
-                    </td>
-                    <td><%=ldao.selectCountOfListeners(event.getId())%>
-                    </td>
-                    <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%>
-                    </td>
-                    <%if (event.getCondition()) {%>
-                    <td><a href="<%=event.getLocation().getAddress()%>"
-                           target="_blank"><%=event.getLocation().getShortName()%>
-                    </a></td>
-                    <%}%>
-                    <%if (!event.getCondition()) {%>
-                    <td><%=event.getLocation().getShortName()%>
-                    </td>
-                    <%}%>
-                    <td>
-                        <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line" style="color: #005;"
-                                         data-width="24"></span></a>
-                    </td>
-                </tr>
-                <%}%>
-                </tbody>
-            </table>
         </div>
         <%
                     break;

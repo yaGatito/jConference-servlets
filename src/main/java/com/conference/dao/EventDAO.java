@@ -1,6 +1,6 @@
 package com.conference.dao;
 
-import com.conference.bean.Event;
+import com.conference.entity.Event;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -90,5 +90,40 @@ public class EventDAO extends DAO {
         return events;
     }
 
+    public List<Event> selectTest(Connection c, String where, int value, String limit, int offset, String order) {
 
+        List<Event> events;
+        try (PreparedStatement statement = c.prepareStatement("SELECT * FROM events WHERE " + where + " = " + value + "  ORDER BY " + order + " LIMIT " + limit + " OFFSET " + offset)) {
+            ResultSet set = statement.executeQuery();
+            events = new ArrayList<>();
+            while (set.next()){
+                int id = set.getInt("id");
+                String topic = set.getString("topic");
+                String description = set.getString("description");
+                String fromtime = set.getString("fromtime");
+                String totime = set.getString("totime");
+                String date = set.getString("date");
+                String location = set.getString("location");
+                int status = set.getInt("status");
+                events.add(new Event(id,topic,description,fromtime,totime,date,location, status));
+            }
+            set.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            events = null;
+        }
+        return events;
+    }
+
+    public static void main(String[] args) {
+        EventDAO edao = new EventDAO();
+
+        long start = System.currentTimeMillis();
+        Connection c = edao.getConnection();
+        for (int i = 0; i < 1000; i++){
+            edao.selectTest(c,"id",28, "all",0,"id");
+        }
+        long res = System.currentTimeMillis() - start;
+        System.out.println(res/1000);
+    }
 }

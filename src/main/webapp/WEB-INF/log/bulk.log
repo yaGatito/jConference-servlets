@@ -1,3 +1,23 @@
-2022-02-18 05:34:54,586 [INFO ][nio-8078-exec-11][com.conference.servlets.Homepage] - test1
-2022-02-18 05:44:59,951 [INFO ][nio-8078-exec-28][com.conference.service.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:adfsdf, SPEAKER:0, EVENT:29, SPEAKER:0
-2022-02-18 06:08:57,273 [INFO ][nio-8078-exec-52][com.conference.servlets.Registration] - SUCCESSFUL REGISTRATION USER: NAME[Ярослав] LASTNAME[Тростинюк] EMAIL[trostinuk@f] 
+2022-02-19 14:02:12,065 [INFO ][-nio-8078-exec-9][com.conference.commands.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:Fdsfsdf, STATUS:2, EVENT:24, SPEAKER:28
+2022-02-19 15:22:06,616 [INFO ][nio-8078-exec-10][com.conference.commands.AcceptOfferCommand] - OFFER[6] WAS SUCCESSFUL ACCEPTED BY USER[28]
+2022-02-19 15:24:15,147 [INFO ][nio-8078-exec-11][com.conference.commands.RejectOfferCommand] - OFFER[22] WAS SUCCESSFUL REJECTED BY USER[28]
+2022-02-19 15:53:48,482 [INFO ][nio-8078-exec-44][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[4] WAS SUCCESSFUL CREATED BY USER[39]
+2022-02-19 15:53:54,210 [INFO ][nio-8078-exec-49][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[4] WAS NOT CREATED BY USER[39]
+2022-02-19 15:57:21,910 [INFO ][nio-8078-exec-56][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[10] WAS SUCCESSFUL CREATED BY USER[39]
+2022-02-19 15:57:25,186 [INFO ][nio-8078-exec-61][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[15] WAS SUCCESSFUL CREATED BY USER[39]
+2022-02-19 15:57:28,797 [INFO ][nio-8078-exec-66][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[19] WAS SUCCESSFUL CREATED BY USER[39]
+2022-02-19 15:57:30,745 [INFO ][nio-8078-exec-57][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[20] WAS SUCCESSFUL CREATED BY USER[39]
+2022-02-19 15:58:18,130 [INFO ][nio-8078-exec-66][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[10] WAS SUCCESSFUL CREATED BY USER[28]
+2022-02-19 16:39:12,008 [INFO ][nio-8078-exec-71][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[4] WAS SUCCESSFUL CREATED BY USER[28]
+2022-02-19 17:10:30,913 [INFO ][io-8078-exec-150][com.conference.commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:Request Test 1, STATUS:1, EVENT:30, SPEAKER:28
+2022-02-19 17:15:13,098 [INFO ][io-8078-exec-157][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[15] WAS SUCCESSFUL CREATED BY USER[28]
+2022-02-19 17:16:09,087 [INFO ][io-8078-exec-168][com.conference.servlets.Registration] - SUCCESSFUL REGISTRATION USER: NAME[Volodya] LASTNAME[Vlasov] EMAIL[vla@vla] 
+2022-02-19 17:29:33,917 [INFO ][io-8078-exec-202][com.conference.commands.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:Matan, STATUS:2, EVENT:24, SPEAKER:28
+2022-02-20 14:36:38,473 [INFO ][nio-8078-exec-65][com.conference.commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:Python as first programming laguage, STATUS:1, EVENT:20, SPEAKER:42
+2022-02-20 15:36:31,323 [INFO ][io-8078-exec-101][com.conference.commands.AcceptRequestCommand] - OFFER[5] WAS SUCCESSFUL ACCEPTED BY USER[42]
+2022-02-20 15:37:26,103 [INFO ][io-8078-exec-107][com.conference.commands.RejectRequestCommand] - OFFER[23] WAS SUCCESSFUL REJECTED BY USER[42]
+2022-02-20 17:33:51,439 [INFO ][io-8078-exec-181][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[4] WAS SUCCESSFUL CREATED BY USER[42]
+2022-02-20 17:43:27,219 [INFO ][io-8078-exec-182][com.conference.commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:FSDfsdfsdfdsf, STATUS:1, EVENT:35, SPEAKER:39
+2022-02-20 17:44:07,424 [INFO ][io-8078-exec-183][com.conference.commands.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:dgdsgzgsdgsdg, STATUS:2, EVENT:35, SPEAKER:39
+2022-02-20 17:55:56,776 [INFO ][io-8078-exec-184][com.conference.servlets.Registration] - SUCCESSFUL REGISTRATION USER: NAME[Vlad] LASTNAME[Gavriluk] EMAIL[gav@gav] 
+2022-02-20 18:16:02,006 [INFO ][io-8078-exec-182][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[15] WAS SUCCESSFUL CREATED BY USER[43]

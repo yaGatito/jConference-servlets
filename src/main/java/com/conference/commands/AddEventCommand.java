@@ -1,6 +1,6 @@
-package com.conference.service;
+package com.conference.commands;
 
-import com.conference.bean.Event;
+import com.conference.entity.Event;
 import com.conference.dao.EventDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
 import java.io.IOException;
 
-public class AddEventCommand extends Command {
+public class AddEventCommand implements Command {
     public static final Logger logger = LoggerFactory.getLogger(AddEventCommand.class);
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -24,7 +24,7 @@ public class AddEventCommand extends Command {
 
         if (new EventDAO().createEvent(event)) {
             if (logger.isInfoEnabled()) {
-                logger.info("SUCCESSFUL INSERTING LECTURE - TOPIC:{}, DATE:{}, TIME:{}, LOCATION:{}", topic, date, String.format("%s-%s", fromtime, totime), location);
+                logger.info("SUCCESSFUL INSERTING LECTURE - TOPIC:{}, DATE:{}, TIME:{}, LOCATION:{}", topic, date, fromtime + "-" + totime, location);
             }
             response.sendRedirect("Profile");
         } else {

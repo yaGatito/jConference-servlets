@@ -1,6 +1,6 @@
-package com.conference.bean;
+package com.conference.entity;
 
-public final class Location {
+public class Location {
     private boolean isOnline;
     private String address;
     private String shortName;

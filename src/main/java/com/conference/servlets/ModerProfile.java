@@ -1,7 +1,7 @@
 package com.conference.servlets;
 
-import com.conference.bean.Event;
-import com.conference.bean.User;
+import com.conference.entity.Event;
+import com.conference.entity.User;
 import com.conference.dao.EventDAO;
 import com.conference.dao.ListenersDAO;
 import com.conference.dao.UserDAO;

@@ -1,6 +1,6 @@
 package com.conference.servlets;
 
-import com.conference.bean.User;
+import com.conference.entity.User;
 import com.conference.dao.UserDAO;
 
 import javax.servlet.*;

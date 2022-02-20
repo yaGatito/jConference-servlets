@@ -1,3 +1,27 @@
 2022-02-18 05:34:54,586 [INFO ][nio-8078-exec-11][             servlets.Homepage] - test1
 2022-02-18 05:44:59,951 [INFO ][nio-8078-exec-28][     service.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:adfsdf, SPEAKER:0, EVENT:29, SPEAKER:0
 2022-02-18 06:08:57,273 [INFO ][nio-8078-exec-52][         servlets.Registration] - SUCCESSFUL REGISTRATION USER: NAME[Ярослав] LASTNAME[Тростинюк] EMAIL[trostinuk@f] 
+2022-02-18 06:56:34,988 [INFO ][nio-8078-exec-55][         servlets.Registration] - FAILURE REGISTRATION USER: NAME[sdfssssssssdfssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssdfssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssdfssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss] LASTNAME[sdfsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss] EMAIL[asdsda@asfd]
+2022-02-19 14:02:12,065 [INFO ][-nio-8078-exec-9][     service.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:Fdsfsdf, STATUS:2, EVENT:24, SPEAKER:28
+2022-02-19 15:22:06,616 [INFO ][nio-8078-exec-10][   commands.AcceptOfferCommand] - OFFER[6] WAS SUCCESSFUL ACCEPTED BY USER[28]
+2022-02-19 15:24:15,147 [INFO ][nio-8078-exec-11][   commands.RejectOfferCommand] - OFFER[22] WAS SUCCESSFUL REJECTED BY USER[28]
+2022-02-19 15:53:48,482 [INFO ][nio-8078-exec-44][   commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[4] WAS SUCCESSFUL CREATED BY USER[39]
+2022-02-19 15:53:54,210 [INFO ][nio-8078-exec-49][   commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[4] WAS NOT CREATED BY USER[39]
+2022-02-19 15:57:21,910 [INFO ][nio-8078-exec-56][   commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[10] WAS SUCCESSFUL CREATED BY USER[39]
+2022-02-19 15:57:25,186 [INFO ][nio-8078-exec-61][   commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[15] WAS SUCCESSFUL CREATED BY USER[39]
+2022-02-19 15:57:28,797 [INFO ][nio-8078-exec-66][   commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[19] WAS SUCCESSFUL CREATED BY USER[39]
+2022-02-19 15:57:30,745 [INFO ][nio-8078-exec-57][   commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[20] WAS SUCCESSFUL CREATED BY USER[39]
+2022-02-19 15:58:18,130 [INFO ][nio-8078-exec-66][   commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[10] WAS SUCCESSFUL CREATED BY USER[28]
+2022-02-19 16:39:12,008 [INFO ][nio-8078-exec-71][   commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[4] WAS SUCCESSFUL CREATED BY USER[28]
+2022-02-19 17:10:30,913 [INFO ][io-8078-exec-150][    commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:Request Test 1, STATUS:1, EVENT:30, SPEAKER:28
+2022-02-19 17:15:13,098 [INFO ][io-8078-exec-157][   commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[15] WAS SUCCESSFUL CREATED BY USER[28]
+2022-02-19 17:16:09,087 [INFO ][io-8078-exec-168][         servlets.Registration] - SUCCESSFUL REGISTRATION USER: NAME[Volodya] LASTNAME[Vlasov] EMAIL[vla@vla] 
+2022-02-19 17:29:33,917 [INFO ][io-8078-exec-202][    commands.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:Matan, STATUS:2, EVENT:24, SPEAKER:28
+2022-02-20 14:36:38,473 [INFO ][nio-8078-exec-65][    commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:Python as first programming laguage, STATUS:1, EVENT:20, SPEAKER:42
+2022-02-20 15:36:31,323 [INFO ][io-8078-exec-101][ commands.AcceptRequestCommand] - OFFER[5] WAS SUCCESSFUL ACCEPTED BY USER[42]
+2022-02-20 15:37:26,103 [INFO ][io-8078-exec-107][ commands.RejectRequestCommand] - OFFER[23] WAS SUCCESSFUL REJECTED BY USER[42]
+2022-02-20 17:33:51,439 [INFO ][io-8078-exec-181][   commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[4] WAS SUCCESSFUL CREATED BY USER[42]
+2022-02-20 17:43:27,219 [INFO ][io-8078-exec-182][    commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:FSDfsdfsdfdsf, STATUS:1, EVENT:35, SPEAKER:39
+2022-02-20 17:44:07,424 [INFO ][io-8078-exec-183][    commands.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:dgdsgzgsdgsdg, STATUS:2, EVENT:35, SPEAKER:39
+2022-02-20 17:55:56,776 [INFO ][io-8078-exec-184][         servlets.Registration] - SUCCESSFUL REGISTRATION USER: NAME[Vlad] LASTNAME[Gavriluk] EMAIL[gav@gav] 
+2022-02-20 18:16:02,006 [INFO ][io-8078-exec-182][   commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[15] WAS SUCCESSFUL CREATED BY USER[43]

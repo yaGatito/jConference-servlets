@@ -1,8 +1,8 @@
 package com.conference.servlets;
 
-import com.conference.service.AddEventCommand;
-import com.conference.service.AddLectureCommand;
-import com.conference.service.Command;
+import com.conference.commands.AddEventCommand;
+import com.conference.commands.AddLectureCommand;
+import com.conference.commands.Command;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,10 +18,10 @@ public class Service extends HttpServlet {
     private HashMap<String, Command> commands;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         commands = new HashMap<>();
         commands.put("addevent", new AddEventCommand());
-        commands.put("addlecture",new AddLectureCommand());
+        commands.put("addlecture", new AddLectureCommand());
     }
 
     @Override

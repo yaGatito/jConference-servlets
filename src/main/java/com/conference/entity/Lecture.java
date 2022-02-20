@@ -1,12 +1,13 @@
-package com.conference.bean;
+package com.conference.entity;
 
 public class Lecture {
     private int id;
     private String topic;
     /**
+     * -1 - rejected
      * 0 - free to choose;
-     * 1 - offered by speaker;
-     * 2 - offered by moder;
+     * 1 - request
+     * 2 - offered
      * 3 - secured;
      */
     private int status;

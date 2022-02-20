@@ -1,6 +1,6 @@
 package com.conference.servlets;
 
-import com.conference.bean.Event;
+import com.conference.entity.Event;
 import com.conference.dao.EventDAO;
 import com.conference.dao.LectureDAO;
 import com.conference.dao.UserDAO;
