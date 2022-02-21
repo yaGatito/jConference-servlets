@@ -66,7 +66,7 @@
             case "Profile":
     %>
     <div class="col">
-        <div  style="background-color: #fff"  class="reg-sec distance">
+        <div   class="reg-sec distance">
             <form action="UpdateUser" method="post" class="container-xl col" style="margin-top: 3rem;width: 30rem;">
                 <div class="input-group distance">
                     <span class="input-group-text">First name</span>
@@ -583,7 +583,6 @@
                 </div>
 
                 <!------------------------Free lectures-------------------------------->
-
                 <div style="background-color: #fff" class="tab-pane fade" id="pills-free-lectures" role="tabpanel"
                      aria-labelledby="pills-free-lectures-tab">
                     <%lectures = lecdao.selectByStatus(0);%>
@@ -622,18 +621,29 @@
                             <%}%>
                             <%speakers = rdao.selectSpeakersFromRequests(lecture.getId());%>
                             <td>
-                                <form class="rowsb" action="">
-                                    <select name="speaker" class="form-control" required>
-                                        <option>Select speaker</option>
+                                <div class="dropdown">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton3"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        Select speaker
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
                                         <%for (User speaker : speakers) {%>
-                                        <option value="<%=speaker.getId()%>"><%=speaker.getName() + " " + speaker.getLastname()%>
-                                        </option>
+                                            <li><a class="dropdown-item" href="OfferController?command=assign&lecture=<%=lecture.getId()%>&speaker=<%=speaker.getId()%>"> <%=speaker.toString()%> </a></li>
                                         <%}%>
-                                    </select>
-                                    <button class="btn btn-blue active" type="submit"><span
-                                            class="iconify-inline" data-icon="clarity:success-standard-line"
-                                            style="color: #005;" data-width="24"></span></button>
-                                </form>
+                                    </ul>
+                                </div>
+<%--                                <form class="rowsb" action="">--%>
+<%--                                    <select name="speaker" class="form-control" required>--%>
+<%--                                        <option>Select speaker</option>--%>
+<%--                                        <%for (User speaker : speakers) {%>--%>
+<%--                                        <option value="<%=speaker.getId()%>"><%=speaker.getName() + " " + speaker.getLastname()%>--%>
+<%--                                        </option>--%>
+<%--                                        <%}%>--%>
+<%--                                    </select>--%>
+<%--                                    <button class="btn btn-blue active" type="submit"><span--%>
+<%--                                            class="iconify-inline" data-icon="clarity:success-standard-line"--%>
+<%--                                            style="color: #005;" data-width="24"></span></button>--%>
+<%--                                </form>--%>
                             </td>
                         </tr>
                         <%}%>

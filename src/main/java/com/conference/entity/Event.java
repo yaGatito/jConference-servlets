@@ -1,6 +1,23 @@
 package com.conference.entity;
 
-public class Event {
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Event implements Comparable<Event> {
+    private static final Map<String,Comparator<Event>> comparators;
+    static {
+        comparators = new HashMap<>();
+        comparators.put("date",Event.comparatorByDate());
+        comparators.put("lectures",Event.comparatorByLectures());
+        comparators.put("listeners",Event.comparatorByListeners());
+        comparators.put("default",Event.comparatorByDefault());
+    }
+
     private int id;
     private String topic;
     private String description;
@@ -9,11 +26,14 @@ public class Event {
     private String date;
     private boolean isOnline;
     private Location location;
+    private List<Lecture> lectures;
+    private int listeners;
     /**
      * 0 - past event
      * 1 - future event
      */
     private int status;
+
 
     public Event(int id, String topic, String description, String fromtime, String totime, String date, String location, int status) {
         this.id = id;
@@ -34,6 +54,29 @@ public class Event {
         this.date = date;
         setLocation(location);
         this.status = status;
+    }
+
+    public static Map<String, Comparator<Event>> getComparators() {
+        return comparators;
+    }
+
+    public int getListeners() {
+        return listeners;
+    }
+
+    public void setListeners(int listeners) {
+        this.listeners = listeners;
+    }
+
+    public List<Lecture> getLectures() {
+        if (lectures==null){
+            lectures = new ArrayList<>();
+        }
+        return lectures;
+    }
+
+    public void setLectures(List<Lecture> lectures) {
+        this.lectures = lectures;
     }
 
     public int getStatus() {
@@ -135,5 +178,72 @@ public class Event {
     @Override
     public int hashCode() {
         return this.id;
+    }
+
+    public static Comparator<Event> comparatorByDate(){
+        return new Comparator<Event>() {
+            @Override
+            public int compare(Event o1, Event o2) {
+                return o1.date.concat(o1.fromtime).compareTo(o2.date.concat(o2.fromtime));
+            }
+        };
+    }
+
+    public static Comparator<Event> comparatorByListeners(){
+        return new Comparator<Event>() {
+            @Override
+            public int compare(Event o1, Event o2) {
+                return Integer.compare(o2.listeners, o1.listeners);
+            }
+        };
+    }
+
+    public static Comparator<Event> comparatorByLectures(){
+        return new Comparator<Event>() {
+            @Override
+            public int compare(Event o1, Event o2) {
+                return Integer.compare(o2.lectures.size(),o1.lectures.size());
+            }
+        };
+    }
+
+    public static Comparator<Event> comparatorByDefault(){
+        return new Comparator<Event>() {
+            @Override
+            public int compare(Event o1, Event o2) {
+                return o2.compareTo(o1);
+            }
+        };
+    }
+
+    @Override
+    public int compareTo(Event o) {
+        return Integer.compare(o.id,this.id);
+    }
+
+
+    /**
+     * Returns an array. First element of which contains only past events.
+     * Second element of which contains today and future events.
+     * @param events
+     * @return array
+     */
+    public static List<Event>[] filter(List<Event> events){
+        List<Event> past = new ArrayList<>();
+        List<Event> future = new ArrayList<>();
+        LocalDate today = LocalDate.now();
+        LocalTime timeNow = LocalTime.of(LocalTime.now().getHour(), LocalTime.now().getMinute());
+        for (Event event : events) {
+            String[] strings = event.getDate().split("-");
+            LocalDate eventDate = LocalDate.of(Integer.parseInt(strings[0]),Integer.parseInt(strings[1]),Integer.parseInt(strings[2]));
+            strings = event.getFromtime().split(":");
+            LocalTime timeEvent = LocalTime.of(Integer.parseInt(strings[0]),Integer.parseInt(strings[1]));
+            if (eventDate.compareTo(today)>0 || (eventDate.compareTo(today)==0 && timeEvent.compareTo(timeNow)>=0)){
+                future.add(event);
+            } else{
+                past.add(event);
+            }
+        }
+        return new List[]{past,future};
     }
 }

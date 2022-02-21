@@ -1,6 +1,7 @@
 package com.conference.dao;
 
 import com.conference.entity.Event;
+import com.conference.entity.Lecture;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -68,7 +69,13 @@ public class EventDAO extends DAO {
 
         List<Event> events;
         try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement("SELECT * FROM events WHERE " + where + " = " + value + "  ORDER BY " + order + " LIMIT " + limit + " OFFSET " + offset)) {
+             PreparedStatement statement = con.prepareStatement(
+                     "SELECT * FROM events WHERE " + where + " = " + value + "  ORDER BY " + order + " LIMIT " + limit + " OFFSET " + offset);
+             PreparedStatement lec = con.prepareStatement(
+                     "SELECT id,topic,status,event,speaker FROM lectures WHERE event = ? AND status = 3");
+             PreparedStatement selectListeners = con.prepareStatement(
+                     "SELECT count(listener) FROM listeners WHERE event = ?"
+             )) {
             ResultSet set = statement.executeQuery();
             events = new ArrayList<>();
             while (set.next()){
@@ -80,7 +87,27 @@ public class EventDAO extends DAO {
                 String date = set.getString("date");
                 String location = set.getString("location");
                 int status = set.getInt("status");
-                events.add(new Event(id,topic,description,fromtime,totime,date,location, status));
+                Event event = new Event(id,topic,description,fromtime,totime,date,location, status);
+
+                selectListeners.setInt(1,id);
+                ResultSet listenersSet = selectListeners.executeQuery();
+                listenersSet.next();
+                int listeners = listenersSet.getInt(1);
+                event.setListeners(listeners);
+
+                List<Lecture> lectures = new ArrayList<>();
+                lec.setInt(1,id);
+                ResultSet lecturesSet = lec.executeQuery();
+                while (lecturesSet.next()){
+                    lectures.add(
+                            new Lecture(lecturesSet.getInt(1),
+                                    lecturesSet.getString(2),
+                                    lecturesSet.getInt(3),
+                                    lecturesSet.getInt(4),
+                                    lecturesSet.getInt(5)));
+                }
+                event.setLectures(lectures);
+                events.add(event);
             }
             set.close();
         } catch (SQLException e) {
@@ -90,7 +117,7 @@ public class EventDAO extends DAO {
         return events;
     }
 
-    public List<Event> selectTest(Connection c, String where, int value, String limit, int offset, String order) {
+    private List<Event> selectTest(Connection c, String where, int value, String limit, int offset, String order) {
 
         List<Event> events;
         try (PreparedStatement statement = c.prepareStatement("SELECT * FROM events WHERE " + where + " = " + value + "  ORDER BY " + order + " LIMIT " + limit + " OFFSET " + offset)) {

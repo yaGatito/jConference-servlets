@@ -43,6 +43,6 @@ public class UserController extends HttpServlet {
                 dao.setRole(2,id);
             }
         }
-        response.sendRedirect("Profile?item=Users");
+//        response.sendRedirect("Profile?item=Users");
     }
 }
