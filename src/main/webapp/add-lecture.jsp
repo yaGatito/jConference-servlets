@@ -4,9 +4,15 @@
 <%@ page import="com.conference.entity.Event" %>
 <%@ page import="com.conference.dao.EventDAO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
-<html lang="en">
-<jsp:include page="header.jsp"/>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="resources"/>
+<fmt:message var="title" key="label.add_lecture" scope="request"/>
+<html lang="${sessionScope.lang}">
+<jsp:include page="nav.jsp"/>
 <%!List<User> speakers;%>
 <%!List<Event> events;%>
 <%speakers = new UserDAO().selectSpeakers();%>
@@ -15,14 +21,14 @@
   <section class="container-xl col">
     <!--Add event-->
     <div class="margin col reg-sec addevent">
-      <h1 class="display-6">Create topic</h1>
+      <h1 class="display-6"><fmt:message key="label.add_lecture"/> </h1>
         <form id="event-form" class="col margin" action="${pageContext.request.contextPath}/Service?command=addlecture" method="post">
           <div style="margin-top: 1rem; line-height: 0">
-            <h4>Topic</h4>
+            <h4><fmt:message key="label.button.topic"/> </h4>
             <input name="topic" class="form-control reg" type="text" placeholder="" aria-label="Search" required>
           </div>
           <div style="margin-top: 1rem; line-height: 0">
-            <h4>Event</h4>
+            <h4><fmt:message key="label.button.event"/> </h4>
             <select name="event" class="form-control reg"  required>
               <%for (Event event : events) {%>
                 <option value="<%=event.getId()%>"><%=event.getTopic() + "[" + event.getDate() + "]"%></option>
@@ -30,9 +36,9 @@
             </select>
           </div>
           <div style="margin-top: 1rem; line-height: 0">
-            <h4>Speaker</h4>
+            <h4><fmt:message key="label.profile.speaker"/> </h4>
             <select name="speaker" class="form-control reg"  required>
-              <option value="0">Free to choose</option>
+              <option value="0"> <fmt:message key="label.add_lecture.free"/> </option>
               <%for (User speaker : speakers) {%>
               <option value="<%=speaker.getId()%>"><%=speaker.getName() + " " + speaker.getLastname()%></option>
               <%}%>
@@ -41,23 +47,12 @@
           <div class="form-check">
             <input class="form-check-input" type="checkbox" name="offer" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
-              As offer
+              <fmt:message key="label.add_lecture.offer"/>
             </label>
           </div>
-          <p></p> <button class="btn btn-info" type="submit">Confirm</button>
+          <p></p> <button class="btn btn-info" type="submit"> <fmt:message key="label.button.confirm"/> </button>
         </form>
     </div>
   </section>
-
-  <!--Footer-->
-  <section class="container-xl rowsb">
-    <div id="reg-sec" class="margin col">
-      All rights reserved 
-    </div>
-  </section>
-
-
-    <script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
+<%@ include file="footer.jsp"%>
 </html>

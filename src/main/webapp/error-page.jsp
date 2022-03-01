@@ -1,7 +1,13 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
-<html lang="en">
-<jsp:include page="header.jsp"/>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="resources"/>
+<fmt:message var="title" key="label.error" scope="request"/>
+<html lang="${sessionScope.lang}">
+<jsp:include page="nav.jsp"/>
 <body>
   <section class="container-xl col">
     <!--Login-->

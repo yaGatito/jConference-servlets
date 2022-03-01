@@ -193,7 +193,7 @@ public class Event implements Comparable<Event> {
         return new Comparator<Event>() {
             @Override
             public int compare(Event o1, Event o2) {
-                return Integer.compare(o2.listeners, o1.listeners);
+                return Integer.compare(o1.listeners, o2.listeners);
             }
         };
     }
@@ -202,7 +202,7 @@ public class Event implements Comparable<Event> {
         return new Comparator<Event>() {
             @Override
             public int compare(Event o1, Event o2) {
-                return Integer.compare(o2.lectures.size(),o1.lectures.size());
+                return Integer.compare(o1.lectures.size(),o2.lectures.size());
             }
         };
     }
@@ -211,21 +211,21 @@ public class Event implements Comparable<Event> {
         return new Comparator<Event>() {
             @Override
             public int compare(Event o1, Event o2) {
-                return o2.compareTo(o1);
+                return o1.compareTo(o2);
             }
         };
     }
 
     @Override
     public int compareTo(Event o) {
-        return Integer.compare(o.id,this.id);
+        return Integer.compare(this.id,o.id);
     }
 
 
     /**
      * Returns an array. First element of which contains only past events.
      * Second element of which contains today and future events.
-     * @param events
+     * @param events list which will be filtered to past and future
      * @return array
      */
     public static List<Event>[] filter(List<Event> events){

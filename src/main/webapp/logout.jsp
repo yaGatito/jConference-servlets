@@ -1,13 +1,22 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.conference.entity.User" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
-<html lang="en">
-<%request.getSession().setAttribute("user",null);%>
-<jsp:include page="header.jsp"/>
+<%
+  request.getSession(false).setAttribute("user",null);
+%>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="resources"/>
+<fmt:message var="title" key="label.button.logout" scope="request"/>
+<html lang="${sessionScope.lang}">
+<jsp:include page="nav.jsp"/>
 <body>
   <section class="container-xl col">
     <!--Login-->
     <div class="margin col reg-sec" style="width: 50rem">
-      <h2 class="display-10">Successful logged out</h2>
+      <h2 class="display-10"><fmt:message key="message.logout"/> </h2>
     </div>
   </section>
 <jsp:include page="footer.jsp"/>

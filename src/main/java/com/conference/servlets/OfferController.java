@@ -22,6 +22,7 @@ public class OfferController extends HttpServlet {
         commands.put("acceptRequest", new AcceptRequestCommand());
         commands.put("rejectRequest", new RejectRequestCommand());
         commands.put("assign", new AssignFreeLectureCommand());
+        commands.put("setlang", new SwitchLocaleCommand());
     }
 
     @Override

@@ -1,13 +1,17 @@
 package com.conference.filters;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
+@WebFilter(filterName = "CharacterSetFilter", urlPatterns = { "/*" })
 public class CharacterSetFilter implements Filter {
     private FilterConfig config = null;
+    private static String encoding;
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig){
         this.config = filterConfig;
+        encoding = filterConfig.getInitParameter("encoding");
     }
 
     @Override
@@ -17,9 +21,9 @@ public class CharacterSetFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain next) throws IOException, ServletException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding(encoding);
+        response.setContentType("text/html; charset="+encoding);
+        response.setCharacterEncoding(encoding);
         next.doFilter(request, response);
     }
 }

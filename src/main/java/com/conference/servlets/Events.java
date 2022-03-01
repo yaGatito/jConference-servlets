@@ -22,7 +22,7 @@ public class Events extends HttpServlet {
         if (!comparators.containsKey(sort)) {
             sort = "default";
         }
-        boolean ascending = Boolean.parseBoolean(request.getParameter("ascending"));
+        boolean descending = Boolean.parseBoolean(request.getParameter("descending"));
         boolean past = Boolean.parseBoolean(request.getParameter("past"));
         boolean future = Boolean.parseBoolean(request.getParameter("future"));
 
@@ -34,7 +34,7 @@ public class Events extends HttpServlet {
         if (!comparators.containsKey(sort)) {
             sort = "default";
         }
-        if (ascending) {
+        if (descending) {
             events.sort(comparators.get(sort).reversed());
         } else {
             events.sort(comparators.get(sort));

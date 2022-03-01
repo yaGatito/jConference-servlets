@@ -6,10 +6,14 @@
 <%@ page import="com.conference.dao.*" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="en">
-<jsp:include page="header.jsp"/>
-<body style="height: 100vh">
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="resources"/>
+<fmt:message key="label.profile" var="title" scope="request"/>
+<html lang="${sessionScope.lang}">
+<jsp:include page="nav.jsp"/>
+<body>
     <%!
   List<User> users;
   List<Event> events;
@@ -39,7 +43,7 @@
     offset = 1;
   }
 
-  final String[] buttons = new String[]{"Profile", "Participation", "Lectures", "Users", "Events Control Panel", "Setting"};
+  final String[] buttons = new String[]{"profile", "participation", "lectures", "users", "ecp", "setting"};
   String item = Optional.ofNullable(request.getParameter("item")).orElse(buttons[0]);
   boolean flag = false;
   for (int i = 0; i < buttons.length; i++) {
@@ -56,62 +60,77 @@
 <body>
 <div class="d-flex align-items-start container-xl margin" style="width: 80%">
     <div class="nav flex-column nav-pills me-3 coll" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <%for (String button : buttons) {%>
-        <a class="btn btn-blue <%= item.equals(button) ? " active" : ""%>" href="Profile?item=<%=button%>"><%=button%>
+        <a class="btn btn-blue <%= item.equals("profile") ? " active " : ""%>"
+           href="Profile?item=profile>"><fmt:message key="label.button.profile"/>
         </a>
-        <%}%>
+        <a class="btn btn-blue <%= item.equals("participation") ? " active " : ""%>"
+           href="Profile?item=participation"><fmt:message key="label.button.participation"/>
+        </a>
+        <a class="btn btn-blue <%= item.equals("lectures") ? " active " : ""%>"
+           href="Profile?item=lectures"><fmt:message key="label.button.lectures"/>
+        </a>
+        <a class="btn btn-blue <%= item.equals("users") ? " active " : ""%>"
+           href="Profile?item=users">
+            <fmt:message key="label.button.users"/>
+            <a class="btn btn-blue <%= item.equals("ecp") ? " active " : ""%>"
+               href="Profile?item=ecp"><fmt:message key="label.button.ecp"/>
+            </a>
+            <a class="btn btn-blue <%= item.equals("settings") ? " active " : ""%>"
+               href="Profile?item=setting"><fmt:message key="label.button.setting"/>
+            </a>
     </div>
     <%
         switch (item) {
-            case "Profile":
+            case "profile":
     %>
     <div class="col">
-        <div   class="reg-sec distance">
+        <div class="reg-sec distance">
             <form action="UpdateUser" method="post" class="container-xl col" style="margin-top: 3rem;width: 30rem;">
                 <div class="input-group distance">
-                    <span class="input-group-text">First name</span>
+                    <span class="input-group-text"><fmt:message key="label.registration.firstname"/></span>
                     <input type="text" aria-label="Search" class="form-control" name="name"
                            value="<%=currentUser.getName()%>">
                 </div>
                 <div class="input-group distance">
-                    <span class="input-group-text">Last name</span>
+                    <span class="input-group-text"><fmt:message key="label.registration.lastname"/></span>
                     <input type="text" aria-label="Search" class="form-control" name="lastname"
                            value="<%=currentUser.getLastname()%>">
                 </div>
                 <div class="input-group distance">
-                    <span class="input-group-text">Email</span>
+                    <span class="input-group-text"><fmt:message key="label.registration.email"/></span>
                     <input type="text" aria-label="First name" class="form-control" name="email"
                            value="<%=currentUser.getEmail()%>">
                 </div>
                 <div class="form-check form-switch distance">
                     <input class="form-check-input" type="checkbox" name="notify" role="switch"
                            id="flexSwitchCheckDefault" <%if (currentUser.getNotify()) {%> checked <%}%> >
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Receive email notifications</label>
+                    <label class="form-check-label" for="flexSwitchCheckDefault"><fmt:message
+                            key="label.profile.email"/></label>
                 </div>
                 <div class="input-group distance">
                     <button type="submit" class="btn btn-info">Save</button>
                 </div>
                 <div class="input-group distance">
-                    <a class="btn btn-info" href="">Change password</a>
+                    <a class="btn btn-info" href=""><fmt:message key="label.profile.changepass"/></a>
                 </div>
             </form>
         </div>
         <%
                 break;
-            case "Participation":
+            case "participation":
                 events = ldao.selectEventsOfListeners(currentUser.getId());
         %>
 
-        <div  style="background-color: #fff"  class="col distance">
+        <div style="background-color: #fff" class="col distance">
             <%if (events.size() > 0) {%>
             <table class="table table-info table-striped">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Topic</th>
-                    <th scope="col">Date and time</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"><fmt:message key="label.button.event"/></th>
+                    <th scope="col"><fmt:message key="label.datetime"/></th>
+                    <th scope="col"><fmt:message key="label.location"/></th>
+                    <th scope="col"><fmt:message key="label.action"/></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -144,44 +163,52 @@
                 </tbody>
             </table>
             <%} else {%>
-            <h2>You don't have any participation now</h2>
+            <h2><fmt:message key="message.no_participation"/></h2>
             <%}%>
         </div>
 
         <%
                 break;
-            case "Lectures":
+            case "lectures":
         %>
         <div class="col distance" style=" background-color: white">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="btn btn-blue active" id="pills-lectures-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-lectures" type="button" role="tab" aria-controls="pills-lectures"
-                            aria-selected="true">Lectures
+                            aria-selected="true"><fmt:message key="label.button.lectures"/>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="btn btn-blue" id="pills-profile-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
-                            aria-selected="false">Offers
+                            aria-selected="false"><fmt:message key="label.profile.lectures.offers"/>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="btn btn-blue" id="pills-requests-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-requests" type="button" role="tab" aria-controls="pills-requests"
-                            aria-selected="false">Requests
+                            aria-selected="false"><fmt:message key="label.profile.lectures.requests"/>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="btn btn-blue" id="pills-free-tab" data-bs-toggle="pill" data-bs-target="#pills-free"
-                            type="button" role="tab" aria-controls="pills-free" aria-selected="false">Free
+                            type="button" role="tab" aria-controls="pills-free" aria-selected="false"><fmt:message
+                            key="label.profile.lectures.free"/>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="btn btn-blue" id="pills-history-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-history"
+                            type="button" role="tab" aria-controls="pills-history" aria-selected="false">History
                     </button>
                 </li>
             </ul>
             <%---------------------------SECURED---------------------%>
             <div class="tab-content" id="pills-tabContent">
 
-                <div  style="background-color: #fff"  class="tab-pane fade show active" id="pills-lectures" role="tabpanel"
+                <div style="background-color: #fff" class="tab-pane fade show active" id="pills-lectures"
+                     role="tabpanel"
                      aria-labelledby="pills-lectures-tab">
                     <%lectures = lecdao.selectBySpeaker(3, currentUser.getId());%>
                     <%if (lectures.size() > 0) {%>
@@ -189,11 +216,10 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Event</th>
-                            <th scope="col">Lecture</th>
-                            <th scope="col">Date and time</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><fmt:message key="label.button.event"/></th>
+                            <th scope="col"><fmt:message key="label.lecture"/></th>
+                            <th scope="col"><fmt:message key="label.datetime"/></th>
+                            <th scope="col"><fmt:message key="label.location"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -217,31 +243,28 @@
                             <td><%=event.getLocation().getShortName()%>
                             </td>
                             <%}%>
-                            <td>
-                                <%--                                <a href=""><span class="iconify-inline" data-icon="clarity:note-edit-line"--%>
-                                <%--                                                 style="color: #005;" data-width="24"></span></a>--%>
-                            </td>
                         </tr>
                         <%}%>
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2>You don't have any lectures </h2>
+                    <h2><fmt:message key="message.no_lectures"/></h2>
                     <%}%>
                 </div>
                 <%---------------------------OFFERS---------------------%>
-                <div  style="background-color: #fff"  class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div style="background-color: #fff" class="tab-pane fade" id="pills-profile" role="tabpanel"
+                     aria-labelledby="pills-profile-tab">
                     <%lectures = lecdao.selectBySpeaker(2, currentUser.getId());%>
                     <%if (lectures.size() > 0) {%>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Event</th>
-                            <th scope="col">Lecture</th>
-                            <th scope="col">Date and time</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><fmt:message key="label.button.event"/></th>
+                            <th scope="col"><fmt:message key="label.lecture"/></th>
+                            <th scope="col"><fmt:message key="label.datetime"/></th>
+                            <th scope="col"><fmt:message key="label.location"/></th>
+                            <th scope="col"><fmt:message key="label.action"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -278,7 +301,7 @@
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2>You don't have any offers </h2>
+                    <h2><fmt:message key="message.no_offers"/></h2>
                     <%}%>
                 </div>
                 <%---------------------------REQUESTS---------------------%>
@@ -290,10 +313,10 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Event</th>
-                            <th scope="col">Lecture</th>
-                            <th scope="col">Date and time</th>
-                            <th scope="col">Location</th>
+                            <th scope="col"><fmt:message key="label.button.event"/></th>
+                            <th scope="col"><fmt:message key="label.lecture"/></th>
+                            <th scope="col"><fmt:message key="label.datetime"/></th>
+                            <th scope="col"><fmt:message key="label.location"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -322,7 +345,7 @@
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2>You didn't make request to give a lecture </h2>
+                    <h2><fmt:message key="message.no_request_lectures"/></h2>
                     <%}%>
                     <div class="distance">
                         <a class="btn btn-info" href="AddRequest">Make request</a>
@@ -340,11 +363,11 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Event</th>
-                            <th scope="col">Lecture</th>
-                            <th scope="col">Date and time</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><fmt:message key="label.button.event"/></th>
+                            <th scope="col"><fmt:message key="label.lecture"/></th>
+                            <th scope="col"><fmt:message key="label.datetime"/></th>
+                            <th scope="col"><fmt:message key="label.location"/></th>
+                            <th scope="col"><fmt:message key="label.action"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -378,7 +401,7 @@
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2>There aren't any free lectures </h2>
+                    <h2><fmt:message key="message.no_available_lectures"/></h2>
                     <%}%>
 
                     <%lectures = rdao.selectLecturesFromRequests(currentUser.getId());%>
@@ -388,10 +411,10 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Event</th>
-                            <th scope="col">Lecture</th>
-                            <th scope="col">Date and time</th>
-                            <th scope="col">Location</th>
+                            <th scope="col"><fmt:message key="label.button.event"/></th>
+                            <th scope="col"><fmt:message key="label.lecture"/></th>
+                            <th scope="col"><fmt:message key="label.datetime"/></th>
+                            <th scope="col"><fmt:message key="label.location"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -420,14 +443,102 @@
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2>You didn't make request on free lectures</h2>
+                    <h2><fmt:message key="message.no_request_free_lectures"/></h2>
+                    <%}%>
+                </div>
+
+                <%-----------------HISTORY------------------------------------------------------------%>
+                <div style="background-color: #fff" class="tab-pane fade" id="pills-history" role="tabpanel"
+                     aria-labelledby="pills-history-tab">
+                    <%lectures = rdao.historyOfOwnRequests(currentUser.getId());%>
+                    <%if (lectures.size() > 0) {%>
+                    <h2>Rejected own requests</h2>
+                    <table class="table table-info table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col"><fmt:message key="label.button.event"/></th>
+                            <th scope="col"><fmt:message key="label.lecture"/></th>
+                            <th scope="col"><fmt:message key="label.datetime"/></th>
+                            <th scope="col"><fmt:message key="label.location"/></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%for (Lecture lecture : lectures) {%>
+                        <tr>
+                            <th scope="row"><%=lecture.getEvent()%>
+                            </th>
+                            <% Event event = edao.select("id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <td><%=event.getTopic()%>
+                            </td>
+                            <td><%=lecture.getTopic()%>
+                            </td>
+                            <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%>
+                            </td>
+                            <%if (event.getCondition()) {%>
+                            <td><a href="<%=event.getLocation().getAddress()%>"
+                                   target="_blank"><%=event.getLocation().getShortName()%>
+                            </a></td>
+                            <%}%>
+                            <%if (!event.getCondition()) {%>
+                            <td><%=event.getLocation().getShortName()%>
+                            </td>
+                            <%}%>
+                        </tr>
+                        <%}%>
+                        </tbody>
+                    </table>
+                    <%} else {%>
+                    <h2><fmt:message key="message.no_available_lectures"/></h2>
+                    <%}%>
+
+                    <%lectures = rdao.historyOfFreeRequests(currentUser.getId());%>
+                    <%if (lectures.size() > 0) {%>
+                    <h2>Rejected free requests</h2>
+                    <table class="table table-info table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col"><fmt:message key="label.button.event"/></th>
+                            <th scope="col"><fmt:message key="label.lecture"/></th>
+                            <th scope="col"><fmt:message key="label.datetime"/></th>
+                            <th scope="col"><fmt:message key="label.location"/></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%for (Lecture lecture : lectures) {%>
+                        <tr>
+                            <th scope="row"><%=lecture.getEvent()%>
+                            </th>
+                            <% Event event = edao.select("id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <td><%=event.getTopic()%>
+                            </td>
+                            <td><%=lecture.getTopic()%>
+                            </td>
+                            <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%>
+                            </td>
+                            <%if (event.getCondition()) {%>
+                            <td><a href="<%=event.getLocation().getAddress()%>"
+                                   target="_blank"><%=event.getLocation().getShortName()%>
+                            </a></td>
+                            <%}%>
+                            <%if (!event.getCondition()) {%>
+                            <td><%=event.getLocation().getShortName()%>
+                            </td>
+                            <%}%>
+                        </tr>
+                        <%}%>
+                        </tbody>
+                    </table>
+                    <%} else {%>
+                    <h2><fmt:message key="message.no_request_free_lectures"/></h2>
                     <%}%>
                 </div>
             </div>
         </div>
         <%
                 break;
-            case "Users":
+            case "users":
                 users = udao.selectLimit((int) maxItems, offset);
         %>
         <div class="col distance" style=" background-color: white">
@@ -436,9 +547,9 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">User</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"><fmt:message key="label.profile.user"/></th>
+                    <th scope="col"><fmt:message key="label.profile.role"/></th>
+                    <th scope="col"><fmt:message key="label.action"/></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -465,14 +576,14 @@
                 </tbody>
             </table>
             <%} else {%>
-            <h2>There aren't any users </h2>
+            <h2><fmt:message key="message.no_users"/></h2>
             <%}%>
             <%if (amount > 1) {%>
             <nav aria-label="...">
                 <ul class="pagination pagination-sm">
                     <%for (int i = 1; i <= amount; i++) {%>
                     <li class="page-item<%= i == offset ? " active" : ""%>"><a class="page-link"
-                                                                               href="Profile?item=Users&page=<%=i%>"><%=i%>
+                                                                               href="Profile?item=users&page=<%=i%>"><%=i%>
                     </a></li>
                     <%}%>
                 </ul>
@@ -481,7 +592,7 @@
         </div>
         <%
                 break;
-            case "Events Control Panel":
+            case "ecp":
                 events = edao.select("status", 1, "all", 0, "date, fromtime");
         %>
         <div class="col distance">
@@ -490,21 +601,28 @@
                     <button class="btn btn-blue active" id="pills-events-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-events" type="button" role="tab" aria-controls="pills-home"
                             aria-selected="true">
-                        Events
+                        <fmt:message key="label.button.events"/>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="btn btn-blue" id="pills-free-lectures-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-free-lectures" type="button" role="tab" aria-controls="pills-profile"
                             aria-selected="false">
-                        Free lectures
+                        <fmt:message key="label.profile.lectures.free"/> <fmt:message key="label.profile.lectures"/>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="btn btn-blue" id="pills-requested-lectures-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-requested-lectures" type="button" role="tab"
                             aria-controls="pills-contact" aria-selected="false">
-                        Requests
+                        <fmt:message key="label.profile.ecp.requests"/>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="btn btn-blue" id="pills-history-ecp-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-history-ecp" type="button" role="tab"
+                            aria-controls="pills-contact" aria-selected="false">
+                        <fmt:message key="label.profile.ecp.requests"/>
                     </button>
                 </li>
             </ul>
@@ -519,12 +637,12 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Topic</th>
-                            <th scope="col">Lectures</th>
-                            <th scope="col">Listeners</th>
-                            <th scope="col">Date and time</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><fmt:message key="label.button.event"/></th>
+                            <th scope="col"><fmt:message key="label.profile.lectures"/></th>
+                            <th scope="col"><fmt:message key="label.listeners"/></th>
+                            <th scope="col"><fmt:message key="label.datetime"/></th>
+                            <th scope="col"><fmt:message key="label.location"/></th>
+                            <th scope="col"><fmt:message key="label.action"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -559,7 +677,7 @@
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2>There aren't any events </h2>
+                    <h2><fmt:message key="message.no_event"/></h2>
                     <%}%>
                     <div class="rowsa">
                         <div class="distance dropdown">
@@ -591,11 +709,11 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Event</th>
-                            <th scope="col">Lecture</th>
-                            <th scope="col">Date and time</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Speaker</th>
+                            <th scope="col"><fmt:message key="label.button.event"/></th>
+                            <th scope="col"><fmt:message key="label.profile.lectures"/></th>
+                            <th scope="col"><fmt:message key="label.datetime"/></th>
+                            <th scope="col"><fmt:message key="label.location"/></th>
+                            <th scope="col"><fmt:message key="label.profile.speaker"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -628,29 +746,19 @@
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
                                         <%for (User speaker : speakers) {%>
-                                            <li><a class="dropdown-item" href="OfferController?command=assign&lecture=<%=lecture.getId()%>&speaker=<%=speaker.getId()%>"> <%=speaker.toString()%> </a></li>
+                                        <li><a class="dropdown-item"
+                                               href="OfferController?command=assign&lecture=<%=lecture.getId()%>&speaker=<%=speaker.getId()%>"><%=speaker.toString()%>
+                                        </a></li>
                                         <%}%>
                                     </ul>
                                 </div>
-<%--                                <form class="rowsb" action="">--%>
-<%--                                    <select name="speaker" class="form-control" required>--%>
-<%--                                        <option>Select speaker</option>--%>
-<%--                                        <%for (User speaker : speakers) {%>--%>
-<%--                                        <option value="<%=speaker.getId()%>"><%=speaker.getName() + " " + speaker.getLastname()%>--%>
-<%--                                        </option>--%>
-<%--                                        <%}%>--%>
-<%--                                    </select>--%>
-<%--                                    <button class="btn btn-blue active" type="submit"><span--%>
-<%--                                            class="iconify-inline" data-icon="clarity:success-standard-line"--%>
-<%--                                            style="color: #005;" data-width="24"></span></button>--%>
-<%--                                </form>--%>
                             </td>
                         </tr>
                         <%}%>
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2>There aren't any free lectures </h2>
+                    <h2><fmt:message key="message.no_free_lectures"/></h2>
                     <%}%>
                 </div>
                 <!------------------------Requests-------------------------------->
@@ -662,13 +770,12 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Event</th>
-                            <th scope="col">Speaker</th>
-                            <th scope="col">Lecture</th>
-                            <th scope="col">Date and time</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Action</th>
-
+                            <th scope="col"><fmt:message key="label.button.event"/></th>
+                            <th scope="col"><fmt:message key="label.profile.speaker"/></th>
+                            <th scope="col"><fmt:message key="label.profile.lectures"/></th>
+                            <th scope="col"><fmt:message key="label.datetime"/></th>
+                            <th scope="col"><fmt:message key="label.location"/></th>
+                            <th scope="col"><fmt:message key="label.action"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -694,20 +801,115 @@
                             <td><%=event.getLocation().getShortName()%>
                             </td>
                             <%}%>
-                            <td class="rowsb">
-                                <a href="OfferController?command=acceptRequest&id=<%=lecture.getId()%>"><span
-                                        class="iconify-inline" data-icon="clarity:success-standard-line"
-                                        style="color: #005;" data-width="24"></span></a>
-                                <a href="OfferController?command=rejectRequest&id=<%=lecture.getId()%>"><span
-                                        class="iconify-inline" data-icon="carbon:close-outline"
-                                        style="color: #005;" data-width="24"></span></a>
+                            <td>
+                                <div class="rowsb">
+                                    <a href="OfferController?command=acceptRequest&id=<%=lecture.getId()%>"><span
+                                            class="iconify-inline" data-icon="clarity:success-standard-line"
+                                            style="color: #005;" data-width="24"></span></a>
+                                    <a href="OfferController?command=rejectRequest&id=<%=lecture.getId()%>"><span
+                                            class="iconify-inline" data-icon="carbon:close-outline"
+                                            style="color: #005;" data-width="24"></span></a>
+                                </div>
                             </td>
                         </tr>
                         <%}%>
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2>There aren't any requests to give a lecture</h2>
+                    <h2><fmt:message key="message.no_request"/></h2>
+                    <%}%>
+                </div>
+                <%-------------------history ------------------------------%>
+                <div style="background-color: #fff" class="tab-pane fade" id="pills-history-ecp" role="tabpanel"
+                     aria-labelledby="pills-history-ecp-tab">
+                    <%lectures = lecdao.selectByStatus(-1);%>
+                    <%if (lectures.size() > 0) {%>
+                    <h2>Rejected lectures</h2>
+                    <table class="table table-info table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col"><fmt:message key="label.button.event"/></th>
+                            <th scope="col"><fmt:message key="label.profile.speaker"/></th>
+                            <th scope="col"><fmt:message key="label.profile.lectures"/></th>
+                            <th scope="col"><fmt:message key="label.datetime"/></th>
+                            <th scope="col"><fmt:message key="label.location"/></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%for (Lecture lecture : lectures) {%>
+                        <tr>
+                            <th scope="row"><%=lecture.getEvent()%>
+                            </th>
+                            <% Event event = edao.select("id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <td><%=event.getTopic()%>
+                            </td>
+                            <td><%=udao.getByID(lecture.getSpeaker()).toString()%>
+                            </td>
+                            <td><%=lecture.getTopic()%>
+                            </td>
+                            <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%>
+                            </td>
+                            <%if (event.getCondition()) {%>
+                            <td><a href="<%=event.getLocation().getAddress()%>"
+                                   target="_blank"><%=event.getLocation().getShortName()%>
+                            </a></td>
+                            <%}%>
+                            <%if (!event.getCondition()) {%>
+                            <td><%=event.getLocation().getShortName()%>
+                            </td>
+                            <%}%>
+                        </tr>
+                        <%}%>
+                        </tbody>
+                    </table>
+                    <%} else {%>
+                    <h2><fmt:message key="message.no_request"/></h2>
+                    <%}%>
+
+                    <%lectures = lecdao.selectByStatus(2);%>
+                    <%if (lectures.size() > 0) {%>
+                    <h2>Not decided lectures</h2>
+                    <table class="table table-info table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col"><fmt:message key="label.button.event"/></th>
+                            <th scope="col"><fmt:message key="label.profile.speaker"/></th>
+                            <th scope="col"><fmt:message key="label.profile.lectures"/></th>
+                            <th scope="col"><fmt:message key="label.datetime"/></th>
+                            <th scope="col"><fmt:message key="label.location"/></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%for (Lecture lecture : lectures) {%>
+                        <tr>
+                            <th scope="row"><%=lecture.getEvent()%>
+                            </th>
+                            <% Event event = edao.select("id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <td><%=event.getTopic()%>
+                            </td>
+                            <td><%=udao.getByID(lecture.getSpeaker()).toString()%>
+                            </td>
+                            <td><%=lecture.getTopic()%>
+                            </td>
+                            <td><%=event.getDate() + " " + event.getFromtime() + "-" + event.getTotime()%>
+                            </td>
+                            <%if (event.getCondition()) {%>
+                            <td><a href="<%=event.getLocation().getAddress()%>"
+                                   target="_blank"><%=event.getLocation().getShortName()%>
+                            </a></td>
+                            <%}%>
+                            <%if (!event.getCondition()) {%>
+                            <td><%=event.getLocation().getShortName()%>
+                            </td>
+                            <%}%>
+                        </tr>
+                        <%}%>
+                        </tbody>
+                    </table>
+                    <%} else {%>
+                    <h2><fmt:message key="message.no_request"/></h2>
                     <%}%>
                 </div>
             </div>

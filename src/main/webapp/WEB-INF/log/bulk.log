@@ -25,3 +25,39 @@
 2022-02-20 18:54:36,145 [INFO ][io-8078-exec-230][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[10] WAS SUCCESSFUL CREATED BY USER[43]
 2022-02-20 18:54:47,427 [INFO ][io-8078-exec-227][com.conference.commands.AssignFreeLectureCommand] - FREE LECTURE[10] WAS FAILURE ASSIGNED TO USER[0]
 2022-02-20 18:58:21,971 [INFO ][io-8078-exec-236][com.conference.commands.AssignFreeLectureCommand] - FREE LECTURE[10] WAS SUCCESSFUL ASSIGNED TO USER[43]
+2022-02-21 16:24:41,344 [INFO ][nio-8078-exec-99][com.conference.servlets.Homepage] - SUCCESSFUL REGISTRATION USER: NAME[Ilya] LASTNAME[Lazovskyi] EMAIL[laz@l] 
+2022-02-23 17:28:34,258 [INFO ][io-8078-exec-114][com.conference.servlets.Homepage] - SUCCESSFUL REGISTRATION USER: NAME[фывтест] LASTNAME[фывтнст] EMAIL[asd@asf] 
+2022-02-23 19:46:47,474 [INFO ][io-8078-exec-302][com.conference.commands.AcceptOfferCommand] - OFFER[11] WAS SUCCESSFUL ACCEPTED BY USER[39]
+2022-02-23 19:47:22,339 [INFO ][io-8078-exec-296][com.conference.commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:Python, STATUS:1, EVENT:20, SPEAKER:39
+2022-02-23 19:49:02,094 [INFO ][io-8078-exec-302][com.conference.commands.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:Lection1Test, STATUS:0, EVENT:20, SPEAKER:0
+2022-02-23 19:50:28,427 [INFO ][io-8078-exec-302][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[29] WAS SUCCESSFUL CREATED BY USER[39]
+2022-02-23 19:52:05,318 [INFO ][io-8078-exec-304][com.conference.commands.AssignFreeLectureCommand] - FREE LECTURE[4] WAS SUCCESSFUL ASSIGNED TO USER[39]
+2022-02-23 19:52:29,094 [INFO ][io-8078-exec-299][com.conference.commands.AssignFreeLectureCommand] - FREE LECTURE[29] WAS SUCCESSFUL ASSIGNED TO USER[39]
+2022-02-23 19:53:24,199 [INFO ][io-8078-exec-298][com.conference.commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:dfsd, STATUS:1, EVENT:24, SPEAKER:39
+2022-02-23 19:54:02,828 [INFO ][io-8078-exec-295][com.conference.commands.AcceptRequestCommand] - OFFER[30] WAS SUCCESSFUL ACCEPTED BY USER[39]
+2022-02-23 20:20:02,054 [INFO ][io-8078-exec-298][com.conference.commands.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:ffffffffff, STATUS:2, EVENT:20, SPEAKER:39
+2022-02-23 22:30:54,522 [INFO ][nio-8078-exec-70][com.conference.servlets.Homepage] - SUCCESSFUL REGISTRATION USER: NAME[ываывп] LASTNAME[afdf] EMAIL[dfsdf@asf] 
+2022-03-01 15:41:03,360 [INFO ][nio-8078-exec-11][com.conference.commands.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:Тест1, STATUS:0, EVENT:20, SPEAKER:0
+2022-03-01 15:44:53,311 [INFO ][nio-8078-exec-20][com.conference.commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:Типу Математик ТЕст1, STATUS:1, EVENT:24, SPEAKER:39
+2022-03-01 15:54:46,154 [INFO ][nio-8078-exec-15][com.conference.commands.RejectRequestCommand] - OFFER[33] WAS SUCCESSFUL REJECTED BY USER[39]
+2022-03-01 15:57:04,607 [INFO ][nio-8078-exec-21][com.conference.commands.AssignFreeLectureCommand] - FREE LECTURE[15] WAS SUCCESSFUL ASSIGNED TO USER[39]
+2022-03-01 17:27:50,425 [INFO ][nio-8078-exec-27][com.conference.commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:trets, STATUS:1, EVENT:20, SPEAKER:39
+2022-03-01 17:28:04,956 [INFO ][nio-8078-exec-32][com.conference.commands.RejectRequestCommand] - OFFER[34] WAS SUCCESSFUL REJECTED BY USER[39]
+2022-03-01 17:28:30,897 [INFO ][nio-8078-exec-27][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[32] WAS SUCCESSFUL CREATED BY USER[39]
+2022-03-01 17:28:59,461 [INFO ][nio-8078-exec-36][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[32] WAS SUCCESSFUL CREATED BY USER[28]
+2022-03-01 17:29:14,403 [INFO ][nio-8078-exec-31][com.conference.commands.AssignFreeLectureCommand] - FREE LECTURE[32] WAS SUCCESSFUL ASSIGNED TO USER[39]
+2022-03-01 17:31:17,170 [INFO ][nio-8078-exec-40][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[20] WAS SUCCESSFUL CREATED BY USER[28]
+2022-03-01 17:31:20,823 [INFO ][nio-8078-exec-31][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[19] WAS SUCCESSFUL CREATED BY USER[28]
+2022-03-01 17:35:48,877 [INFO ][nio-8078-exec-38][com.conference.commands.AssignFreeLectureCommand] - FREE LECTURE[20] WAS SUCCESSFUL ASSIGNED TO USER[28]
+2022-03-01 17:38:32,296 [INFO ][nio-8078-exec-40][com.conference.commands.AssignFreeLectureCommand] - FREE LECTURE[19] WAS SUCCESSFUL ASSIGNED TO USER[28]
+2022-03-01 18:58:01,784 [INFO ][nio-8078-exec-41][com.conference.commands.RejectRequestCommand] - OFFER[18] WAS SUCCESSFUL REJECTED BY USER[28]
+2022-03-01 18:58:57,094 [INFO ][nio-8078-exec-55][com.conference.commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:asfdsfsdfsdf 243234, STATUS:1, EVENT:30, SPEAKER:28
+2022-03-01 18:59:09,347 [INFO ][nio-8078-exec-57][com.conference.commands.RejectRequestCommand] - OFFER[35] WAS SUCCESSFUL REJECTED BY USER[28]
+2022-03-01 19:00:07,893 [INFO ][nio-8078-exec-56][com.conference.commands.RejectOfferCommand] - OFFER[16] WAS SUCCESSFUL REJECTED BY USER[28]
+2022-03-01 19:03:27,936 [INFO ][nio-8078-exec-51][com.conference.commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:1111111111, STATUS:1, EVENT:30, SPEAKER:28
+2022-03-01 19:03:49,954 [INFO ][nio-8078-exec-56][com.conference.commands.RejectRequestCommand] - OFFER[36] WAS SUCCESSFUL REJECTED BY USER[28]
+2022-03-01 19:06:00,282 [INFO ][nio-8078-exec-63][com.conference.commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:222222222, STATUS:1, EVENT:30, SPEAKER:39
+2022-03-01 19:06:18,940 [INFO ][nio-8078-exec-61][com.conference.commands.AcceptRequestCommand] - OFFER[37] WAS SUCCESSFUL ACCEPTED BY USER[39]
+2022-03-01 19:06:32,486 [INFO ][nio-8078-exec-67][com.conference.commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:33333333333, STATUS:1, EVENT:30, SPEAKER:39
+2022-03-01 19:06:38,551 [INFO ][nio-8078-exec-70][com.conference.commands.RejectRequestCommand] - OFFER[38] WAS SUCCESSFUL REJECTED BY USER[39]
+2022-03-01 19:07:34,961 [INFO ][nio-8078-exec-70][com.conference.commands.RejectOfferCommand] - OFFER[31] WAS SUCCESSFUL REJECTED BY USER[39]

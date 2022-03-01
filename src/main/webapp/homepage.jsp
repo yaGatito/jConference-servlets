@@ -1,47 +1,38 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
-<html lang="en">
-<jsp:include page="header.jsp"/>
-
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="resources"/>
+<fmt:message key="label.title.main" var="title" scope="request"/>
+<html lang="${sessionScope.lang}">
+<jsp:include page="nav.jsp"/>
 <body>
 <!--Registration-->
 <section class="container-xl col">
     <c:if test="${sessionScope.user == null}">
         <div class="margin col reg-sec">
-            <h1 class="display-6">Welcome! Have not registered yet?</h1>
-            <h4 style="width: 30rem;">If you already have one - <a href="login.jsp" class="link-info">login</a></h4>
-            <form class="col margin" action="${pageContext.request.contextPath}/Registration" method="post">
-                <input name="name" class="form-control reg" type="text" placeholder="Name" aria-label="Search" required>
-                <input name="lastname" class="form-control reg" type="text" placeholder="Lastname" aria-label="Search"
+            <h1 class="display-6"> <fmt:message key="message.welcome"/> </h1>
+            <h4 style="width: 30rem;"><fmt:message key="message.welcome.cap"/> - <a href="login.jsp" class="link-info"> <fmt:message key="label.button.login"/> </a></h4>
+            <form class="col margin" action="Homepage" method="post">
+                <input name="name" class="form-control reg" type="text" placeholder="<fmt:message key="label.button.login"/>" aria-label="Search" required>
+                <input name="lastname" class="form-control reg" type="text" placeholder="<fmt:message key="label.registration.lastname"/>" aria-label="Search"
                        required>
-                <input name="email" class="form-control reg" type="Email" placeholder="Email" aria-label="Search"
+                <input name="email" class="form-control reg" type="Email" placeholder="<fmt:message key="label.registration.email"/>" aria-label="Search"
                        required>
-                <input name="password" class="form-control reg" type="password" placeholder="Password"
+                <input name="password" class="form-control reg" type="password" placeholder="<fmt:message key="label.registration.password"/>"
                        aria-label="Search" required>
-                <input class="form-control reg" type="password" placeholder="Enter password again" aria-label="Search"
+                <input class="form-control reg" type="password" placeholder="<fmt:message key="label.registration.password.again"/>" aria-label="Search"
                        required>
                 <p></p>
-                <button class="btn btn-info" type="submit">Sign up</button>
+                <button class="btn btn-info" type="submit"><fmt:message key="label.button.signup"/> </button>
             </form>
         </div>
     </c:if>
+
     <div class="margin col">
-        <!--Events-->
-
-        <h2 class="display-6 margin">Events</h2>
-
-        <div class="dropdown">
-            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                Sort events
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                <li><a class="dropdown-item" href="#">by date</a></li>
-                <li><a class="dropdown-item" href="#">by name of speaker</a></li>
-                <li><a class="dropdown-item" href="#">by name of events</a></li>
-            </ul>
-        </div>
+        <h2 class="display-6 margin"><fmt:message key="label.button.events"/></h2>
         <c:forEach var="event" items="${requestScope.events}">
             <div class="card border-info mb-3" style="width: 40rem;">
                 <div class="card-header rowsb">

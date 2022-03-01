@@ -1,0 +1,16 @@
+
+w
+java:S1989"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(§Ùú¾
+t
+java:S1989"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(žñÄ½üÿÿÿÿ
+~
+java:S1989"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(§Ùú¾8ÓÙ»Ãï/
+t
+java:S1989#"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(§°Õˆûÿÿÿÿ
+~
+java:S1989'"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(§Ùú¾8µ¤¼Ãï/
+X	java:S125."<This block of commented-out lines of code should be removed.(·—±¬8¥Õ·Àñ/
+j
+java:S1192"HDefine a constant instead of duplicating this literal "message" 3 times.(øòëýÿÿÿÿ8µ¤¼Ãï/
+l
+java:S1192"ODefine a constant instead of duplicating this literal "error-page.jsp" 3 times.(§Ùú¾8µ¤¼Ãï/

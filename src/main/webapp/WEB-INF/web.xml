@@ -7,15 +7,52 @@
         <welcome-file>homepage.jsp</welcome-file>
     </welcome-file-list>
     <listener>
-        <listener-class>com.conference.listeners.Log4jInit</listener-class>
+        <listener-class>com.conference.listeners.ContextListener</listener-class>
     </listener>
     <filter>
         <filter-name>CharacterSetFilter</filter-name>
         <filter-class>com.conference.filters.CharacterSetFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
     </filter>
+    <filter>
+        <filter-name>LangInitFilter</filter-name>
+        <filter-class>com.conference.filters.LangInitFilter</filter-class>
+    </filter>
+
     <filter-mapping>
         <filter-name>CharacterSetFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>LangInitFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <!--============================================================
+                    i18n support
+    =============================================================-->
+    <!-- this way we set the resource bundle name -->
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>resources</param-value>
+    </context-param>
+
+    <!-- this way we set the default locale (optional) -->
+    <!-- the (preferable) browser's locale will be used if we don't set the default locale -->
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
+        <param-value>en</param-value>
+    </context-param>
+
+    <!-- supported locales -->
+    <context-param>
+        <param-name>locales</param-name>
+        <param-value>ru en</param-value>
+    </context-param>
+
 
 </web-app>
