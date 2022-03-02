@@ -32,10 +32,8 @@ public class ContextListener implements ServletContextListener {
         DOMConfigurator.configure(log4jFilePath);
     }
     private void initI18N(ServletContextEvent event) {
-//        log.debug("I18N subsystem initialization started");
         String localesValue = event.getServletContext().getInitParameter("locales");
         if (localesValue == null || localesValue.isEmpty()) {
-//            log.warn("'locales' init parameter is empty, the default encoding will be used");
         } else {
             List<String> locales = new ArrayList<>();
             StringTokenizer st = new StringTokenizer(localesValue);
@@ -43,12 +41,8 @@ public class ContextListener implements ServletContextListener {
                 String localeName = st.nextToken();
                 locales.add(localeName);
             }
-
-//            log.debug("Application attribute set: locales --> " + locales);
             event.getServletContext().setAttribute("locales", locales);
         }
-
-//        log.debug("I18N subsystem initialization finished");
     }
 
 

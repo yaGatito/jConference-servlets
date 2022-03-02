@@ -65,3 +65,12 @@
 2022-03-01 19:06:32,486 [INFO ][nio-8078-exec-67][    commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:33333333333, STATUS:1, EVENT:30, SPEAKER:39
 2022-03-01 19:06:38,551 [INFO ][nio-8078-exec-70][ commands.RejectRequestCommand] - OFFER[38] WAS SUCCESSFUL REJECTED BY USER[39]
 2022-03-01 19:07:34,961 [INFO ][nio-8078-exec-70][   commands.RejectOfferCommand] - OFFER[31] WAS SUCCESSFUL REJECTED BY USER[39]
+2022-03-01 19:24:03,837 [INFO ][nio-8078-exec-61][      commands.AddEventCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:FAF, DATE:2022-03-23, TIME:22:23-22:23, LOCATION:Vyacheslava Chornovola str, 56B
+2022-03-02 02:28:19,353 [INFO ][-nio-8078-exec-7][      commands.AddEventCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:Salesforce, DATE:2022-03-10, TIME:03:27-07:27, LOCATION:https://elearn.epam.com/courses/course-v1:RD_CEE+OnlineUAJava+2022-Winter/courseware/07a53325b2da4c10bd6e8de2e5f794f4/385596d9d98d40f6bf57f7a6ea62f4e8/1?activate_block_id=block-v1%3ARD_CEE%2BOnlineUAJava%2B2022-Winter%2Btype%40vertical%2Bblock%4022dad6bc8f6b45a6843487c35fdf49aa
+2022-03-02 02:29:18,742 [INFO ][-nio-8078-exec-6][    commands.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:Apex language, STATUS:0, EVENT:37, SPEAKER:0
+2022-03-02 02:30:41,812 [INFO ][-nio-8078-exec-9][    commands.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:e-commerce solutions, STATUS:0, EVENT:37, SPEAKER:0
+2022-03-02 02:31:44,227 [INFO ][-nio-8078-exec-9][    commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:Why you should pick salesforce?, STATUS:1, EVENT:37, SPEAKER:39
+2022-03-02 02:35:13,458 [INFO ][-nio-8078-exec-1][   commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[40] WAS SUCCESSFUL CREATED BY USER[39]
+2022-03-02 02:36:31,087 [INFO ][-nio-8078-exec-5][    commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:Test lecture, STATUS:1, EVENT:37, SPEAKER:39
+2022-03-02 02:37:01,158 [INFO ][-nio-8078-exec-8][ commands.RejectRequestCommand] - OFFER[42] WAS SUCCESSFUL REJECTED BY USER[39]
+2022-03-02 02:37:52,095 [INFO ][-nio-8078-exec-3][ commands.AcceptRequestCommand] - OFFER[41] WAS SUCCESSFUL ACCEPTED BY USER[39]

@@ -108,7 +108,7 @@
                             key="label.profile.email"/></label>
                 </div>
                 <div class="input-group distance">
-                    <button type="submit" class="btn btn-info">Save</button>
+                    <button type="submit" class="btn btn-info"> <fmt:message key="label.profile.save"/> </button>
                 </div>
                 <div class="input-group distance">
                     <a class="btn btn-info" href=""><fmt:message key="label.profile.changepass"/></a>
@@ -200,7 +200,7 @@
                 <li class="nav-item" role="presentation">
                     <button class="btn btn-blue" id="pills-history-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-history"
-                            type="button" role="tab" aria-controls="pills-history" aria-selected="false">History
+                            type="button" role="tab" aria-controls="pills-history" aria-selected="false"><fmt:message key="label.button.history"/>
                     </button>
                 </li>
             </ul>
@@ -348,7 +348,7 @@
                     <h2><fmt:message key="message.no_request_lectures"/></h2>
                     <%}%>
                     <div class="distance">
-                        <a class="btn btn-info" href="AddRequest">Make request</a>
+                        <a class="btn btn-info" href="AddRequest"> <fmt:message key="label.add_request"/> </a>
                     </div>
 
                 </div>
@@ -358,7 +358,7 @@
                      aria-labelledby="pills-free-tab">
                     <%lectures = lecdao.selectNotRequested(currentUser.getId());%>
                     <%if (lectures.size() > 0) {%>
-                    <h2>Not requested</h2>
+                    <h2><fmt:message key="message.free.no"/> </h2>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -406,7 +406,7 @@
 
                     <%lectures = rdao.selectLecturesFromRequests(currentUser.getId());%>
                     <%if (lectures.size() > 0) {%>
-                    <h2>Already requested</h2>
+                    <h2><fmt:message key="message.free.already"/> </h2>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -452,7 +452,7 @@
                      aria-labelledby="pills-history-tab">
                     <%lectures = rdao.historyOfOwnRequests(currentUser.getId());%>
                     <%if (lectures.size() > 0) {%>
-                    <h2>Rejected own requests</h2>
+                    <h2><fmt:message key="message.history.own.rejected"/> </h2>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -489,12 +489,12 @@
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2><fmt:message key="message.no_available_lectures"/></h2>
+                    <h2><fmt:message key="message.history.own.no"/> </h2>
                     <%}%>
 
                     <%lectures = rdao.historyOfFreeRequests(currentUser.getId());%>
                     <%if (lectures.size() > 0) {%>
-                    <h2>Rejected free requests</h2>
+                    <h2> <fmt:message key="message.history.free.rejected"/> </h2>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -531,7 +531,7 @@
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2><fmt:message key="message.no_request_free_lectures"/></h2>
+                    <h2><fmt:message key="message.history.free.no"/> </h2>
                     <%}%>
                 </div>
             </div>
@@ -608,7 +608,7 @@
                     <button class="btn btn-blue" id="pills-free-lectures-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-free-lectures" type="button" role="tab" aria-controls="pills-profile"
                             aria-selected="false">
-                        <fmt:message key="label.profile.lectures.free"/> <fmt:message key="label.profile.lectures"/>
+                        <fmt:message key="label.profile.ecp.free"/>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -622,7 +622,7 @@
                     <button class="btn btn-blue" id="pills-history-ecp-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-history-ecp" type="button" role="tab"
                             aria-controls="pills-contact" aria-selected="false">
-                        <fmt:message key="label.profile.ecp.requests"/>
+                        <fmt:message key="label.button.history"/>
                     </button>
                 </li>
             </ul>
@@ -680,22 +680,22 @@
                     <h2><fmt:message key="message.no_event"/></h2>
                     <%}%>
                     <div class="rowsa">
-                        <div class="distance dropdown">
-                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                Sort events
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                <li><a class="dropdown-item" href="#">by date</a></li>
-                                <li><a class="dropdown-item" href="#">by name of speaker</a></li>
-                                <li><a class="dropdown-item" href="#">by name of events</a></li>
-                            </ul>
+<%--                        <div class="distance dropdown">--%>
+<%--                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2"--%>
+<%--                                    data-bs-toggle="dropdown" aria-expanded="false">--%>
+<%--                                Sort events--%>
+<%--                            </button>--%>
+<%--                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">--%>
+<%--                                <li><a class="dropdown-item" href="#">by date</a></li>--%>
+<%--                                <li><a class="dropdown-item" href="#">by name of speaker</a></li>--%>
+<%--                                <li><a class="dropdown-item" href="#">by name of events</a></li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+                        <div class="distance">
+                            <a class="btn btn-info" href="AddLecture"> <fmt:message key="label.add_lecture"/> </a>
                         </div>
                         <div class="distance">
-                            <a class="btn btn-info" href="AddLecture">Add lecture</a>
-                        </div>
-                        <div class="distance">
-                            <a class="btn btn-info" href="AddEvent">Add event</a>
+                            <a class="btn btn-info" href="AddEvent"><fmt:message key="label.add_event"/> </a>
                         </div>
                     </div>
                 </div>
@@ -742,7 +742,7 @@
                                 <div class="dropdown">
                                     <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton3"
                                             data-bs-toggle="dropdown" aria-expanded="false">
-                                        Select speaker
+                                        <fmt:message key="label.button.select"/>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
                                         <%for (User speaker : speakers) {%>
@@ -819,12 +819,12 @@
                     <h2><fmt:message key="message.no_request"/></h2>
                     <%}%>
                 </div>
-                <%-------------------history ------------------------------%>
+                <%-------------------History ------------------------------%>
                 <div style="background-color: #fff" class="tab-pane fade" id="pills-history-ecp" role="tabpanel"
                      aria-labelledby="pills-history-ecp-tab">
                     <%lectures = lecdao.selectByStatus(-1);%>
                     <%if (lectures.size() > 0) {%>
-                    <h2>Rejected lectures</h2>
+                    <h2><fmt:message key="message.ecp.history.rejected"/> </h2>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -864,12 +864,12 @@
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2><fmt:message key="message.no_request"/></h2>
+                    <h2><fmt:message key="message.ecp.history.rejected.no"/></h2>
                     <%}%>
 
                     <%lectures = lecdao.selectByStatus(2);%>
                     <%if (lectures.size() > 0) {%>
-                    <h2>Not decided lectures</h2>
+                    <h2><fmt:message key="message.ecp.history.pending"/></h2>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -909,7 +909,7 @@
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2><fmt:message key="message.no_request"/></h2>
+                    <h2><fmt:message key="message.ecp.history.pending.no"/></h2>
                     <%}%>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 @WebFilter(filterName = "LangInitFilter", urlPatterns = {"/*"})
@@ -27,7 +28,13 @@ public class LangInitFilter implements Filter {
         HttpServletRequest httpRequest = ((HttpServletRequest) request);
         HttpSession session = httpRequest.getSession(true);
         if (session.isNew()) {
-            session.setAttribute("lang", locale.toString());
+            String l = locale.toString();
+            List<String> locales = (List<String>) request.getServletContext().getAttribute("locales");
+            if (!locales.contains(l)) {
+                //Default locale
+                l = "en";
+            }
+            session.setAttribute("lang", l);
         }
         next.doFilter(request, response);
     }

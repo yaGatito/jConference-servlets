@@ -25,9 +25,9 @@ public class Homepage extends HttpServlet {
         //Display only 5 future nearest events
         List<Event> events = edao.select("status", 1,"5", 0, "date, fromtime");
         events = Event.filter(events)[1];
+        LectureDAO lecdao = new LectureDAO();
 
         request.setAttribute("events",events);
-        LectureDAO lecdao = new LectureDAO();
         request.setAttribute("lecdao", lecdao);
 
         request.getRequestDispatcher("homepage.jsp").forward(request,response);
