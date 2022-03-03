@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LectureDAO extends DAO {
+public class LectureDAO  {
     public boolean insertLecture(Connection c, Lecture lecture) {
         try (PreparedStatement ps = c.prepareStatement(
                      "INSERT INTO lectures (id, topic, status, event, speaker) VALUES (DEFAULT,?,?,?,?)")) {

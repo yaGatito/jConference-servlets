@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO extends DAO {
+public class UserDAO  {
 
     private static final String INSERT_USER = "\n" +
             "INSERT INTO users (id, role, name, lastname, email, password) " +

@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListenersDAO extends DAO {
+public class ListenersDAO  {
 
     private static final String CREATE_LISTENER = "\n" +
             "INSERT INTO listeners (event, listener) " +

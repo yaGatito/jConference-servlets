@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventDAO extends DAO {
+public class EventDAO  {
 
     private static final String CREATE_EVENT =
             "INSERT INTO events (id, topic, description,date,fromtime,totime,location) " +
