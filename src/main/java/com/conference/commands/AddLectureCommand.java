@@ -1,5 +1,6 @@
 package com.conference.commands;
 
+import com.conference.DBCPool;
 import com.conference.entity.Lecture;
 import com.conference.dao.LectureDAO;
 import org.slf4j.Logger;
@@ -8,11 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.sql.Connection;
 
 public class AddLectureCommand implements Command {
     public static final Logger logger = LoggerFactory.getLogger(AddLectureCommand.class);
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+        Connection connection = pool.getConnection();
         String topic = "";
         boolean asOffer = false;
         int event = 0;
@@ -40,7 +44,8 @@ public class AddLectureCommand implements Command {
         }
         Lecture lecture = new Lecture(topic, status, event, speaker);
 
-        if (isFree && new LectureDAO().insertFreeLecture(lecture) || !isFree && new LectureDAO().insertLecture(lecture)) {
+        if (isFree && new LectureDAO().insertFreeLecture(connection,lecture) ||
+                !isFree && new LectureDAO().insertLecture(connection,lecture)) {
             if(logger.isInfoEnabled()) {
                 logger.info("SUCCESSFUL INSERTING LECTURE - TOPIC:{}, STATUS:{}, EVENT:{}, SPEAKER:{}",topic,status,event,speaker);
             }
@@ -52,5 +57,6 @@ public class AddLectureCommand implements Command {
             request.setAttribute("message", "Something goes wrong");
             request.getRequestDispatcher("error-page.jsp").forward(request, response);
         }
+        pool.putBackConnection(connection);
     }
 }

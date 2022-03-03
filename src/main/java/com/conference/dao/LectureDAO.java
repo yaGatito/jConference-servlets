@@ -10,9 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LectureDAO extends DAO {
-    public boolean insertLecture(Lecture lecture) {
-        try (Connection c = getConnection();
-             PreparedStatement ps = c.prepareStatement(
+    public boolean insertLecture(Connection c, Lecture lecture) {
+        try (PreparedStatement ps = c.prepareStatement(
                      "INSERT INTO lectures (id, topic, status, event, speaker) VALUES (DEFAULT,?,?,?,?)")) {
             ps.setString(1, lecture.getTopic());
             ps.setInt(2, lecture.getStatus());
@@ -26,9 +25,8 @@ public class LectureDAO extends DAO {
         }
     }
 
-    public boolean insertFreeLecture(Lecture lecture) {
-        try (Connection c = getConnection();
-             PreparedStatement ps = c.prepareStatement(
+    public boolean insertFreeLecture(Connection c, Lecture lecture) {
+        try (PreparedStatement ps = c.prepareStatement(
                      "INSERT INTO lectures (id, topic, status, event) VALUES (DEFAULT,?,?,?)")) {
             ps.setString(1, lecture.getTopic());
             ps.setInt(2, lecture.getStatus());
@@ -42,10 +40,9 @@ public class LectureDAO extends DAO {
     }
 
 
-    public List<Lecture> select(int event, int status) {
+    public List<Lecture> select(Connection c, int event, int status) {
         List<Lecture> lectures = new ArrayList<>();
-        try (Connection c = getConnection();
-             PreparedStatement ps = c.prepareStatement(
+        try (PreparedStatement ps = c.prepareStatement(
                      "SELECT * FROM lectures WHERE (status = ?) AND (event = ?) ORDER BY id")
         ) {
             ps.setInt(1, status);
@@ -68,10 +65,9 @@ public class LectureDAO extends DAO {
         }
     }
 
-    public List<Lecture> selectByStatus(int status) {
+    public List<Lecture> selectByStatus(Connection c,int status) {
         List<Lecture> lectures = new ArrayList<>();
-        try (Connection c = getConnection();
-             PreparedStatement ps = c.prepareStatement(
+        try (PreparedStatement ps = c.prepareStatement(
                      "SELECT * FROM lectures WHERE status = ? ORDER BY id")
         ) {
             ps.setInt(1, status);
@@ -93,10 +89,9 @@ public class LectureDAO extends DAO {
         }
     }
 
-    public List<Lecture> selectNotRequested(int speaker) {
+    public List<Lecture> selectNotRequested(Connection c, int speaker) {
         List<Lecture> lectures = new ArrayList<>();
-        try (Connection c = getConnection();
-             PreparedStatement ps = c.prepareStatement(
+        try (PreparedStatement ps = c.prepareStatement(
                      "SELECT * FROM lectures WHERE status = 0 ORDER BY id");
              PreparedStatement req = c.prepareStatement(
                      "SELECT lecture FROM requests WHERE speaker = ?")
@@ -128,10 +123,9 @@ public class LectureDAO extends DAO {
         }
     }
 
-    public List<Lecture> selectBySpeaker(int status, int speaker) {
+    public List<Lecture> selectBySpeaker(Connection c, int status, int speaker) {
         List<Lecture> lectures = new ArrayList<>();
-        try (Connection c = getConnection();
-             PreparedStatement ps = c.prepareStatement(
+        try (PreparedStatement ps = c.prepareStatement(
                      "SELECT * FROM lectures WHERE (status = ?) AND (speaker = ?) ORDER BY id")
         ) {
             ps.setInt(1, status);
@@ -154,10 +148,9 @@ public class LectureDAO extends DAO {
         }
     }
 
-    public int selectCount(int event, int status) {
+    public int selectCount(Connection c, int event, int status) {
         int count = 0;
-        try (Connection c = getConnection();
-             PreparedStatement ps = c.prepareStatement(
+        try (PreparedStatement ps = c.prepareStatement(
                      "SELECT count(*) FROM lectures WHERE (event = ?) AND (status = ?) ")
         ) {
             ps.setInt(1, event);
@@ -173,9 +166,8 @@ public class LectureDAO extends DAO {
         }
     }
 
-    public boolean rejectOffer(int lecture){
-        try(Connection c = getConnection();
-            PreparedStatement ps = c.prepareStatement(
+    public boolean rejectOffer(Connection c, int lecture){
+        try(PreparedStatement ps = c.prepareStatement(
             "UPDATE lectures SET status = -1 WHERE id = ?")){
             ps.setInt(1,lecture);
             ps.executeUpdate();
@@ -186,9 +178,8 @@ public class LectureDAO extends DAO {
         }
     }
 
-    public boolean acceptOffer(int lecture){
-        try(Connection c = getConnection();
-            PreparedStatement ps = c.prepareStatement(
+    public boolean acceptOffer(Connection c, int lecture){
+        try(PreparedStatement ps = c.prepareStatement(
                     "UPDATE lectures SET status = 3 WHERE id = ?")){
             ps.setInt(1,lecture);
             ps.executeUpdate();

@@ -2,11 +2,10 @@ package com.conference.listeners;
 
 import javax.servlet.*;
 
+import com.conference.DBCPool;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
-
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -19,7 +18,11 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
         log4jInit(event);
+        log.info("INITIALIZED LOG4J SYSTEM");
         initI18N(event);
+        log.info("INITIALIZED I18N SYSTEM");
+        initDBCPool(event);
+        log.info("INITIALIZED DBCPool SYSTEM");
     }
 
     /**
@@ -31,10 +34,13 @@ public class ContextListener implements ServletContextListener {
         String log4jFilePath = webAppPath + "WEB-INF/log4j.xml";
         DOMConfigurator.configure(log4jFilePath);
     }
+    /**
+     * Initializing i18n
+     * @param event
+     */
     private void initI18N(ServletContextEvent event) {
         String localesValue = event.getServletContext().getInitParameter("locales");
-        if (localesValue == null || localesValue.isEmpty()) {
-        } else {
+        if (localesValue != null && !localesValue.isEmpty()) {
             List<String> locales = new ArrayList<>();
             StringTokenizer st = new StringTokenizer(localesValue);
             while (st.hasMoreTokens()) {
@@ -45,7 +51,13 @@ public class ContextListener implements ServletContextListener {
         }
     }
 
-
+    /**
+     * Initializing Connection Pool
+     * @param event
+     */
+    private void initDBCPool(ServletContextEvent event){
+        event.getServletContext().setAttribute("pool", DBCPool.getInstance());
+    }
 
     @Override
     public void contextDestroyed(ServletContextEvent event) {}

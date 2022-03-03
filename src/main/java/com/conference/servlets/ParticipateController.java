@@ -1,5 +1,6 @@
 package com.conference.servlets;
 
+import com.conference.DBCPool;
 import com.conference.entity.User;
 import com.conference.dao.ListenersDAO;
 
@@ -7,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Connection;
 
 @WebServlet(name = "ParticipateController", value = "/ParticipateController")
 public class ParticipateController extends HttpServlet {
@@ -17,6 +19,8 @@ public class ParticipateController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+        Connection connection = pool.getConnection();
         try {
             String action = request.getParameter("action");
             int event;
@@ -25,7 +29,7 @@ public class ParticipateController extends HttpServlet {
             switch (action){
                 case "join":
                     event = Integer.parseInt(request.getParameter("event"));
-                    res = new ListenersDAO().createListener(event,listener);
+                    res = new ListenersDAO().createListener(connection,event,listener);
                     if (res){
                         response.sendRedirect("Events");
                     }else{
@@ -35,7 +39,8 @@ public class ParticipateController extends HttpServlet {
                     break;
                 case "unjoin":
                     event = Integer.parseInt(request.getParameter("event"));
-                    res = new ListenersDAO().deleteListener(event,listener);
+                    res = new ListenersDAO().deleteListener(connection,event,listener);
+                    pool.putBackConnection(connection);
                     if (res){
                         response.sendRedirect("Profile?item=Your%20participation");
                     }else{
@@ -50,6 +55,7 @@ public class ParticipateController extends HttpServlet {
         }catch (NullPointerException | NumberFormatException exception){
             request.getRequestDispatcher("Error?message=Something_goes_wrong").forward(request, response);
         }
+
 
     }
 }

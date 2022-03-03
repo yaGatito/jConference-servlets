@@ -1,5 +1,6 @@
 package com.conference.commands;
 
+import com.conference.DBCPool;
 import com.conference.dao.LectureDAO;
 import com.conference.entity.Lecture;
 import com.conference.entity.User;
@@ -10,12 +11,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.List;
 
 public class AcceptRequestCommand implements Command {
     public static final Logger logger = LoggerFactory.getLogger(AcceptRequestCommand.class);
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+        Connection connection = pool.getConnection();
         int id = 0;
         try {
              id = Integer.parseInt(request.getParameter("id"));
@@ -31,7 +35,7 @@ public class AcceptRequestCommand implements Command {
             request.getRequestDispatcher("error-page.jsp").forward(request,response);
         }
 
-        if (ldao.acceptOffer(id)){
+        if (ldao.acceptOffer(connection,id)){
             if (logger.isInfoEnabled()) {
                 logger.info("OFFER[{}] WAS SUCCESSFUL ACCEPTED BY USER[{}]",id,user.getId());
             }
@@ -43,7 +47,7 @@ public class AcceptRequestCommand implements Command {
             request.setAttribute("message", "You can't accept another lectures");
             request.getRequestDispatcher("error-page.jsp").forward(request,response);
         }
-
+        pool.putBackConnection(connection);
 
     }
 }

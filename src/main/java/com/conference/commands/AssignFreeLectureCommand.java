@@ -1,5 +1,6 @@
 package com.conference.commands;
 
+import com.conference.DBCPool;
 import com.conference.dao.LectureDAO;
 import com.conference.dao.RequestDAO;
 import com.conference.entity.Lecture;
@@ -11,12 +12,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.List;
 
 public class AssignFreeLectureCommand implements Command {
     public static final Logger logger = LoggerFactory.getLogger(AssignFreeLectureCommand.class);
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+        Connection connection = pool.getConnection();
         int lecture = 0;
         int speaker = 0;
         try {
@@ -33,7 +37,7 @@ public class AssignFreeLectureCommand implements Command {
             request.setAttribute("message", "Please, log in");
             request.getRequestDispatcher("error-page.jsp").forward(request,response);
         }
-        if (rdao.secureLecture(speaker,lecture)){
+        if (rdao.secureLecture(connection,speaker,lecture)){
             if (logger.isInfoEnabled()) {
                 logger.info("FREE LECTURE[{}] WAS SUCCESSFUL ASSIGNED TO USER[{}]",lecture,speaker);
             }
@@ -45,5 +49,6 @@ public class AssignFreeLectureCommand implements Command {
             request.setAttribute("message", "You can't assign another lectures");
             request.getRequestDispatcher("error-page.jsp").forward(request,response);
         }
+        pool.putBackConnection(connection);
     }
 }

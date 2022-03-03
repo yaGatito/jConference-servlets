@@ -2,6 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.conference.dao.UserDAO" %>
 <%@ page import="java.time.LocalDate" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="com.conference.DBCPool" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -13,7 +15,12 @@
 <html lang="${sessionScope.lang}">
 <jsp:include page="nav.jsp"/>
 <%!List<User> speakers;%>
-<%speakers = new UserDAO().selectSpeakers();%>
+<%
+    DBCPool pool = (DBCPool) config.getServletContext().getAttribute("pool");
+    Connection connection = pool.getConnection();
+    speakers = new UserDAO().selectSpeakers(connection);
+    pool.putBackConnection(connection);
+%>
 <body>
 <section class="container-xl col">
     <!--Add event-->

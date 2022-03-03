@@ -1,5 +1,6 @@
 package com.conference.commands;
 
+import com.conference.DBCPool;
 import com.conference.dao.RequestDAO;
 import com.conference.entity.User;
 import org.slf4j.Logger;
@@ -8,12 +9,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 
 public class MakeRequestCommand implements Command {
     public static final Logger logger = LoggerFactory.getLogger(MakeRequestCommand.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+        Connection connection = pool.getConnection();
         int id = 0;
         try {
             id = Integer.parseInt(request.getParameter("id"));
@@ -28,7 +32,7 @@ public class MakeRequestCommand implements Command {
             request.setAttribute("message", "Please, log in");
             request.getRequestDispatcher("error-page.jsp").forward(request, response);
         }
-        if (rdao.createRequest(user.getId(),id)) {
+        if (rdao.createRequest(connection,user.getId(),id)) {
             if (logger.isInfoEnabled()) {
                 logger.info("REQUEST FOR FREE LECTURE[{}] WAS SUCCESSFUL CREATED BY USER[{}]", id, user.getId());
             }
@@ -40,6 +44,6 @@ public class MakeRequestCommand implements Command {
             request.setAttribute("message", "You can't accept this");
             request.getRequestDispatcher("error-page.jsp").forward(request, response);
         }
-
+        pool.putBackConnection(connection);
     }
 }

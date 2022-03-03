@@ -1,5 +1,6 @@
 package com.conference.servlets;
 
+import com.conference.DBCPool;
 import com.conference.entity.Event;
 import com.conference.entity.User;
 import com.conference.dao.EventDAO;
@@ -10,6 +11,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class ModerProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+        Connection connection = pool.getConnection();
 
         List<User> users;
         List<Event> events;
@@ -29,7 +33,8 @@ public class ModerProfile extends HttpServlet {
         }
 
         double maxItems = 5;
-        double count = udao.getCount();
+        double count = udao.getCount(connection);
+        pool.putBackConnection(connection);
         double amount = Math.ceil(count / maxItems);
         int offset;
         try {

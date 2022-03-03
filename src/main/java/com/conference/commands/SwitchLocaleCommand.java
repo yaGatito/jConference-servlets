@@ -1,9 +1,12 @@
 package com.conference.commands;
 
+import com.conference.DBCPool;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.List;
 
 public class SwitchLocaleCommand implements Command{

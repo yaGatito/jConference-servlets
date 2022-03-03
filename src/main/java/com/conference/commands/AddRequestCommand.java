@@ -1,5 +1,6 @@
 package com.conference.commands;
 
+import com.conference.DBCPool;
 import com.conference.dao.LectureDAO;
 import com.conference.entity.Lecture;
 import com.conference.entity.User;
@@ -10,11 +11,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 
 public class AddRequestCommand implements Command {
     public static final Logger logger = LoggerFactory.getLogger(AddRequestCommand.class);
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+        Connection connection = pool.getConnection();
         String topic = "";
         int event = 0;
         int speaker = 0;
@@ -30,7 +34,7 @@ public class AddRequestCommand implements Command {
         }
         Lecture lecture = new Lecture(topic, status, event, speaker);
 
-        if (new LectureDAO().insertLecture(lecture)) {
+        if (new LectureDAO().insertLecture(connection,lecture)) {
             if(logger.isInfoEnabled()) {
                 logger.info("SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:{}, STATUS:{}, EVENT:{}, SPEAKER:{}",topic,status,event,speaker);
             }
@@ -42,5 +46,6 @@ public class AddRequestCommand implements Command {
             request.setAttribute("message", "Something goes wrong");
             request.getRequestDispatcher("error-page.jsp").forward(request, response);
         }
+        pool.putBackConnection(connection);
     }
 }

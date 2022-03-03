@@ -13,9 +13,8 @@ public class EventDAO extends DAO {
             "INSERT INTO events (id, topic, description,date,fromtime,totime,location) " +
                     "VALUES (default, ?, ?, ?, ?, ?, ?)";
 
-    public boolean createEvent(Event event){
-        try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement(CREATE_EVENT)) {
+    public boolean createEvent(Connection con, Event event){
+        try (PreparedStatement statement = con.prepareStatement(CREATE_EVENT)) {
             statement.setString(1,event.getTopic());
             statement.setString(2,event.getDescription());
             statement.setString(3,event.getDate());
@@ -33,9 +32,8 @@ public class EventDAO extends DAO {
     private static final String DELETE_EVENT =
             "DELETE FROM events WHERE id = ?";
 
-    public boolean deleteEvent(int id){
-        try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement(DELETE_EVENT)) {
+    public boolean deleteEvent(Connection con,int id){
+        try (PreparedStatement statement = con.prepareStatement(DELETE_EVENT)) {
             statement.setInt(1,id);
             statement.executeUpdate();
             return true;
@@ -48,9 +46,8 @@ public class EventDAO extends DAO {
     private static final String UPDATE_EVENT =
             "UPDATE events SET date = ?, fromtime = ?, totime = ?, location = ?,status = ? WHERE id = ?";
 
-    public boolean updateEvent(Event event){
-        try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement(UPDATE_EVENT)) {
+    public boolean updateEvent(Connection con, Event event){
+        try (PreparedStatement statement = con.prepareStatement(UPDATE_EVENT)) {
             statement.setString(1,event.getDate());
             statement.setString(2,event.getFromtime());
             statement.setString(3,event.getTotime());
@@ -65,11 +62,10 @@ public class EventDAO extends DAO {
         }
     }
 
-    public List<Event> select(String where, int value, String limit, int offset, String order) {
+    public List<Event> select(Connection con, String where, int value, String limit, int offset, String order) {
 
         List<Event> events;
-        try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement(
+        try (PreparedStatement statement = con.prepareStatement(
                      "SELECT * FROM events WHERE " + where + " = " + value + "  ORDER BY " + order + " LIMIT " + limit + " OFFSET " + offset);
              PreparedStatement lec = con.prepareStatement(
                      "SELECT id,topic,status,event,speaker FROM lectures WHERE event = ? AND status = 3");
@@ -115,42 +111,5 @@ public class EventDAO extends DAO {
             events = null;
         }
         return events;
-    }
-
-    private List<Event> selectTest(Connection c, String where, int value, String limit, int offset, String order) {
-
-        List<Event> events;
-        try (PreparedStatement statement = c.prepareStatement("SELECT * FROM events WHERE " + where + " = " + value + "  ORDER BY " + order + " LIMIT " + limit + " OFFSET " + offset)) {
-            ResultSet set = statement.executeQuery();
-            events = new ArrayList<>();
-            while (set.next()){
-                int id = set.getInt("id");
-                String topic = set.getString("topic");
-                String description = set.getString("description");
-                String fromtime = set.getString("fromtime");
-                String totime = set.getString("totime");
-                String date = set.getString("date");
-                String location = set.getString("location");
-                int status = set.getInt("status");
-                events.add(new Event(id,topic,description,fromtime,totime,date,location, status));
-            }
-            set.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            events = null;
-        }
-        return events;
-    }
-
-    public static void main(String[] args) {
-        EventDAO edao = new EventDAO();
-
-        long start = System.currentTimeMillis();
-        Connection c = edao.getConnection();
-        for (int i = 0; i < 1000; i++){
-            edao.selectTest(c,"id",28, "all",0,"id");
-        }
-        long res = System.currentTimeMillis() - start;
-        System.out.println(res/1000);
     }
 }

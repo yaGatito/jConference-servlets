@@ -12,9 +12,8 @@ import java.util.List;
 
 public class RequestDAO extends DAO {
 
-    public boolean createRequest(int speaker, int lecture) {
-        try (Connection c = getConnection();
-             PreparedStatement ps = c.prepareStatement(
+    public boolean createRequest(Connection c, int speaker, int lecture) {
+        try (PreparedStatement ps = c.prepareStatement(
                      "INSERT INTO requests (speaker, lecture) VALUES (?,?)")) {
             ps.setInt(1, speaker);
             ps.setInt(2, lecture);
@@ -26,9 +25,8 @@ public class RequestDAO extends DAO {
         }
     }
 
-    public List<User> selectSpeakersFromRequests(int lecture) {
-        try (Connection c = getConnection();
-             PreparedStatement sel = c.prepareStatement(
+    public List<User> selectSpeakersFromRequests(Connection c, int lecture) {
+        try (PreparedStatement sel = c.prepareStatement(
                      "SELECT speaker FROM requests WHERE lecture = ?");
              PreparedStatement selSp = c.prepareStatement(
                      "SELECT * FROM users WHERE id = ?")) {
@@ -60,9 +58,8 @@ public class RequestDAO extends DAO {
         }
     }
 
-    public List<Lecture> selectLecturesFromRequests(int speaker) {
-        try (Connection c = getConnection();
-             PreparedStatement sel = c.prepareStatement(
+    public List<Lecture> selectLecturesFromRequests(Connection c, int speaker) {
+        try (PreparedStatement sel = c.prepareStatement(
                      "SELECT lecture FROM requests WHERE speaker = ? AND status = 1");
              PreparedStatement selSp = c.prepareStatement(
                      "SELECT * FROM lectures WHERE id = ?")) {
@@ -92,9 +89,8 @@ public class RequestDAO extends DAO {
         }
     }
 
-    public boolean secureLecture(int speaker, int lecture) {
-        try (Connection c = getConnection();
-             PreparedStatement delR = c.prepareStatement(
+    public boolean secureLecture(Connection c, int speaker, int lecture) {
+        try (PreparedStatement delR = c.prepareStatement(
                      "UPDATE requests SET status = -1 WHERE lecture = ? AND speaker != ?"); // was "DELETE FROM requests WHERE lecture = ?"
              PreparedStatement upd = c.prepareStatement(
                      "UPDATE lectures SET status = 3, speaker = ? WHERE id = ?")) {
@@ -116,9 +112,8 @@ public class RequestDAO extends DAO {
         }
     }
 
-    public List<Lecture> historyOfOwnRequests(int speaker) {
-        try (Connection c = getConnection();
-             PreparedStatement own = c.prepareStatement(
+    public List<Lecture> historyOfOwnRequests(Connection c, int speaker) {
+        try (PreparedStatement own = c.prepareStatement(
                      "SELECT id, topic, status, event FROM lectures WHERE status = -1 AND speaker = ?");
         ) {
             List<Lecture> ownRequests = new ArrayList<>();
@@ -139,9 +134,8 @@ public class RequestDAO extends DAO {
         }
     }
 
-    public List<Lecture> historyOfFreeRequests(int speaker) {
-        try (Connection c = getConnection();
-             PreparedStatement ids = c.prepareStatement(
+    public List<Lecture> historyOfFreeRequests(Connection c, int speaker) {
+        try (PreparedStatement ids = c.prepareStatement(
                      "SELECT lecture FROM requests WHERE status = -1 AND speaker = ?");
              PreparedStatement free = c.prepareStatement(
                      "SELECT id, topic, status, event, speaker FROM lectures WHERE id = ?")

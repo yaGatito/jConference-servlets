@@ -74,3 +74,15 @@
 2022-03-02 02:36:31,087 [INFO ][-nio-8078-exec-5][    commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:Test lecture, STATUS:1, EVENT:37, SPEAKER:39
 2022-03-02 02:37:01,158 [INFO ][-nio-8078-exec-8][ commands.RejectRequestCommand] - OFFER[42] WAS SUCCESSFUL REJECTED BY USER[39]
 2022-03-02 02:37:52,095 [INFO ][-nio-8078-exec-3][ commands.AcceptRequestCommand] - OFFER[41] WAS SUCCESSFUL ACCEPTED BY USER[39]
+2022-03-03 00:14:55,096 [INFO ][on(15)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-03 00:14:55,104 [INFO ][on(15)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-03 00:14:55,904 [INFO ][on(15)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-03 00:22:12,439 [INFO ][on(18)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-03 00:22:12,439 [INFO ][on(18)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-03 00:22:13,162 [INFO ][on(18)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-03 00:24:08,204 [INFO ][on(22)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-03 00:24:08,204 [INFO ][on(22)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-03 00:24:08,914 [INFO ][on(22)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-03 16:21:38,933 [INFO ][on(26)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-03 16:21:38,933 [INFO ][on(26)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-03 16:21:39,620 [INFO ][on(26)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM

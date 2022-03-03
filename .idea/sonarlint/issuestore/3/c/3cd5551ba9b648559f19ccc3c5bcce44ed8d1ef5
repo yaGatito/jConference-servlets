@@ -1,11 +1,0 @@
-
-V
-java:S1128":Remove this unused import 'com.conference.dao.LectureDAO'.(‚ç±y8ùœÀñ/
-\
-java:S1128":Remove this unused import 'com.conference.entity.Lecture'.(Çğğªûÿÿÿÿ8ùœÀñ/
-M
-java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ùœÀñ/
-^
-java:S1192"HDefine a constant instead of duplicating this literal "message" 3 times.(´‡®Œ
-e
-java:S1192"ODefine a constant instead of duplicating this literal "error-page.jsp" 3 times.(§Ùú¾

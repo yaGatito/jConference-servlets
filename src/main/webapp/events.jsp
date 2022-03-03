@@ -1,3 +1,5 @@
+<%@ page import="java.sql.Connection" %>
+<%@ page import="com.conference.DBCPool" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -10,6 +12,11 @@
 <jsp:include page="nav.jsp"/>
 <body>
 <section class="container-xl col">
+    <%
+        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+        Connection connection = pool.getConnection();
+        request.setAttribute("connection",connection);
+    %>
     <div class="margin col">
         <!--Events-->
 
@@ -115,9 +122,9 @@
                                     <p class="card-text">${event.getDescription()}</p>
                                     <p>Lectures:</p>
                                     <ol>
-                                        <c:forEach var="lecture" items="${requestScope.lecdao.select(event.getId(),3)}">
+                                        <c:forEach var="lecture" items="${requestScope.lecdao.select(connection,event.getId(),3)}">
                                             <li>${lecture.getTopic()}
-                                                by ${requestScope.udao.getByID(lecture.getSpeaker())}</li>
+                                                by ${requestScope.udao.getByID(connection,lecture.getSpeaker())}</li>
                                         </c:forEach>
                                     </ol>
                                 </div>
@@ -153,6 +160,9 @@
             </c:if>
         </div>
     </div>
+    <%
+        pool.putBackConnection(connection);
+    %>
 </section>
 </body>
 <jsp:include page="footer.jsp"/>

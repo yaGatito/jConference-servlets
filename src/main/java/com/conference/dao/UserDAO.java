@@ -11,8 +11,8 @@ public class UserDAO extends DAO {
             "INSERT INTO users (id, role, name, lastname, email, password) " +
             "VALUES (default, ?, ?, ?, ?, ?)";
 
-    public boolean insertUser(User user){
-        try (Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(INSERT_USER)) {
+    public boolean insertUser(Connection con, User user){
+        try ( PreparedStatement statement = con.prepareStatement(INSERT_USER)) {
             statement.setInt(1,user.getRole());
             statement.setString(2,user.getName());
             statement.setString(3,user.getLastname());
@@ -28,10 +28,9 @@ public class UserDAO extends DAO {
 
     private static final String SELECT_ALL = "SELECT * FROM users ";
 
-    public List<User> selectAll(){
+    public List<User> selectAll(Connection con){
         List<User> users;
-        try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement(SELECT_ALL)) {
+        try (PreparedStatement statement = con.prepareStatement(SELECT_ALL)) {
             ResultSet set = statement.executeQuery();
             users = new ArrayList<>();
             while (set.next()){
@@ -53,10 +52,9 @@ public class UserDAO extends DAO {
 
     private static final String SELECT_COUNT = "SELECT COUNT(*) FROM users ";
 
-    public int getCount(){
+    public int getCount(Connection con){
         int count;
-        try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement(SELECT_COUNT)) {
+        try (PreparedStatement statement = con.prepareStatement(SELECT_COUNT)) {
             ResultSet set = statement.executeQuery();
             set.next();
             count = set.getInt("count");
@@ -70,10 +68,9 @@ public class UserDAO extends DAO {
 
     private static final String SELECT_LIMIT = "SELECT * FROM users ORDER BY id LIMIT ? OFFSET ?";
 
-    public List<User> selectLimit(int amount,int page){
+    public List<User> selectLimit(Connection con, int amount,int page){
         List<User> users;
-        try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement(SELECT_LIMIT)) {
+        try (PreparedStatement statement = con.prepareStatement(SELECT_LIMIT)) {
             statement.setInt(1,amount);
             statement.setInt(2,amount*(page-1));
             ResultSet set = statement.executeQuery();
@@ -97,8 +94,8 @@ public class UserDAO extends DAO {
 
     private static final String DELETE_BY_ID = "DELETE FROM users WHERE id = ?";
 
-    public boolean deleteById(int id){
-        try(Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(DELETE_BY_ID)){
+    public boolean deleteById(Connection con, int id){
+        try(PreparedStatement statement = con.prepareStatement(DELETE_BY_ID)){
             statement.setInt(1,id);
             statement.executeUpdate();
             return true;
@@ -110,8 +107,8 @@ public class UserDAO extends DAO {
 
     private static final String UPDATE_BY_ID = "UPDATE users SET name = ?, lastname = ?, email = ?, notify = ? WHERE id = ?";
 
-    public boolean updateUser(User user){
-        try(Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(UPDATE_BY_ID)){
+    public boolean updateUser(Connection con, User user){
+        try(PreparedStatement statement = con.prepareStatement(UPDATE_BY_ID)){
             statement.setString(1,user.getName());
             statement.setString(2,user.getLastname());
             statement.setString(3,user.getEmail());
@@ -127,8 +124,8 @@ public class UserDAO extends DAO {
 
     private static final String SET_ROLE = "UPDATE users SET role = ? WHERE id = ?";
 
-    public boolean setRole(int role, int id){
-        try(Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(SET_ROLE)){
+    public boolean setRole(Connection con, int role, int id){
+        try(PreparedStatement statement = con.prepareStatement(SET_ROLE)){
             statement.setInt(1,role);
             statement.setInt(2,id);
             statement.executeUpdate();
@@ -141,8 +138,8 @@ public class UserDAO extends DAO {
 
     private static final String GET_BY_ID = "SELECT * FROM users WHERE id = ?";
 
-    public User getByID(int id){
-        try (Connection con = getConnection(); PreparedStatement statement = con.prepareStatement(GET_BY_ID)) {
+    public User getByID(Connection con, int id){
+        try (PreparedStatement statement = con.prepareStatement(GET_BY_ID)) {
             statement.setInt(1,id);
             ResultSet set = statement.executeQuery();
             User user = null;
@@ -163,10 +160,9 @@ public class UserDAO extends DAO {
     }
 private static final String LOGGED_USER = "SELECT * FROM users WHERE email = ? AND password = ?";
 
-    public User loginUser(String email, String password){
+    public User loginUser(Connection con, String email, String password){
         User user = null;
-        try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement(LOGGED_USER)) {
+        try (PreparedStatement statement = con.prepareStatement(LOGGED_USER)) {
             statement.setString(1,email);
             statement.setString(2,password);
             ResultSet set = statement.executeQuery();
@@ -187,10 +183,9 @@ private static final String LOGGED_USER = "SELECT * FROM users WHERE email = ? A
 
     private static final String SELECT_SPEAKER = "SELECT * FROM users WHERE role = 2"; //2 - Speaker
 
-    public List<User> selectSpeakers(){
+    public List<User> selectSpeakers(Connection con){
         List<User> users;
-        try (Connection con = getConnection();
-             PreparedStatement statement = con.prepareStatement(SELECT_SPEAKER)) {
+        try (PreparedStatement statement = con.prepareStatement(SELECT_SPEAKER)) {
             ResultSet set = statement.executeQuery();
             users = new ArrayList<>();
             while (set.next()){

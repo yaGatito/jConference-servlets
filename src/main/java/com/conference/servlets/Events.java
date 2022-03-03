@@ -1,5 +1,6 @@
 package com.conference.servlets;
 
+import com.conference.DBCPool;
 import com.conference.entity.Event;
 import com.conference.dao.EventDAO;
 import com.conference.dao.LectureDAO;
@@ -9,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.*;
 
 @WebServlet(name = "Events", value = "/Events")
@@ -17,6 +19,9 @@ public class Events extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+        Connection connection = pool.getConnection();
+
         Map<String, Comparator<Event>> comparators = Event.getComparators();
         String sort = request.getParameter("sort");
         if (!comparators.containsKey(sort)) {
@@ -29,7 +34,8 @@ public class Events extends HttpServlet {
         UserDAO udao = new UserDAO();
         LectureDAO lecdao = new LectureDAO();
         EventDAO edao = new EventDAO();
-        List<Event> events = edao.select("status", 1, "all", 0, "id");
+        List<Event> events = edao.select(connection,"status", 1, "all", 0, "id");
+        pool.putBackConnection(connection);
         events.sort(comparators.get(sort));
         if (!comparators.containsKey(sort)) {
             sort = "default";

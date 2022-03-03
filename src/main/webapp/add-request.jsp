@@ -3,6 +3,8 @@
 <%@ page import="com.conference.dao.UserDAO" %>
 <%@ page import="com.conference.entity.Event" %>
 <%@ page import="com.conference.dao.EventDAO" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="com.conference.DBCPool" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -15,8 +17,12 @@
 <jsp:include page="nav.jsp"/>
 <%!List<User> speakers;%>
 <%!List<Event> events;%>
-<%speakers = new UserDAO().selectSpeakers();%>
-<%events = new EventDAO().select("status",1,"all",0,"date, fromtime");%>
+<%
+  DBCPool pool = (DBCPool) config.getServletContext().getAttribute("pool");
+  Connection connection = pool.getConnection();
+  speakers = new UserDAO().selectSpeakers(connection);
+  events = new EventDAO().select(connection,"status",1,"all",0,"date, fromtime");
+%>
 
   <section class="container-xl col">
     <!--Add event-->
