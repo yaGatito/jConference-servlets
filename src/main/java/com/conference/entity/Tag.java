@@ -1,45 +1,28 @@
 package com.conference.entity;
 
-import java.util.Locale;
-import java.util.Objects;
-
 public class Tag {
-    private final int id;
-    private String en;
-    private String ru;
+    private int id;
+    private String name;
 
-    public Tag(int id, String en, String ru) {
+    public Tag(int id, String name) {
         this.id = id;
-        this.en = en;
-        this.ru = ru;
+        this.name = name;
+    }
+
+    public Tag(String name) {
+        this.name = name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getEn() {
-        return en;
-    }
-
-    public void setEn(String en) {
-        this.en = en;
-    }
-
-    public String getRu() {
-        return ru;
-    }
-
-    public void setRu(String ru) {
-        this.ru = ru;
-    }
-
-    @Override
-    public String toString() {
-        return "Tag{" +
-                "en='" + en + '\'' +
-                ", ru='" + ru + '\'' +
-                '}';
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -52,10 +35,6 @@ public class Tag {
 
     @Override
     public int hashCode() {
-        return getId();
-    }
-
-    public static void main(String[] args) {
-        Locale locale = Locale.US;
+        return this.id;
     }
 }
