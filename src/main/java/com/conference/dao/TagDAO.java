@@ -196,10 +196,10 @@ public class TagDAO {
      * @return true if inserting was successful, false - if not
      */
     public boolean updateLocalization(Connection c, int tagId, String locale, String name){
-        try(PreparedStatement ps = c.prepareStatement("UPDATE tags_local SET lang = ?, name = ? WHERE id = ?")) {
-            ps.setString(1,locale);
-            ps.setString(2,name);
-            ps.setInt(3,tagId);
+        try(PreparedStatement ps = c.prepareStatement("UPDATE tags_local SET name = ? WHERE id = ? AND lang = ?")) {
+            ps.setString(1,name);
+            ps.setInt(2,tagId);
+            ps.setString(3,locale);
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
