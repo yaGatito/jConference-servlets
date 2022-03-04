@@ -75,8 +75,6 @@ T
 $src/main/webapp/WEB-INF/log/bulk.log,1\d\1d4474c2509182e77ebe72df61c56d1dff9ea8bd
 [
 +src/main/webapp/WEB-INF/log/application.log,5\5\557a58068b34cf0497813eae70b99e9c8571c8db
-m
-=src/main/java/com/conference/commands/AcceptOfferCommand.java,9\a\9a7f7966c3a2d5a767e0ad5b54b4ba1138a7b5b4
 o
 ?src/main/java/com/conference/commands/AcceptRequestCommand.java,e\6\e6026c62e8be923194305f6fbc679afcfa275e65
 M
@@ -133,5 +131,3 @@ b
 2src/main/java/com/conference/dao/ListenersDAO.java,7\1\717aca58e5d8085baddf21a2be7ff0806308e5be
 `
 0src/main/java/com/conference/dao/LectureDAO.java,9\1\91f7188573ddcdbf56e23a04d642261935f83c5a
-^
-.src/main/java/com/conference/dao/EventDAO.java,d\3\d3877cc795a12dc5378663a61bc376924371c9d8
