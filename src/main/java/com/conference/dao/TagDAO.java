@@ -10,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TagDAO {
     private static final Logger log = LoggerFactory.getLogger(TagDAO.class);
@@ -23,6 +25,27 @@ public class TagDAO {
     public List<Tag> select(Connection c) {
         try (PreparedStatement ps = c.prepareStatement("SELECT id,name FROM tags");
              ResultSet set = ps.executeQuery()) {
+            List<Tag> tags = new ArrayList<>();
+            while (set.next()) {
+                tags.add(new Tag(set.getInt(1), set.getString(2)));
+            }
+            return tags;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves all existing tags
+     *
+     * @param c Connection
+     * @return collection of tags
+     */
+    public List<Tag> selectForLocale(Connection c, String locale) {
+        try (PreparedStatement ps = c.prepareStatement("SELECT id,name FROM tags_local WHERE lang = ?")) {
+            ps.setString(1,locale);
+            ResultSet set = ps.executeQuery();
             List<Tag> tags = new ArrayList<>();
             while (set.next()) {
                 tags.add(new Tag(set.getInt(1), set.getString(2)));
@@ -109,16 +132,40 @@ public class TagDAO {
         }
     }
 
+
     /**
      * Create tag method
      * @param c Connection
-     * @param name Name of tag
+     * @param map Map of tags where key is locale and value is translate of tag
      * @return true if inserting was successful, false - if not
      */
-    public boolean createTag(Connection c, String name){
-        try(PreparedStatement ps = c.prepareStatement("INSERT INTO tags (name) VALUES (?)")) {
-            ps.setString(1,name);
+    public boolean createTag(Connection c, Map<String, String> map){
+        try(PreparedStatement ps = c.prepareStatement(
+                "INSERT INTO tags (name) VALUES (?)");
+        PreparedStatement getId = c.prepareStatement(
+                "SELECT id FROM tags WHERE name = ?")) {
+            c.setAutoCommit(false);
+            if (!map.containsKey("en")){
+                return false;
+            }
+
+            //Creating base tag
+            String enName = map.get("en");
+            ps.setString(1,enName);
             ps.executeUpdate();
+
+            //Getting id of just created tag
+            getId.setString(1,enName);
+            ResultSet set = getId.executeQuery();
+            set.next();
+            int tagID = set.getInt(1);
+
+            //Adding localizations
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                addLocalization(c, tagID, entry.getKey(), entry.getValue());
+            }
+            c.commit();
+
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -149,14 +196,14 @@ public class TagDAO {
      * Associating tags with event
      * @param c Connection
      * @param event Event
-     * @param tagIds Collection of tag's ids
+     * @param tags Collection of tag's
      * @return true if operation was success, false - if not
      */
-    public boolean associateTagToEvent(Connection c, int event, List<Integer> tagIds){
+    public boolean associateTagToEvent(Connection c, int event, List<Tag> tags){
         try(PreparedStatement ps = c.prepareStatement("INSERT INTO tags_from_events (event, tag) VALUES (?,?)")) {
-            for (Integer id : tagIds) {
+            for (Tag tag : tags) {
                 ps.setInt(1,event);
-                ps.setInt(2,id);
+                ps.setInt(2,tag.getId());
                 ps.executeUpdate();
             }
             return true;
@@ -207,4 +254,14 @@ public class TagDAO {
             return false;
         }
     }
+
+
+    public static void main(String[] args) {
+        TagDAO tdao = new TagDAO();
+        Map<String,String> map = new HashMap<>();
+        map.put("en","Math");
+        map.put("ua","Математика");
+        tdao.createTag(DBCPool.getInstance().getConnection(), map);
+    }
+
 }

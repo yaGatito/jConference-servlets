@@ -28,7 +28,7 @@
   ListenersDAO ldao = new ListenersDAO();
 
 %>
-<%
+    <%
 DBCPool pool = (DBCPool) config.getServletContext().getAttribute("pool");
 Connection connection = pool.getConnection();
   User currentUser = (User) request.getSession().getAttribute("user");
@@ -58,7 +58,7 @@ Connection connection = pool.getConnection();
     }
   }
   if (!flag) item = "profile";
-
+  String locale = (String)request.getSession().getAttribute("lang");
 
 %>
 <!-- Admin profile -->
@@ -114,7 +114,7 @@ Connection connection = pool.getConnection();
                             key="label.profile.email"/></label>
                 </div>
                 <div class="input-group distance">
-                    <button type="submit" class="btn btn-info"> <fmt:message key="label.profile.save"/> </button>
+                    <button type="submit" class="btn btn-info"><fmt:message key="label.profile.save"/></button>
                 </div>
                 <div class="input-group distance">
                     <a class="btn btn-info" href=""><fmt:message key="label.profile.changepass"/></a>
@@ -124,7 +124,7 @@ Connection connection = pool.getConnection();
         <%
                 break;
             case "participation":
-                events = ldao.selectEventsOfListeners(connection,currentUser.getId());
+                events = ldao.selectEventsOfListeners(connection, currentUser.getId(), locale);
         %>
 
         <div style="background-color: #fff" class="col distance">
@@ -206,7 +206,8 @@ Connection connection = pool.getConnection();
                 <li class="nav-item" role="presentation">
                     <button class="btn btn-blue" id="pills-history-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-history"
-                            type="button" role="tab" aria-controls="pills-history" aria-selected="false"><fmt:message key="label.button.history"/>
+                            type="button" role="tab" aria-controls="pills-history" aria-selected="false"><fmt:message
+                            key="label.button.history"/>
                     </button>
                 </li>
             </ul>
@@ -217,7 +218,7 @@ Connection connection = pool.getConnection();
                      role="tabpanel"
                      aria-labelledby="pills-lectures-tab">
                     <%
-                        lectures = lecdao.selectBySpeaker(connection,3, currentUser.getId());
+                        lectures = lecdao.selectBySpeaker(connection, 3, currentUser.getId());
                     %>
 
                     <%if (lectures.size() > 0) {%>
@@ -236,7 +237,7 @@ Connection connection = pool.getConnection();
                         <tr>
                             <th scope="row"><%=lecture.getId()%>
                             </th>
-                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime", locale).get(0); %>
                             <td><%=event.getTopic()%>
                             </td>
                             <td><%=lecture.getTopic()%>
@@ -264,7 +265,7 @@ Connection connection = pool.getConnection();
                 <div style="background-color: #fff" class="tab-pane fade" id="pills-profile" role="tabpanel"
                      aria-labelledby="pills-profile-tab">
                     <%
-                        lectures = lecdao.selectBySpeaker(connection,2, currentUser.getId());
+                        lectures = lecdao.selectBySpeaker(connection, 2, currentUser.getId());
                     %>
                     <%if (lectures.size() > 0) {%>
                     <table class="table table-info table-striped">
@@ -285,7 +286,7 @@ Connection connection = pool.getConnection();
                             </th>
                             <%
 
-                                Event event = edao.select(connection,"id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                                Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime", locale).get(0); %>
                             <td><%=event.getTopic()%>
                             </td>
                             <td><%=lecture.getTopic()%>
@@ -337,7 +338,7 @@ Connection connection = pool.getConnection();
                         <tr>
                             <th scope="row"><%=lecture.getEvent()%>
                             </th>
-                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime", locale).get(0); %>
                             <td><%=event.getTopic()%>
                             </td>
                             <td><%=lecture.getTopic()%>
@@ -371,7 +372,7 @@ Connection connection = pool.getConnection();
                      aria-labelledby="pills-free-tab">
                     <%lectures = lecdao.selectNotRequested(connection, currentUser.getId());%>
                     <%if (lectures.size() > 0) {%>
-                    <h2><fmt:message key="message.free.no"/> </h2>
+                    <h2><fmt:message key="message.free.no"/></h2>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -388,7 +389,7 @@ Connection connection = pool.getConnection();
                         <tr>
                             <th scope="row"><%=lecture.getEvent()%>
                             </th>
-                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime", locale).get(0); %>
                             <td><%=event.getTopic()%>
                             </td>
                             <td><%=lecture.getTopic()%>
@@ -419,7 +420,7 @@ Connection connection = pool.getConnection();
 
                     <%lectures = rdao.selectLecturesFromRequests(connection, currentUser.getId());%>
                     <%if (lectures.size() > 0) {%>
-                    <h2><fmt:message key="message.free.already"/> </h2>
+                    <h2><fmt:message key="message.free.already"/></h2>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -435,7 +436,7 @@ Connection connection = pool.getConnection();
                         <tr>
                             <th scope="row"><%=lecture.getEvent()%>
                             </th>
-                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime", locale).get(0); %>
                             <td><%=event.getTopic()%>
                             </td>
                             <td><%=lecture.getTopic()%>
@@ -465,7 +466,7 @@ Connection connection = pool.getConnection();
                      aria-labelledby="pills-history-tab">
                     <%lectures = rdao.historyOfOwnRequests(connection, currentUser.getId());%>
                     <%if (lectures.size() > 0) {%>
-                    <h2><fmt:message key="message.history.own.rejected"/> </h2>
+                    <h2><fmt:message key="message.history.own.rejected"/></h2>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -481,7 +482,7 @@ Connection connection = pool.getConnection();
                         <tr>
                             <th scope="row"><%=lecture.getEvent()%>
                             </th>
-                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime", locale).get(0); %>
                             <td><%=event.getTopic()%>
                             </td>
                             <td><%=lecture.getTopic()%>
@@ -502,12 +503,12 @@ Connection connection = pool.getConnection();
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2><fmt:message key="message.history.own.no"/> </h2>
+                    <h2><fmt:message key="message.history.own.no"/></h2>
                     <%}%>
 
                     <%lectures = rdao.historyOfFreeRequests(connection, currentUser.getId());%>
                     <%if (lectures.size() > 0) {%>
-                    <h2> <fmt:message key="message.history.free.rejected"/> </h2>
+                    <h2><fmt:message key="message.history.free.rejected"/></h2>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -523,7 +524,7 @@ Connection connection = pool.getConnection();
                         <tr>
                             <th scope="row"><%=lecture.getEvent()%>
                             </th>
-                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime", locale).get(0); %>
                             <td><%=event.getTopic()%>
                             </td>
                             <td><%=lecture.getTopic()%>
@@ -544,7 +545,7 @@ Connection connection = pool.getConnection();
                         </tbody>
                     </table>
                     <%} else {%>
-                    <h2><fmt:message key="message.history.free.no"/> </h2>
+                    <h2><fmt:message key="message.history.free.no"/></h2>
                     <%}%>
                 </div>
             </div>
@@ -606,7 +607,7 @@ Connection connection = pool.getConnection();
         <%
                 break;
             case "ecp":
-                events = edao.select(connection, "status", 1, "all", 0, "date, fromtime");
+                events = edao.select(connection, "status", 1, "all", 0, "date, fromtime", locale);
         %>
         <div class="col distance">
             <ul class="nav nav-pills mb-3" id="pills-tab1" role="tablist">
@@ -693,17 +694,20 @@ Connection connection = pool.getConnection();
                     <h2><fmt:message key="message.no_event"/></h2>
                     <%}%>
                     <div class="rowsa">
-<%--                        <div class="distance dropdown">--%>
-<%--                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2"--%>
-<%--                                    data-bs-toggle="dropdown" aria-expanded="false">--%>
-<%--                                Sort events--%>
-<%--                            </button>--%>
-<%--                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">--%>
-<%--                                <li><a class="dropdown-item" href="#">by date</a></li>--%>
-<%--                                <li><a class="dropdown-item" href="#">by name of speaker</a></li>--%>
-<%--                                <li><a class="dropdown-item" href="#">by name of events</a></li>--%>
-<%--                            </ul>--%>
-<%--                        </div>--%>
+                        <%--                        <div class="distance dropdown">--%>
+                        <%--                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2"--%>
+                        <%--                                    data-bs-toggle="dropdown" aria-expanded="false">--%>
+                        <%--                                Sort events--%>
+                        <%--                            </button>--%>
+                        <%--                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">--%>
+                        <%--                                <li><a class="dropdown-item" href="#">by date</a></li>--%>
+                        <%--                                <li><a class="dropdown-item" href="#">by name of speaker</a></li>--%>
+                        <%--                                <li><a class="dropdown-item" href="#">by name of events</a></li>--%>
+                        <%--                            </ul>--%>
+                        <%--                        </div>--%>
+                        <div class="distance">
+                            <a class="btn btn-info" href="AddTag"> <fmt:message key="label.add_tag"/> </a>
+                        </div>
                         <div class="distance">
                             <a class="btn btn-info" href="AddLecture"> <fmt:message key="label.add_lecture"/> </a>
                         </div>
@@ -734,7 +738,7 @@ Connection connection = pool.getConnection();
                         <tr>
                             <th scope="row"><%=lecture.getEvent()%>
                             </th>
-                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime", locale).get(0); %>
                             <td><%=event.getTopic()%>
                             </td>
                             <td><%=lecture.getTopic()%>
@@ -796,7 +800,7 @@ Connection connection = pool.getConnection();
                         <tr>
                             <th scope="row"><%=lecture.getEvent()%>
                             </th>
-                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime", locale).get(0); %>
                             <td><%=event.getTopic()%>
                             </td>
                             <td><%=udao.getByID(connection, lecture.getSpeaker()).toString()%>
@@ -837,7 +841,7 @@ Connection connection = pool.getConnection();
                      aria-labelledby="pills-history-ecp-tab">
                     <%lectures = lecdao.selectByStatus(connection, -1);%>
                     <%if (lectures.size() > 0) {%>
-                    <h2><fmt:message key="message.ecp.history.rejected"/> </h2>
+                    <h2><fmt:message key="message.ecp.history.rejected"/></h2>
                     <table class="table table-info table-striped">
                         <thead>
                         <tr>
@@ -854,7 +858,7 @@ Connection connection = pool.getConnection();
                         <tr>
                             <th scope="row"><%=lecture.getEvent()%>
                             </th>
-                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime", locale).get(0); %>
                             <td><%=event.getTopic()%>
                             </td>
                             <td><%=udao.getByID(connection, lecture.getSpeaker()).toString()%>
@@ -899,7 +903,7 @@ Connection connection = pool.getConnection();
                         <tr>
                             <th scope="row"><%=lecture.getEvent()%>
                             </th>
-                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime").get(0); %>
+                            <% Event event = edao.select(connection, "id", lecture.getEvent(), "1", 0, "date, fromtime", locale).get(0); %>
                             <td><%=event.getTopic()%>
                             </td>
                             <td><%=udao.getByID(connection, lecture.getSpeaker()).toString()%>

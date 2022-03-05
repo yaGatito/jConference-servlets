@@ -67,7 +67,9 @@
                 <div class="card-body text-secondary">
                     <h5 class="card-title">${event.getTopic()}
                     </h5>
-                    <p class="card-text">${event.getDescription()}</p>
+                    <p class="card-text"> <c:forEach var="tag" items="${event.getTags()}">
+                        #<c:out value="${tag.getName()}"/>
+                    </c:forEach> </p>
                     <caption><fmt:message key="label.button.lectures"/>: </caption>
                     <ol>
                         <c:forEach var="lecture" items="${requestScope.lecdao.select(connection,event.getId(),3)}">

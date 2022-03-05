@@ -27,8 +27,8 @@ public class Homepage extends HttpServlet {
         EventDAO edao = new EventDAO();
         request.setAttribute("udao",udao);
         //Display only 5 future nearest events
-
-        List<Event> events = edao.select(connection,"status", 1,"5", 0, "date, fromtime");
+        String lang = (String) request.getSession().getAttribute("lang");
+        List<Event> events = edao.select(connection,"status", 1,"5", 0, "date, fromtime",lang);
 
 
         events = Event.filter(events)[1];

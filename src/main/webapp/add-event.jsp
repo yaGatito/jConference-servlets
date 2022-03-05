@@ -4,6 +4,8 @@
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="com.conference.DBCPool" %>
+<%@ page import="com.conference.entity.Tag" %>
+<%@ page import="com.conference.dao.TagDAO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -19,6 +21,8 @@
     DBCPool pool = (DBCPool) config.getServletContext().getAttribute("pool");
     Connection connection = pool.getConnection();
     speakers = new UserDAO().selectSpeakers(connection);
+    String locale = (String) request.getSession().getAttribute("lang");
+    List<Tag> tags = new TagDAO().selectForLocale(connection, locale);
     pool.putBackConnection(connection);
 %>
 <body>
@@ -31,10 +35,30 @@
                 <h4><fmt:message key="label.button.topic"/> </h4>
                 <input name="topic" class="form-control reg" type="text" placeholder="" aria-label="Search" required>
             </div>
-            <div style="margin-top: 1rem; line-height: 0">
+            <div class="coll" style="margin-top: 1rem; line-height: 0; align-self: start;" >
                 <h4> <fmt:message key="label.add_event.tags"/> </h4>
-                <textarea name="description" class="form-control reg" rows="4" cols="50" form="event-form"
-                          required></textarea>
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                #
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <% for (Tag tag : tags){%>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="tag<%=tag.getId()%>" id="flexCheckDefault<%=tag.getId()%>">
+                                    <label class="form-check-label" for="flexCheckDefault<%=tag.getId()%>">
+                                        <%=tag.getName()%>
+                                    </label>
+                                </div>
+                                <%}%>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
             <div style="margin-top: 1rem; line-height: 0">
                 <h4><fmt:message key="label.date"/> </h4>

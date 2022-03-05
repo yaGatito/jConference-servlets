@@ -1,20 +1,45 @@
-2022-03-02 02:28:19,353 [INFO ][-nio-8078-exec-7][com.conference.commands.AddEventCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:Salesforce, DATE:2022-03-10, TIME:03:27-07:27, LOCATION:https://elearn.epam.com/courses/course-v1:RD_CEE+OnlineUAJava+2022-Winter/courseware/07a53325b2da4c10bd6e8de2e5f794f4/385596d9d98d40f6bf57f7a6ea62f4e8/1?activate_block_id=block-v1%3ARD_CEE%2BOnlineUAJava%2B2022-Winter%2Btype%40vertical%2Bblock%4022dad6bc8f6b45a6843487c35fdf49aa
-2022-03-02 02:29:18,742 [INFO ][-nio-8078-exec-6][com.conference.commands.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:Apex language, STATUS:0, EVENT:37, SPEAKER:0
-2022-03-02 02:30:41,812 [INFO ][-nio-8078-exec-9][com.conference.commands.AddLectureCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:e-commerce solutions, STATUS:0, EVENT:37, SPEAKER:0
-2022-03-02 02:31:44,227 [INFO ][-nio-8078-exec-9][com.conference.commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:Why you should pick salesforce?, STATUS:1, EVENT:37, SPEAKER:39
-2022-03-02 02:35:13,458 [INFO ][-nio-8078-exec-1][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[40] WAS SUCCESSFUL CREATED BY USER[39]
-2022-03-02 02:36:31,087 [INFO ][-nio-8078-exec-5][com.conference.commands.AddRequestCommand] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:Test lecture, STATUS:1, EVENT:37, SPEAKER:39
-2022-03-02 02:37:01,158 [INFO ][-nio-8078-exec-8][com.conference.commands.RejectRequestCommand] - OFFER[42] WAS SUCCESSFUL REJECTED BY USER[39]
-2022-03-02 02:37:52,095 [INFO ][-nio-8078-exec-3][com.conference.commands.AcceptRequestCommand] - OFFER[41] WAS SUCCESSFUL ACCEPTED BY USER[39]
-2022-03-03 00:14:55,096 [INFO ][on(15)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
-2022-03-03 00:14:55,104 [INFO ][on(15)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
-2022-03-03 00:14:55,904 [INFO ][on(15)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
-2022-03-03 00:22:12,439 [INFO ][on(18)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
-2022-03-03 00:22:12,439 [INFO ][on(18)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
-2022-03-03 00:22:13,162 [INFO ][on(18)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
-2022-03-03 00:24:08,204 [INFO ][on(22)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
-2022-03-03 00:24:08,204 [INFO ][on(22)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
-2022-03-03 00:24:08,914 [INFO ][on(22)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
-2022-03-03 16:21:38,933 [INFO ][on(26)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
-2022-03-03 16:21:38,933 [INFO ][on(26)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
-2022-03-03 16:21:39,620 [INFO ][on(26)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-05 03:59:59,535 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 03:59:59,537 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 04:00:00,401 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-05 04:49:32,456 [INFO ][ion(7)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 04:49:32,456 [INFO ][ion(7)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 04:49:33,171 [INFO ][ion(7)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-05 04:50:37,986 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 04:50:37,986 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 04:50:38,741 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-05 06:06:24,562 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 06:06:24,562 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 06:06:25,334 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-05 06:08:12,276 [INFO ][nio-8078-exec-19][com.conference.commands.AddEventCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:PYTHON TEST, DATE:2022-03-06, TIME:14:12-05:23, LOCATION:Deribasovskaya str. 12a
+2022-03-05 06:18:44,693 [INFO ][on(17)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 06:18:44,693 [INFO ][on(17)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 06:19:50,624 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 06:19:50,624 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 06:19:51,392 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-05 06:20:31,283 [INFO ][-nio-8078-exec-5][com.conference.commands.AddEventCommand] - SUCCESSFUL INSERTING LECTURE - TOPIC:PYTHON TEST, DATE:2022-03-06, TIME:06:20-14:03, LOCATION:b.Arnautskaya 12B
+2022-03-05 06:33:40,611 [INFO ][ion(7)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 06:33:40,627 [INFO ][ion(7)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 06:33:41,330 [INFO ][ion(7)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-05 06:34:44,104 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 06:34:44,104 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 06:34:44,869 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-05 06:35:18,935 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 06:35:18,935 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 06:35:19,638 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-05 06:35:51,325 [INFO ][on(16)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 06:35:51,326 [INFO ][on(16)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 06:35:52,087 [INFO ][on(16)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-05 06:36:10,532 [INFO ][on(19)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 06:36:10,532 [INFO ][on(19)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 06:36:48,663 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 06:36:48,663 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 06:36:49,460 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-05 17:32:42,348 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 17:32:42,349 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 17:32:43,187 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-05 17:34:42,919 [INFO ][host-startStop-2][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 17:34:42,920 [INFO ][host-startStop-2][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 17:34:43,625 [INFO ][host-startStop-2][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-05 17:37:05,416 [INFO ][host-startStop-3][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-05 17:37:05,417 [INFO ][host-startStop-3][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-05 17:37:06,117 [INFO ][host-startStop-3][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM

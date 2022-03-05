@@ -34,7 +34,8 @@ public class Events extends HttpServlet {
         UserDAO udao = new UserDAO();
         LectureDAO lecdao = new LectureDAO();
         EventDAO edao = new EventDAO();
-        List<Event> events = edao.select(connection,"status", 1, "all", 0, "id");
+        String lang = (String) request.getSession().getAttribute("lang");
+        List<Event> events = edao.select(connection,"status", 1, "all", 0, "id",lang);
         pool.putBackConnection(connection);
         events.sort(comparators.get(sort));
         if (!comparators.containsKey(sort)) {

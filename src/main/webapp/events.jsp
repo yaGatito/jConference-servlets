@@ -119,7 +119,7 @@
                                 <div class="card-body text-secondary">
                                     <h5 class="card-title">${event.getTopic()}
                                     </h5>
-                                    <p class="card-text">${event.getDescription()}</p>
+                                    <p class="card-text">${event.getTags()}</p>
                                     <p>Lectures:</p>
                                     <ol>
                                         <c:forEach var="lecture" items="${requestScope.lecdao.select(connection,event.getId(),3)}">

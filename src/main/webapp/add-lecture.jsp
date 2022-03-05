@@ -20,8 +20,9 @@
 <%
   DBCPool pool = (DBCPool) config.getServletContext().getAttribute("pool");
   Connection connection = pool.getConnection();
+  String locale = (String) request.getSession().getAttribute("lang");
   speakers = new UserDAO().selectSpeakers(connection);
-  events = new EventDAO().select(connection,"status",1,"all",0,"date, fromtime");
+  events = new EventDAO().select(connection,"status",1,"all",0,"date, fromtime",locale);
   pool.putBackConnection(connection);
 %>
 

@@ -21,7 +21,6 @@ public class Event implements Comparable<Event> {
     private int id;
     private String topic;
     private List<Tag> tags;
-    private String description;
     private String fromtime;
     private String totime;
     private String date;
@@ -109,10 +108,6 @@ public class Event implements Comparable<Event> {
         return topic;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public String getDate() {
         return date;
     }
@@ -142,11 +137,6 @@ public class Event implements Comparable<Event> {
     public void setTopic(String topic) {
         topic = checkString(topic);
         this.topic = topic;
-    }
-
-    public void setDescription(String description) {
-        description = checkString(description);
-        this.description = description;
     }
 
     public void setDate(String date) {
