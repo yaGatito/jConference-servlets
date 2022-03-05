@@ -20,6 +20,7 @@ public class Event implements Comparable<Event> {
 
     private int id;
     private String topic;
+    private List<Tag> tags;
     private String description;
     private String fromtime;
     private String totime;
@@ -35,10 +36,10 @@ public class Event implements Comparable<Event> {
     private int status;
 
 
-    public Event(int id, String topic, String description, String fromtime, String totime, String date, String location, int status) {
+    public Event(int id, String topic, List<Tag> tags, String fromtime, String totime, String date, String location, int status) {
         this.id = id;
         this.topic = topic;
-        this.description = description;
+        this.tags = tags;
         this.fromtime = fromtime;
         this.totime = totime;
         this.date = date;
@@ -46,9 +47,9 @@ public class Event implements Comparable<Event> {
         this.status = status;
     }
 
-    public Event(String topic, String description, String fromtime, String totime, String date, String location, int status) {
+    public Event(String topic, List<Tag> tags, String fromtime, String totime, String date, String location, int status) {
         this.topic = topic;
-        this.description = description;
+        this.tags = tags;
         this.fromtime = fromtime;
         this.totime = totime;
         this.date = date;
@@ -73,6 +74,14 @@ public class Event implements Comparable<Event> {
             lectures = new ArrayList<>();
         }
         return lectures;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     public void setLectures(List<Lecture> lectures) {
