@@ -708,6 +708,9 @@ Connection connection = pool.getConnection();
                         <div class="distance">
                             <a class="btn btn-info" href="AddTag"> <fmt:message key="label.add_tag"/> </a>
                         </div>
+                            <div class="distance">
+                                <a class="btn btn-info" href="UpdateTag"> <fmt:message key="label.update_tag"/> </a>
+                            </div>
                         <div class="distance">
                             <a class="btn btn-info" href="AddLecture"> <fmt:message key="label.add_lecture"/> </a>
                         </div>

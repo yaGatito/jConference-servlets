@@ -29,8 +29,6 @@ a
 -src/main/java/com/conference/entity/Main.java,a\c\ac145ae35691bc413a06bbe83472c76efaad2015
 `
 0src/main/java/com/conference/entity/Lecture.java,e\1\e117e666433f66e504332cd87b8a2b467dd50a0c
-l
-<src/main/java/com/conference/filters/CharacterSetFilter.java,f\8\f8b13e2bd00092170324016006b4da13ce531512
 c
 3src/main/webapp/WEB-INF/log/bulk.log.2022-02-18.log,b\7\b7304b121563c09d25c85e28d38d1d9799380dac
 c
