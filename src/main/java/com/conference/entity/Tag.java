@@ -37,4 +37,9 @@ public class Tag {
     public int hashCode() {
         return this.id;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
