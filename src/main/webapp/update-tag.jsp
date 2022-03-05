@@ -12,14 +12,13 @@
 <section class="container-xl col">
     <!--Update tag-->
     <div class="margin col reg-sec addevent">
-        <c:set var="goals" value="${requestScope.goals.entrySet()}"/>
-        <c:if test="${requestScope.goals.entrySet().isEmpty()}">
+        <c:if test="${requestScope.goals.isEmpty()}">
             <h2>There aren't any tags that need update</h2>
         </c:if>
-        <c:if test="${!requestScope.goals.entrySet().isEmpty()}">
+        <c:if test="${!requestScope.goals.isEmpty()}">
             <h2 class="display-6"><fmt:message key="label.update_tag"/></h2>
             <form id="event-form" class="col margin" action="UpdateTag" method="post">
-                <c:forEach items="${requestScope.goals.entrySet()}" var="goal">
+                <c:forEach items="${requestScope.goals}" var="goal">
                     <h2>${goal.getKey().getName()}</h2>
                     <c:forEach items="${goal.getValue().entrySet()}" var="locale">
                         <div class="input-group">

@@ -49,8 +49,7 @@ public class UpdateTag extends HttpServlet {
             }
         }
         pool.putBackConnection(connection);
-        System.out.println(shouldBeLocalized);
-        request.setAttribute("goals", shouldBeLocalized);
+        request.setAttribute("goals", shouldBeLocalized.entrySet());
         request.getRequestDispatcher("update-tag.jsp").forward(request, response);
     }
 

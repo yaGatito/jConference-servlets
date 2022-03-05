@@ -1,6 +1,9 @@
 package com.conference.servlets;
 
 import com.conference.DBCPool;
+import com.conference.dao.LanguageDAO;
+import com.conference.dao.TagDAO;
+import com.conference.entity.Tag;
 import com.conference.entity.User;
 import com.conference.dao.UserDAO;
 
@@ -9,6 +12,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.*;
 
 @WebServlet("/Profile")
 public class Profile extends HttpServlet {
@@ -40,6 +44,44 @@ public class Profile extends HttpServlet {
             request.setAttribute("message", "Please log in");
             request.getRequestDispatcher("error-page.jsp").forward(request,response);
         }else{
+            List<String> locales = (List<String>) request.getServletContext().getAttribute("locales");
+            DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+            Connection connection = pool.getConnection();
+            TagDAO tdao = new TagDAO();
+            Map<Tag, Map<String, String>> translations = tdao.selectAllTagTranslations(connection);
+            Map<Tag, Map<String,String>> shouldBeLocalized = new HashMap<>();
+
+            Map<String, String> map = new LanguageDAO().select(connection);
+            Map<String, String> languages = new HashMap<>();
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                if (locales.contains(entry.getKey())) {
+                    languages.put(entry.getKey(), entry.getValue());
+                }
+            }
+            for (Map.Entry<Tag, Map<String, String>> entry : translations.entrySet()) {
+                Tag tag = entry.getKey();
+                Set<String> tagLocales = entry.getValue().keySet();
+                List<String> forLocalization = new ArrayList<>(locales);
+                if (!tagLocales.containsAll(locales)){
+                    forLocalization.removeAll(tagLocales);
+                }else{
+                    forLocalization = new ArrayList<>();
+                }
+                if (!forLocalization.isEmpty()){
+                    shouldBeLocalized.put(tag, new HashMap<>());
+                    for (String locale : forLocalization) {
+                        shouldBeLocalized.get(tag).put(locale,languages.get(locale));
+                    }
+                }
+            }
+            pool.putBackConnection(connection);
+            int count = 0;
+            for (Map.Entry<Tag, Map<String, String>> entry : shouldBeLocalized.entrySet()) {
+                for (Map.Entry<String, String> stringEntry : entry.getValue().entrySet()) {
+                    count++;
+                }
+            }
+            request.setAttribute("goals", count);
             request.getRequestDispatcher("profile.jsp").forward(request,response);
         }
     }
