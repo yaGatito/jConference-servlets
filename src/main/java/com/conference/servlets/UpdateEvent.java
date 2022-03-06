@@ -49,7 +49,6 @@ public class UpdateEvent extends HttpServlet {
         String location = request.getParameter("location");
         Event event = new Event(id, topic, tagOfEvent, fromtime, totime, date, location, 1);
 
-        System.out.println(event);
         if (new EventDAO().updateEvent(connection,event)) {
             if (logger.isInfoEnabled()) {
                 logger.info("SUCCESSFUL UPDATING LECTURE - TOPIC:{}, DATE:{}, TIME:{}, LOCATION:{}", topic, date, fromtime + "-" + totime, location);

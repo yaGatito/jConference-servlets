@@ -276,7 +276,6 @@ public class TagDAO {
             sel.setInt(1, event);
             ResultSet set = sel.executeQuery();
 
-            //Ignoring existing tags
             while (set.next()) {
                 Tag tag = new Tag(set.getInt(1), "");
                 currentTagsOfEvent.add(tag);
@@ -289,10 +288,13 @@ public class TagDAO {
                     del.executeUpdate();
                 }
             }
+
             for (Tag tag : insertTags){
-                ins.setInt(1,event);
-                ins.setInt(2,tag.getId());
-                ins.executeUpdate();
+                if (!currentTagsOfEvent.contains(tag)) {
+                    ins.setInt(1, event);
+                    ins.setInt(2, tag.getId());
+                    ins.executeUpdate();
+                }
             }
 
             set.close();

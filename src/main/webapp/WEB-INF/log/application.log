@@ -472,3 +472,38 @@
 2022-03-06 15:00:32,991 [INFO ][nio-8078-exec-10][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
 2022-03-06 15:00:47,146 [INFO ][nio-8078-exec-13][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
 2022-03-06 15:00:54,994 [INFO ][nio-8078-exec-16][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:06:34,190 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-06 15:06:34,190 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-06 15:06:34,971 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-06 15:06:47,133 [INFO ][-nio-8078-exec-1][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:06:57,765 [INFO ][-nio-8078-exec-8][          servlets.UpdateEvent] - FAILURE UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:07:09,604 [INFO ][-nio-8078-exec-4][          servlets.UpdateEvent] - FAILURE UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:07:56,815 [INFO ][ion(6)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-06 15:07:56,815 [INFO ][ion(6)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-06 15:07:57,519 [INFO ][ion(6)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-06 15:08:17,429 [INFO ][-nio-8078-exec-8][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:08:27,772 [INFO ][nio-8078-exec-12][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:09:01,407 [INFO ][ion(9)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-06 15:09:01,407 [INFO ][ion(9)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-06 15:09:02,125 [INFO ][ion(9)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-06 15:09:32,925 [INFO ][nio-8078-exec-17][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:10:04,775 [INFO ][on(12)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-06 15:10:04,775 [INFO ][on(12)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-06 15:10:05,618 [INFO ][on(12)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-06 15:10:17,074 [INFO ][nio-8078-exec-25][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:10:26,561 [INFO ][nio-8078-exec-20][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:10:38,687 [INFO ][nio-8078-exec-22][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:11:01,579 [INFO ][on(15)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-06 15:11:01,579 [INFO ][on(15)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-06 15:11:02,267 [INFO ][on(15)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-06 15:11:22,691 [INFO ][nio-8078-exec-28][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:11:37,182 [INFO ][nio-8078-exec-43][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:11:55,343 [INFO ][nio-8078-exec-40][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:12:04,876 [INFO ][nio-8078-exec-45][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:13:00,098 [INFO ][on(18)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-06 15:13:00,098 [INFO ][on(18)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-06 15:13:19,119 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-06 15:13:19,119 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-06 15:13:19,915 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-06 15:13:32,993 [INFO ][nio-8078-exec-10][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 15:13:43,899 [INFO ][-nio-8078-exec-7][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
