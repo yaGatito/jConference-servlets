@@ -1,6 +1,6 @@
 package com.conference.dao;
 
-import com.conference.DBCPool;
+import com.conference.connection.DBCPool;
 import com.conference.entity.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

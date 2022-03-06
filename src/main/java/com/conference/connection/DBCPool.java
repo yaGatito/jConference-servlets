@@ -1,4 +1,4 @@
-package com.conference;
+package com.conference.connection;
 
 import java.io.FileInputStream;
 import java.io.IOException;

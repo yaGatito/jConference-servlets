@@ -3,7 +3,7 @@
 <%@ page import="com.conference.dao.UserDAO" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.sql.Connection" %>
-<%@ page import="com.conference.DBCPool" %>
+<%@ page import="com.conference.connection.DBCPool" %>
 <%@ page import="com.conference.entity.Tag" %>
 <%@ page import="com.conference.dao.TagDAO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>

@@ -2,7 +2,7 @@ package com.conference.listeners;
 
 import javax.servlet.*;
 
-import com.conference.DBCPool;
+import com.conference.connection.DBCPool;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import java.util.ArrayList;

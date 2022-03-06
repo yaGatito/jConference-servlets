@@ -1,6 +1,6 @@
 package com.conference.servlets;
 
-import com.conference.DBCPool;
+import com.conference.connection.DBCPool;
 import com.conference.dao.LanguageDAO;
 import com.conference.dao.TagDAO;
 

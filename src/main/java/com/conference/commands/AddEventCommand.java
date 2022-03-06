@@ -1,6 +1,6 @@
 package com.conference.commands;
 
-import com.conference.DBCPool;
+import com.conference.connection.DBCPool;
 import com.conference.dao.TagDAO;
 import com.conference.entity.Event;
 import com.conference.dao.EventDAO;

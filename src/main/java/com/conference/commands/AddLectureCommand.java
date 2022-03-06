@@ -1,6 +1,6 @@
 package com.conference.commands;
 
-import com.conference.DBCPool;
+import com.conference.connection.DBCPool;
 import com.conference.entity.Lecture;
 import com.conference.dao.LectureDAO;
 import org.slf4j.Logger;

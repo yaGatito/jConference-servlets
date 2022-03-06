@@ -4,7 +4,7 @@
 <%@ page import="com.conference.entity.Event" %>
 <%@ page import="com.conference.dao.EventDAO" %>
 <%@ page import="java.sql.Connection" %>
-<%@ page import="com.conference.DBCPool" %>
+<%@ page import="com.conference.connection.DBCPool" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>

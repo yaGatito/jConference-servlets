@@ -1,9 +1,7 @@
 package com.conference.commands;
 
-import com.conference.DBCPool;
-import com.conference.dao.LectureDAO;
+import com.conference.connection.DBCPool;
 import com.conference.dao.RequestDAO;
-import com.conference.entity.Lecture;
 import com.conference.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.List;
 
 public class AssignFreeLectureCommand implements Command {
     public static final Logger logger = LoggerFactory.getLogger(AssignFreeLectureCommand.class);
