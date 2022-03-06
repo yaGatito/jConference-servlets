@@ -6,6 +6,7 @@ import com.conference.dao.EventDAO;
 import com.conference.dao.LectureDAO;
 import com.conference.dao.UserDAO;
 import com.conference.entity.User;
+import com.conference.util.Badges;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +35,8 @@ public class Homepage extends HttpServlet {
         events = Event.filter(events)[1];
         LectureDAO lecdao = new LectureDAO();
 
+        Badges badges = new Badges();
+        request.setAttribute("badges",badges);
         request.setAttribute("events",events);
         request.setAttribute("lecdao", lecdao);
 

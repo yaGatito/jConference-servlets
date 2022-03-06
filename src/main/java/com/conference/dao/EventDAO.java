@@ -69,18 +69,27 @@ public class EventDAO {
         }
     }
 
-    private static final String UPDATE_EVENT =
-            "UPDATE events SET date = ?, fromtime = ?, totime = ?, location = ?,status = ? WHERE id = ?";
-
     public boolean updateEvent(Connection con, Event event) {
-        try (PreparedStatement statement = con.prepareStatement(UPDATE_EVENT)) {
-            statement.setString(1, event.getDate());
-            statement.setString(2, event.getFromtime());
-            statement.setString(3, event.getTotime());
-            statement.setString(4, event.getLocation().getAddress());
-            statement.setInt(5, event.getStatus());
-            statement.setInt(6, event.getId());
+        try (PreparedStatement statement = con.prepareStatement(
+                "UPDATE events SET topic = ?, date = ?, fromtime = ?, totime = ?, " +
+                        "location = ?,status = ? WHERE id = ?")) {
+            con.setAutoCommit(false);
+
+            statement.setString(1,event.getTopic());
+            statement.setString(2, event.getDate());
+            statement.setString(3, event.getFromtime());
+            statement.setString(4, event.getTotime());
+            statement.setString(5, event.getLocation().getAddress());
+            statement.setInt(6, event.getStatus());
+            statement.setInt(7, event.getId());
             statement.executeUpdate();
+
+            TagDAO tdao = new TagDAO();
+            if(!tdao.updatingTagsOfEvent(con, event.getId(), event.getTags())){
+                return false;
+            }
+
+            con.commit();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

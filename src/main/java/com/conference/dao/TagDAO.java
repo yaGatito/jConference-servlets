@@ -43,23 +43,23 @@ public class TagDAO {
      * @param c Connection
      * @return Map
      */
-    public Map<Tag, Map<String,String>> selectAllTagTranslations(Connection c) {
+    public Map<Tag, Map<String, String>> selectAllTagTranslations(Connection c) {
         try (PreparedStatement ps = c.prepareStatement(
                 "SELECT id,name FROM tags");
              PreparedStatement loc = c.prepareStatement(
                      "SELECT lang, name FROM tags_local WHERE id = ?")
         ) {
-            Map<Tag, Map<String,String>> tags = new HashMap<>();
+            Map<Tag, Map<String, String>> tags = new HashMap<>();
             ResultSet set = ps.executeQuery();
             while (set.next()) {
                 Tag tag = new Tag(set.getInt(1), set.getString(2));
                 Map<String, String> map = new HashMap<>();
-                loc.setInt(1,tag.getId());
+                loc.setInt(1, tag.getId());
                 ResultSet set1 = loc.executeQuery();
-                while (set1.next()){
+                while (set1.next()) {
                     String lang = set1.getString(1);
                     String name = set1.getString(2);
-                    map.put(lang,name);
+                    map.put(lang, name);
                 }
                 tags.put(tag, map);
                 set1.close();
@@ -248,6 +248,54 @@ public class TagDAO {
                 ps.setInt(2, tag.getId());
                 ps.executeUpdate();
             }
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Updating tags with event
+     *
+     * @param c            Connection
+     * @param event        Event
+     * @param insertTags Collection of tag's that must be associated with event
+     * @return true if operation was success, false - if not
+     */
+    public boolean updatingTagsOfEvent(Connection c, int event, List<Tag> insertTags) {
+        try (
+                PreparedStatement sel = c.prepareStatement(
+                        "SELECT tag FROM tags_from_events WHERE event = ?");
+                PreparedStatement del = c.prepareStatement(
+                        "DELETE FROM tags_from_events WHERE event = ? AND tag = ?");
+                PreparedStatement ins = c.prepareStatement(
+                        "INSERT INTO tags_from_events (event, tag) VALUES (?,?)")) {
+            List<Tag> currentTagsOfEvent = new ArrayList<>();
+            List<Tag> deleteTags = new ArrayList<>();
+            sel.setInt(1, event);
+            ResultSet set = sel.executeQuery();
+
+            //Ignoring existing tags
+            while (set.next()) {
+                Tag tag = new Tag(set.getInt(1), "");
+                currentTagsOfEvent.add(tag);
+            }
+
+            for (Tag tag : currentTagsOfEvent){
+                if (!insertTags.contains(tag)){
+                    del.setInt(1,event);
+                    del.setInt(2,tag.getId());
+                    del.executeUpdate();
+                }
+            }
+            for (Tag tag : insertTags){
+                ins.setInt(1,event);
+                ins.setInt(2,tag.getId());
+                ins.executeUpdate();
+            }
+
+            set.close();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

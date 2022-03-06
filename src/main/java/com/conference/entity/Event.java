@@ -156,7 +156,19 @@ public class Event implements Comparable<Event> {
 
     @Override
     public String toString() {
-        return topic;
+        return "Event{" +
+                "id=" + id +
+                ", topic='" + topic + '\'' +
+                ", tags=" + tags +
+                ", fromtime='" + fromtime + '\'' +
+                ", totime='" + totime + '\'' +
+                ", date='" + date + '\'' +
+                ", isOnline=" + isOnline +
+                ", location=" + location.getAddress() +
+                ", lectures=" + lectures +
+                ", listeners=" + listeners +
+                ", status=" + status +
+                '}';
     }
 
     private String checkString(String s){
@@ -220,6 +232,15 @@ public class Event implements Comparable<Event> {
         return Integer.compare(this.id,o.id);
     }
 
+    public static List<Event> notEmpty(List<Event> events){
+        List<Event> result = new ArrayList<>();
+        for (Event event : events) {
+            if (!event.getLectures().isEmpty()){
+                result.add(event);
+            }
+        }
+        return result;
+    }
 
     /**
      * Returns an array. First element of which contains only past events.

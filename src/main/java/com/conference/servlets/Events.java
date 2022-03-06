@@ -5,6 +5,7 @@ import com.conference.entity.Event;
 import com.conference.dao.EventDAO;
 import com.conference.dao.LectureDAO;
 import com.conference.dao.UserDAO;
+import com.conference.util.Badges;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -37,6 +38,7 @@ public class Events extends HttpServlet {
         String lang = (String) request.getSession().getAttribute("lang");
         List<Event> events = edao.select(connection,"status", 1, "all", 0, "id",lang);
         pool.putBackConnection(connection);
+        events = Event.notEmpty(events);
         events.sort(comparators.get(sort));
         if (!comparators.containsKey(sort)) {
             sort = "default";
@@ -65,6 +67,9 @@ public class Events extends HttpServlet {
                 pages.add(temp);
             }
         }
+
+        Badges badges = new Badges();
+        request.setAttribute("badges",badges);
         request.setAttribute("udao", udao);
         request.setAttribute("lecdao", lecdao);
         request.setAttribute("pages", pages);

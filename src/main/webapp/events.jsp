@@ -1,5 +1,5 @@
 <%@ page import="java.sql.Connection" %>
-<%@ page import="com.conference.DBCPool" %>
+<%@ page import="com.conference.connection.DBCPool" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -13,8 +13,8 @@
 <body>
 <section class="container-xl col">
     <%
-        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
-        Connection connection = pool.getConnection();
+//        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+        Connection connection = DBCPool.getInstance().getConnection();
         request.setAttribute("connection",connection);
     %>
     <div class="margin col">
@@ -89,7 +89,6 @@
                          role="tabpanel"
                          aria-labelledby="pills-${requestScope.pages.indexOf(page)+1}-tab">
                         <c:forEach var="event" items="${page}">
-                            <%--            <c:if test="${event.getLectures().size()>0}">--%>
                             <div class="card border-info mb-3" style="width: 40rem;">
                                 <div class="card-header rowsb">
                                     <c:if test="${event.getCondition()}">
@@ -119,7 +118,11 @@
                                 <div class="card-body text-secondary">
                                     <h5 class="card-title">${event.getTopic()}
                                     </h5>
-                                    <p class="card-text">${event.getTags()}</p>
+                                    <p class="card-text">
+                                        <c:forEach items="${event.getTags()}" var="tag">
+                                            <span class="badge ${requestScope.badges.getBadge()}">${tag}</span>
+                                        </c:forEach>
+                                    </p>
                                     <p>Lectures:</p>
                                     <ol>
                                         <c:forEach var="lecture" items="${requestScope.lecdao.select(connection,event.getId(),3)}">
@@ -138,7 +141,6 @@
                                     </p>
                                 </div>
                             </div>
-                            <%--            </c:if>--%>
                         </c:forEach>
                     </div>
                 </c:forEach>
@@ -161,7 +163,7 @@
         </div>
     </div>
     <%
-        pool.putBackConnection(connection);
+        DBCPool.getInstance().putBackConnection(connection);
     %>
 </section>
 </body>

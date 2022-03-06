@@ -40,7 +40,7 @@
     </context-param>
     <context-param>
         <param-name>locales</param-name>
-        <param-value>ua en ru</param-value>
+        <param-value>ua en</param-value>
     </context-param>
     
 </web-app>
