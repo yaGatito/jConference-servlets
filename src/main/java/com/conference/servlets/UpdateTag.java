@@ -16,6 +16,8 @@ import java.util.*;
 
 @WebServlet(name = "UpdateTag", value = "/UpdateTag")
 public class UpdateTag extends HttpServlet {
+    private static final Map<Tag, Map<String, String>> shouldBeLocalized = new HashMap<>();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> locales = (List<String>) request.getServletContext().getAttribute("locales");
@@ -23,7 +25,7 @@ public class UpdateTag extends HttpServlet {
         Connection connection = pool.getConnection();
         TagDAO tdao = new TagDAO();
         Map<Tag, Map<String, String>> translations = tdao.selectAllTagTranslations(connection);
-        Map<Tag, Map<String,String>> shouldBeLocalized = new HashMap<>();
+//        Map<Tag, Map<String,String>> shouldBeLocalized = new HashMap<>();
 
         Map<String, String> map = new LanguageDAO().select(connection);
         Map<String, String> languages = new HashMap<>();
@@ -36,15 +38,15 @@ public class UpdateTag extends HttpServlet {
             Tag tag = entry.getKey();
             Set<String> tagLocales = entry.getValue().keySet();
             List<String> forLocalization = new ArrayList<>(locales);
-            if (!tagLocales.containsAll(locales)){
+            if (!tagLocales.containsAll(locales)) {
                 forLocalization.removeAll(tagLocales);
-            }else{
+            } else {
                 forLocalization = new ArrayList<>();
             }
-            if (!forLocalization.isEmpty()){
+            if (!forLocalization.isEmpty()) {
                 shouldBeLocalized.put(tag, new HashMap<>());
                 for (String locale : forLocalization) {
-                    shouldBeLocalized.get(tag).put(locale,languages.get(locale));
+                    shouldBeLocalized.get(tag).put(locale, languages.get(locale));
                 }
             }
         }
@@ -55,29 +57,21 @@ public class UpdateTag extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
-//        Connection connection = pool.getConnection();
-//        List<String> locales = (List<String>) request.getServletContext().getAttribute("locales");
-//        Map<String, String> map = new LanguageDAO().select(connection);
-//        Map<String, String> languages = new HashMap<>();
-//        for (Map.Entry<String, String> entry : map.entrySet()) {
-//            if (locales.contains(entry.getKey())) {
-//                languages.put(entry.getKey(), entry.getValue());
-//            }
-//        }
-//        TagDAO tdao = new TagDAO();
-//        Map<String, String> tags = new HashMap<>();
-//        for (Map.Entry<String, String> entry : languages.entrySet()) {
-//            String locale = entry.getKey();
-//            String translation = request.getParameter(locale);
-//            tags.put(locale, translation);
-//        }
-//        if (tdao.createTag(connection, tags)) {
-//            response.sendRedirect("Profile");
-//        } else {
-//            response.sendRedirect("Error");
-//        }
-//        pool.putBackConnection(connection);
+        TagDAO tdao = new TagDAO();
+        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+        Connection connection = pool.getConnection();
+        for (Map.Entry<Tag, Map<String, String>> entry : shouldBeLocalized.entrySet()) {
+            Tag tag = entry.getKey();
+            for (Map.Entry<String, String> localeEntry : entry.getValue().entrySet()) {
+                String locale = localeEntry.getKey();
+                String update = request.getParameter(locale + "Tag" + tag.getId());
+                if(!tdao.addLocalization(connection, tag.getId(), localeEntry.getKey(), update)){
+                    response.sendRedirect("Error");
+                    return;
+                }
+            }
+        }
+        response.sendRedirect("Profile");
     }
 
     public static void main(String[] args) {

@@ -69,8 +69,6 @@ l
 <src/main/java/com/conference/commands/AddRequestCommand.java,9\3\932036d7a25dd32359fa1d44fa8646947c820511
 s
 Csrc/main/java/com/conference/commands/AssignFreeLectureCommand.java,3\c\3cd5551ba9b648559f19ccc3c5bcce44ed8d1ef5
-Y
-)src/main/java/com/conference/DBCPool.java,9\e\9ec5a6c6ab14840382fa71f4bf481b92df3087f9
 g
 7src/main/java/com/conference/servlets/ModerProfile.java,5\f\5f9cc4040001d7cd6fcc6167e72b9f47d34863d5
 p
@@ -91,8 +89,6 @@ m
 =src/main/java/com/conference/commands/AcceptOfferCommand.java,9\a\9a7f7966c3a2d5a767e0ad5b54b4ba1138a7b5b4
 \
 ,src/main/java/com/conference/entity/Tag.java,3\f\3fb8078f3c0a23b895ffa7748bf4dde59a8e07ad
-k
-;src/main/java/com/conference/listeners/ContextListener.java,2\1\21dbcd37938eec918641a208088b358bfec7e1a1
 `
 0src/main/java/com/conference/dao/LectureDAO.java,9\1\91f7188573ddcdbf56e23a04d642261935f83c5a
 `
@@ -129,7 +125,3 @@ b
 2src/main/java/com/conference/dao/ListenersDAO.java,7\1\717aca58e5d8085baddf21a2be7ff0806308e5be
 a
 1src/main/java/com/conference/dao/LanguageDAO.java,a\6\a633bd47942a9128152d1db1bb9e6a2f1bd1f943
-a
-1src/main/java/com/conference/servlets/AddTag.java,0\d\0d476c79736fb917c27a15723c4f78019bef1d77
-\
-,src/main/java/com/conference/dao/TagDAO.java,d\4\d41cd940c4f6af9b667b1f56dde9e4ab6233bcf8
