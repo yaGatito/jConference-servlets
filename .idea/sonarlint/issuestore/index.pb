@@ -21,8 +21,6 @@ a
 -src/main/java/com/conference/entity/Main.java,a\c\ac145ae35691bc413a06bbe83472c76efaad2015
 `
 0src/main/java/com/conference/entity/Lecture.java,e\1\e117e666433f66e504332cd87b8a2b467dd50a0c
-]
--src/main/java/com/conference/entity/User.java,7\4\74d9833ebb5a36ba69a414d696950f6126b80a98
 e
 5src/main/java/com/conference/servlets/AddLecture.java,e\8\e847c0b267b1e6f0ddb720f189c7e709e6fb2f42
 e
@@ -41,8 +39,6 @@ b
 0src/main/java/com/conference/dao/LectureDAO.java,9\1\91f7188573ddcdbf56e23a04d642261935f83c5a
 `
 0src/main/java/com/conference/dao/RequestDAO.java,b\0\b0e26566af3675cacf93aa25394d6a3ab7294b15
-]
--src/main/java/com/conference/dao/UserDAO.java,6\6\663798486309690f48a8f63e8e09c1bfd7c6db87
 b
 2src/main/java/com/conference/dao/ListenersDAO.java,7\1\717aca58e5d8085baddf21a2be7ff0806308e5be
 a
@@ -119,14 +115,10 @@ j
 -src/main/java/com/conference/util/Badges.java,5\7\57756da65960c8dae89081d457bf6f49b8185aa5
 a
 1src/main/java/com/conference/servlets/Events.java,8\0\801bbe3a5ae9219d05455fc01703696c5bd6564d
-c
-3src/main/java/com/conference/servlets/Homepage.java,5\7\57f07fb20b7c530c37f630a43e066bf3b4e93db7
 L
 src/main/webapp/homepage.jsp,d\0\d0b3bfee6f336b994820209ce9a5afb084b3cce5
 O
 src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
-f
-6src/main/java/com/conference/servlets/UpdateEvent.java,b\c\bccd5a6dedde6dbd1cc2c70f169fa5e6e2d0882a
 ^
 .src/main/java/com/conference/entity/Event.java,4\0\406ee5f9dbabb0ae24ad3791a42ca476be8ede53
 P
@@ -135,5 +127,3 @@ K
 src/main/webapp/profile.jsp,3\9\3932b6a22a1db264677b40c5b9307e011739496b
 \
 ,src/main/java/com/conference/dao/TagDAO.java,d\4\d41cd940c4f6af9b667b1f56dde9e4ab6233bcf8
-^
-.src/main/java/com/conference/dao/EventDAO.java,d\3\d3877cc795a12dc5378663a61bc376924371c9d8

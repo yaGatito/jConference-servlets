@@ -1,0 +1,6 @@
+2022-03-10 12:02:34,713 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-10 12:02:34,716 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-10 12:02:35,752 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-10 12:09:42,691 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-10 12:09:42,691 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-10 12:09:43,384 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM

@@ -1,5 +1,8 @@
 package com.conference.util;
 
+import com.conference.entity.Event;
+import com.conference.entity.User;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -7,13 +10,11 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class MailSender {
-    static MailSender instance;
+    private static String workMail = "dclazovskyi@gmail.com";
+    private static MailSender instance;
     Session session;
 
     private MailSender() {
@@ -39,14 +40,49 @@ public class MailSender {
         return instance;
     }
 
-    public boolean sendMessage(String subject, String msg, String resipient){
+    public Map<String, Boolean> sendChangesMessages(Map<String, String> changes, Set<User> recipients, Event event){
+        Map<String, Boolean> res = new HashMap<>();
+
+        StringBuffer msgSubject = new StringBuffer();
+        msgSubject.append("Changes in ").append(event.getTopic());
+
+        StringBuffer msgBody = new StringBuffer();
+        for (Map.Entry<String, String> entry : changes.entrySet()) {
+            msgBody.append(entry.getKey());
+            msgBody.append(" changed to ");
+            msgBody.append(entry.getValue());
+            msgBody.append(".<br/>");
+        }
+
+        for (User recipient : recipients) {
+            if (workMail != null){
+                recipient.setEmail(workMail);
+            }
+
+            StringBuffer msg = new StringBuffer();
+            msg.
+                    append("Hello, ").
+                    append(recipient.getName()).
+                    append("! ").
+                    append("We should inform you that we have some changes in ").
+                    append(event.getTopic()).
+                    append(" event.<br/>");
+            msg.append(msgBody);
+            res.put(recipient.getEmail(),sendMsg(msgSubject.toString(), msg.toString(), recipient.getEmail()));
+        }
+
+        return res;
+    }
+
+    private boolean sendMsg(String subject, String msg, String recipient){
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("jConferenceTeam"));
             message.setRecipients(
-                    Message.RecipientType.TO, InternetAddress.parse(resipient));
+                    Message.RecipientType.TO, InternetAddress.parse(recipient));
             message.setSubject(subject);
             MimeBodyPart mimeBodyPart = new MimeBodyPart();
+
             mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
 
             Multipart multipart = new MimeMultipart();
@@ -60,13 +96,5 @@ public class MailSender {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public Map<String, Boolean> sendMessage(String subject, String msg, List<String> emails){
-        Map<String, Boolean> res = new HashMap<>();
-        for (String email : emails) {
-            res.put(email, sendMessage(subject,msg,email));
-        }
-        return res;
     }
 }

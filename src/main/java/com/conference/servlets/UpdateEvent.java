@@ -3,9 +3,12 @@ package com.conference.servlets;
 import com.conference.commands.AddEventCommand;
 import com.conference.connection.DBCPool;
 import com.conference.dao.EventDAO;
+import com.conference.dao.ListenersDAO;
 import com.conference.dao.TagDAO;
 import com.conference.entity.Event;
 import com.conference.entity.Tag;
+import com.conference.entity.User;
+import com.conference.util.MailSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +21,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @WebServlet(name = "UpdateEvent", value = "/UpdateEvent")
 public class UpdateEvent extends HttpServlet {
@@ -48,8 +53,12 @@ public class UpdateEvent extends HttpServlet {
         String totime = request.getParameter("totime");
         String location = request.getParameter("location");
         Event event = new Event(id, topic, tagOfEvent, fromtime, totime, date, location, 1);
+        EventDAO edao = new EventDAO();
+        Map<String, String> changes = edao.updateEvent(connection, event);
+        Set<User> recipients = edao.selectRecipients(connection, event.getId());
+        MailSender.getInstance().sendChangesMessages(changes,recipients,event);
 
-        if (new EventDAO().updateEvent(connection,event)) {
+        if (changes != null && !changes.isEmpty()) {
             if (logger.isInfoEnabled()) {
                 logger.info("SUCCESSFUL UPDATING LECTURE - TOPIC:{}, DATE:{}, TIME:{}, LOCATION:{}", topic, date, fromtime + "-" + totime, location);
             }

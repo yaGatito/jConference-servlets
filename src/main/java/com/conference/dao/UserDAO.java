@@ -149,7 +149,7 @@ public class UserDAO  {
                 String lastname = set.getString("lastname");
                 String email = set.getString("email");
                 String password = set.getString("password");
-                user = new User(role, name, lastname, email, password);
+                user = new User(id, role, name, lastname, email, password);
             }
             set.close();
             return user;
