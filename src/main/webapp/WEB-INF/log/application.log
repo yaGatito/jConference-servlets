@@ -507,3 +507,12 @@
 2022-03-06 15:13:19,915 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
 2022-03-06 15:13:32,993 [INFO ][nio-8078-exec-10][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
 2022-03-06 15:13:43,899 [INFO ][-nio-8078-exec-7][          servlets.UpdateEvent] - SUCCESSFUL UPDATING LECTURE - TOPIC:Java Conference MARCH 2220, DATE:2022-03-06, TIME:12:30-15:30, LOCATION:m.Arnautskaya str. 16B
+2022-03-06 18:37:33,354 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-06 18:37:33,355 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-06 18:37:34,274 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-10 12:02:34,713 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-10 12:02:34,716 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-10 12:02:35,752 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-10 12:09:42,691 [INFO ][ion(6)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-10 12:09:42,691 [INFO ][ion(6)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-10 12:09:43,384 [INFO ][ion(6)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM

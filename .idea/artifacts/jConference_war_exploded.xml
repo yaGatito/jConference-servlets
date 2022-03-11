@@ -23,6 +23,8 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-reload4j:1.7.36" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.36" />
           <element id="library" level="project" name="Maven: ch.qos.reload4j:reload4j:1.2.19" />
+          <element id="library" level="project" name="Maven: javax.mail:mail:1.5.0-b01" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -109,7 +109,7 @@
                                     </c:if>
                                     <p style="margin-left: 10px;">
                                         <a href="ParticipateController?action=join&event=${event.getId()}"
-                                           class="link-info">Participate
+                                           class="link-info"> <fmt:message key="label.button.participate"/>
                                             <span class="iconify-inline" data-icon="carbon:user-follow"
                                                   data-width="1.1em"></span></a>
                                     </p>
@@ -123,11 +123,11 @@
                                             <span class="badge ${requestScope.badges.getBadge()}">${tag}</span>
                                         </c:forEach>
                                     </p>
-                                    <p>Lectures:</p>
+                                    <p><fmt:message key="label.button.lectures"/>:</p>
                                     <ol>
                                         <c:forEach var="lecture" items="${requestScope.lecdao.select(connection,event.getId(),3)}">
                                             <li>${lecture.getTopic()}
-                                                by ${requestScope.udao.getByID(connection,lecture.getSpeaker())}</li>
+                                                <fmt:message key="label.events.by"/> ${requestScope.udao.getByID(connection,lecture.getSpeaker())}</li>
                                         </c:forEach>
                                     </ol>
                                 </div>
