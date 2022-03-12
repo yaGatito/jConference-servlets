@@ -14,21 +14,23 @@ public class User {
     private String password;
     private boolean notifications = true;
 
-    public User(int id, int role, String name, String lastname, String email, String password) {
+    public User(int id, int role, String name, String lastname, String email, String password, boolean notify) {
         this.id = id;
         this.role = role;
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
+        this.notifications = notify;
     }
 
-    public User(int role, String name, String lastname, String email, String password) {
+    public User(int role, String name, String lastname, String email, String password, boolean notify) {
         this.role = role;
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
+        this.notifications = notify;
     }
 
     public static String getNameRole(int i){

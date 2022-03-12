@@ -27,9 +27,10 @@ public class Homepage extends HttpServlet {
         UserDAO udao = new UserDAO();
         EventDAO edao = new EventDAO();
         request.setAttribute("udao",udao);
+
         //Display only 5 future nearest events
         String lang = (String) request.getSession().getAttribute("lang");
-        List<Event> events = edao.select(connection,"status", 1,"5", 0, "date, fromtime",lang);
+        List<Event> events = edao.select(connection,"status", 1,"5", 0, "date, fromtime", lang);
 
 
         events = Event.filter(events)[1];
@@ -51,7 +52,7 @@ public class Homepage extends HttpServlet {
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        User user = new User(3,name,lastname,email,password);
+        User user = new User(3,name,lastname,email,password, true);
 
         if (new UserDAO().insertUser(connection, user)){
 

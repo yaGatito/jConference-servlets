@@ -180,14 +180,18 @@ public class EventDAO {
             ResultSet listenersSet = listenersStmt.executeQuery();
             while (listenersSet.next()) {
                 User user = udao.getByID(c, listenersSet.getInt(1));
-                recipients.add(user);
+                if(user.getNotify()) {
+                    recipients.add(user);
+                }
             }
 
             speakersStmt.setInt(1, event);
             ResultSet speakersSet = speakersStmt.executeQuery();
             while (speakersSet.next()) {
                 User user = udao.getByID(c, speakersSet.getInt(1));
-                recipients.add(user);
+                if(user.getNotify()) {
+                    recipients.add(user);
+                }
             }
             return recipients;
         } catch (SQLException e) {

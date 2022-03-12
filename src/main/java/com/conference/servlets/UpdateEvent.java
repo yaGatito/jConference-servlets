@@ -60,12 +60,12 @@ public class UpdateEvent extends HttpServlet {
 
         if (changes != null && !changes.isEmpty()) {
             if (logger.isInfoEnabled()) {
-                logger.info("SUCCESSFUL UPDATING LECTURE - TOPIC:{}, DATE:{}, TIME:{}, LOCATION:{}", topic, date, fromtime + "-" + totime, location);
+                logger.info("SUCCESSFUL UPDATING EVENT - TOPIC:{}, DATE:{}, TIME:{}, LOCATION:{}", topic, date, fromtime + "-" + totime, location);
             }
             response.sendRedirect("Profile");
         } else {
             if (logger.isInfoEnabled()) {
-                logger.info("FAILURE UPDATING LECTURE - TOPIC:{}, DATE:{}, TIME:{}, LOCATION:{}", topic, date, fromtime + "-" + totime, location);
+                logger.info("FAILURE UPDATING EVENT - TOPIC:{}, DATE:{}, TIME:{}, LOCATION:{}", topic, date, fromtime + "-" + totime, location);
             }
             request.setAttribute("message", "Oops. Something goes wrong");
             request.getRequestDispatcher("error-page.jsp").forward(request,response);

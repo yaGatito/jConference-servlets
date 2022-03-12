@@ -29,23 +29,25 @@ public class RequestDAO  {
         try (PreparedStatement sel = c.prepareStatement(
                      "SELECT speaker FROM requests WHERE lecture = ?");
              PreparedStatement selSp = c.prepareStatement(
-                     "SELECT * FROM users WHERE id = ?")) {
+                     "SELECT role, name, lastname, email, password, notify FROM users WHERE id = ?")) {
 
             sel.setInt(1, lecture);
             ResultSet set = sel.executeQuery();
             List<User> speakers = new ArrayList<>();
             while (set.next()) {
-                selSp.setInt(1, set.getInt(1));
-                ResultSet speakerSet = selSp.executeQuery();
+                int id = set.getInt(1);
 
+                selSp.setInt(1, id);
+                ResultSet speakerSet = selSp.executeQuery();
                 speakerSet.next();
-                int id = speakerSet.getInt("id");
-                int role = speakerSet.getInt("role");
-                String name = speakerSet.getString("name");
-                String lastname = speakerSet.getString("lastname");
-                String email = speakerSet.getString("email");
-                String password = speakerSet.getString("password");
-                User user = new User(id, role, name, lastname, email, password);
+
+                int role = speakerSet.getInt(1);
+                String name = speakerSet.getString(2);
+                String lastname = speakerSet.getString(3);
+                String email = speakerSet.getString(4);
+                String password = speakerSet.getString(5);
+                boolean notify = speakerSet.getBoolean(6);
+                User user = new User(id, role, name, lastname, email, password, notify);
                 speakers.add(user);
                 speakerSet.close();
             }

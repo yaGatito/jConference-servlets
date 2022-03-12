@@ -26,30 +26,6 @@ public class UserDAO  {
         }
     }
 
-    private static final String SELECT_ALL = "SELECT * FROM users ";
-
-    public List<User> selectAll(Connection con){
-        List<User> users;
-        try (PreparedStatement statement = con.prepareStatement(SELECT_ALL)) {
-            ResultSet set = statement.executeQuery();
-            users = new ArrayList<>();
-            while (set.next()){
-                int id = set.getInt("id");
-                int role = set.getInt("role");
-                String name = set.getString("name");
-                String lastname = set.getString("lastname");
-                String email = set.getString("email");
-                String password = set.getString("password");
-                users.add(new User(id,role,name,lastname,email,password));
-            }
-            set.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            users = null;
-        }
-        return users;
-    }
-
     private static final String SELECT_COUNT = "SELECT COUNT(*) FROM users ";
 
     public int getCount(Connection con){
@@ -66,7 +42,7 @@ public class UserDAO  {
         return count;
     }
 
-    private static final String SELECT_LIMIT = "SELECT * FROM users ORDER BY id LIMIT ? OFFSET ?";
+    private static final String SELECT_LIMIT = "SELECT id, role, name, lastname, email, password, notify FROM users ORDER BY id LIMIT ? OFFSET ?";
 
     public List<User> selectLimit(Connection con, int amount,int page){
         List<User> users;
@@ -76,13 +52,14 @@ public class UserDAO  {
             ResultSet set = statement.executeQuery();
             users = new ArrayList<>();
             while (set.next()){
-                int id = set.getInt("id");
-                int role = set.getInt("role");
-                String name = set.getString("name");
-                String lastname = set.getString("lastname");
-                String email = set.getString("email");
-                String password = set.getString("password");
-                users.add(new User(id,role,name,lastname,email,password));
+                int id = set.getInt(1);
+                int role = set.getInt(2);
+                String name = set.getString(3);
+                String lastname = set.getString(4);
+                String email = set.getString(5);
+                String password = set.getString(6);
+                boolean notify = set.getBoolean(7);
+                users.add(new User(id,role,name,lastname,email,password,notify));
             }
             set.close();
         } catch (SQLException e) {
@@ -136,7 +113,7 @@ public class UserDAO  {
         }
     }
 
-    private static final String GET_BY_ID = "SELECT * FROM users WHERE id = ?";
+    private static final String GET_BY_ID = "SELECT role, name, lastname, email, password, notify FROM users WHERE id = ?";
 
     public User getByID(Connection con, int id){
         try (PreparedStatement statement = con.prepareStatement(GET_BY_ID)) {
@@ -144,12 +121,13 @@ public class UserDAO  {
             ResultSet set = statement.executeQuery();
             User user = null;
             while (set.next()) {
-                int role = set.getInt("role");
-                String name = set.getString("name");
-                String lastname = set.getString("lastname");
-                String email = set.getString("email");
-                String password = set.getString("password");
-                user = new User(id, role, name, lastname, email, password);
+                int role = set.getInt(1);
+                String name = set.getString(2);
+                String lastname = set.getString(3);
+                String email = set.getString(4);
+                String password = set.getString(5);
+                boolean notify = set.getBoolean(6);
+                user = new User(id, role, name, lastname, email, password, notify);
             }
             set.close();
             return user;
@@ -158,7 +136,7 @@ public class UserDAO  {
             return null;
         }
     }
-private static final String LOGGED_USER = "SELECT * FROM users WHERE email = ? AND password = ?";
+private static final String LOGGED_USER = "SELECT id, role, name, lastname, notify FROM users WHERE email = ? AND password = ?";
 
     public User loginUser(Connection con, String email, String password){
         User user = null;
@@ -167,11 +145,12 @@ private static final String LOGGED_USER = "SELECT * FROM users WHERE email = ? A
             statement.setString(2,password);
             ResultSet set = statement.executeQuery();
             if(set.next()) {
-                int id = set.getInt("id");
-                int role = set.getInt("role");
-                String name = set.getString("name");
-                String lastname = set.getString("lastname");
-                user = new User(id, role, name, lastname, email, password);
+                int id = set.getInt(1);
+                int role = set.getInt(2);
+                String name = set.getString(3);
+                String lastname = set.getString(4);
+                boolean notify = set.getBoolean(5);
+                user = new User(id, role, name, lastname, email, password, notify);
             }
             set.close();
         } catch (SQLException e) {
@@ -181,7 +160,7 @@ private static final String LOGGED_USER = "SELECT * FROM users WHERE email = ? A
         return user;
     }
 
-    private static final String SELECT_SPEAKER = "SELECT * FROM users WHERE role = 2"; //2 - Speaker
+    private static final String SELECT_SPEAKER = "SELECT id, name, lastname, email, password, notify FROM users WHERE role = 2"; //2 - Speaker
 
     public List<User> selectSpeakers(Connection con){
         List<User> users;
@@ -189,13 +168,14 @@ private static final String LOGGED_USER = "SELECT * FROM users WHERE email = ? A
             ResultSet set = statement.executeQuery();
             users = new ArrayList<>();
             while (set.next()){
-                int id = set.getInt("id");
-                int role = set.getInt("role");
-                String name = set.getString("name");
-                String lastname = set.getString("lastname");
-                String email = set.getString("email");
-                String password = set.getString("password");
-                users.add(new User(id,role,name,lastname,email,password));
+                int id = set.getInt(1);
+                int role = 2;
+                String name = set.getString(2);
+                String lastname = set.getString(3);
+                String email = set.getString(4);
+                String password = set.getString(5);
+                boolean notify = set.getBoolean(6);
+                users.add(new User(id,role,name,lastname,email,password,notify));
             }
             set.close();
         } catch (SQLException e) {
