@@ -3,7 +3,7 @@
         "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
 <log4j:configuration debug="false">
     <appender name="bulk" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="C:/Users/Никита/IdeaProjects/jConference/src/main/webapp/WEB-INF/log/bulk.log"/>
+        <param name="File" value="C:/Users/Nikita/IdeaProjects/jConference/src/main/webapp/WEB-INF/log/bulk.log"/>
         <param name="Append" value="true"/>
         <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
         <param name="Encoding" value="UTF-8"/>
@@ -13,7 +13,7 @@
     </appender>
 
     <appender name="application" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="C:/Users/Никита/IdeaProjects/jConference/src/main/webapp/WEB-INF/log/application.log"/>
+        <param name="File" value="C:/Users/Nikita/IdeaProjects/jConference/src/main/webapp/WEB-INF/log/application.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="10"/>
         <param name="Encoding" value="UTF-8"/>

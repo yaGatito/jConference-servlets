@@ -567,3 +567,10 @@
 2022-03-12 07:25:50,773 [INFO ][ion(6)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
 2022-03-12 07:26:39,936 [INFO ][nio-8078-exec-10][          servlets.UpdateEvent] - SUCCESSFUL UPDATING EVENT - TOPIC:Phyton 2022 APRIL, DATE:2022-05-26, TIME:04:31-05:31, LOCATION:https://elearn.epam.com/courses/course-v1:ED_CEE+OnlineUAJava+2022-Winter/courseware/07a53325b2da4c10bd6e8de2e5f794f4/0043ce8f98e14aa88ee57688f7d6025c/1?activate_block_id=block-v1%3ARD_CEE%2BOnlineUAJava%2B2022-Winter%2Btype%40vertical%2Bblock%40cfb0a30f733449efa5199cf8b7db947d
 2022-03-12 07:35:30,829 [INFO ][nio-8078-exec-16][          servlets.UpdateEvent] - SUCCESSFUL UPDATING EVENT - TOPIC:Phyton 2022 APRIL, DATE:2022-05-25, TIME:04:31-05:31, LOCATION:https://elearn.epam.com/courses/course-v1:ED_CEE+OnlineUAJava+2022-Winter/courseware/07a53325b2da4c10bd6e8de2e5f794f4/0043ce8f98e14aa88ee57688f7d6025c/1?activate_block_id=block-v1%3ARD_CEE%2BOnlineUAJava%2B2022-Winter%2Btype%40vertical%2Bblock%40cfb0a30f733449efa5199cf8b7db947d
+2022-03-23 14:14:14,246 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-23 14:14:14,246 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-23 14:14:25,132 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-23 14:14:25,133 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-23 14:36:38,150 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-23 14:36:38,150 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-23 14:36:38,820 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM

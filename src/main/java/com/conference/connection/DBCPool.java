@@ -23,7 +23,7 @@ public class DBCPool {
     private final BlockingQueue<Connection> connections = new ArrayBlockingQueue<>(maxConnections);
 
     private DBCPool(){
-        try (FileInputStream fis = new FileInputStream("C:\\Users\\Никита\\IdeaProjects\\jConference\\src\\main\\resources\\db.properties")) {
+        try (FileInputStream fis = new FileInputStream("C:\\Users\\Nikita\\IdeaProjects\\jConference\\src\\main\\resources\\db.properties")) {
             Properties config = new Properties();
             config.load(fis);
             String url = config.getProperty("url");
