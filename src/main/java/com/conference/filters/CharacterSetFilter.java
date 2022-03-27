@@ -22,7 +22,7 @@ public class CharacterSetFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain next) throws IOException, ServletException {
         request.setCharacterEncoding(encoding);
-        response.setContentType("text/html; charset="+encoding);
+        response.setContentType("charset="+encoding);
         response.setCharacterEncoding(encoding);
         next.doFilter(request, response);
     }
