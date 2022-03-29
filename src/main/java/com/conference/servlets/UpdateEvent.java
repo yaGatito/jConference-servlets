@@ -1,9 +1,7 @@
 package com.conference.servlets;
 
-import com.conference.commands.AddEventCommand;
 import com.conference.connection.DBCPool;
 import com.conference.dao.EventDAO;
-import com.conference.dao.ListenersDAO;
 import com.conference.dao.TagDAO;
 import com.conference.entity.Event;
 import com.conference.entity.Tag;

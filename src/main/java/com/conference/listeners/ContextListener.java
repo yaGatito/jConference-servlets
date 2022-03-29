@@ -56,6 +56,7 @@ public class ContextListener implements ServletContextListener {
      * @param event
      */
     private void initDBCPool(ServletContextEvent event){
+//        DBCPool.getInstance();
         event.getServletContext().setAttribute("pool", DBCPool.getInstance());
     }
 

@@ -18,7 +18,6 @@ public class OfferController extends HttpServlet {
         commands.put("accept", new AcceptOfferCommand());
         commands.put("reject", new RejectOfferCommand());
         commands.put("request", new MakeRequestCommand());
-        commands.put("addRequest", new AddRequestCommand());
         commands.put("acceptRequest", new AcceptRequestCommand());
         commands.put("rejectRequest", new RejectRequestCommand());
         commands.put("assign", new AssignFreeLectureCommand());

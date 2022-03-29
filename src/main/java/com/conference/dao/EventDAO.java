@@ -125,6 +125,7 @@ public class EventDAO {
              PreparedStatement selectListeners = con.prepareStatement(
                      "SELECT count(listener) FROM listeners WHERE event = ?"
              )) {
+            UserDAO udao = new UserDAO();
             ResultSet set = statement.executeQuery();
             events = new ArrayList<>();
             while (set.next()) {
@@ -153,7 +154,8 @@ public class EventDAO {
                                     lecturesSet.getString(2),
                                     lecturesSet.getInt(3),
                                     lecturesSet.getInt(4),
-                                    lecturesSet.getInt(5)));
+                                    udao.getByID(con,lecturesSet.getInt(5))
+                                    ));
                 }
                 event.setLectures(lectures);
                 events.add(event);

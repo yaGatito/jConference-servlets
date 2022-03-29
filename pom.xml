@@ -8,7 +8,7 @@
     <artifactId>jConference</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>jConference</name>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

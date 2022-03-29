@@ -1,11 +1,4 @@
-<%@ page import="com.conference.entity.User" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.conference.dao.UserDAO" %>
 <%@ page import="java.time.LocalDate" %>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="com.conference.connection.DBCPool" %>
-<%@ page import="com.conference.entity.Tag" %>
-<%@ page import="com.conference.dao.TagDAO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -16,21 +9,12 @@
 <fmt:message var="title" key="label.add_event" scope="request"/>
 <html lang="${sessionScope.lang}">
 <jsp:include page="nav.jsp"/>
-<%!List<User> speakers;%>
-<%
-    DBCPool pool = (DBCPool) config.getServletContext().getAttribute("pool");
-    Connection connection = pool.getConnection();
-    speakers = new UserDAO().selectSpeakers(connection);
-    String locale = (String) request.getSession().getAttribute("lang");
-    List<Tag> tags = new TagDAO().selectForLocale(connection, locale);
-    pool.putBackConnection(connection);
-%>
 <body>
 <section class="container-xl col">
     <!--Add event-->
     <div class="margin col reg-sec addevent">
         <h1 class="display-6"><fmt:message key="label.add_event"/> </h1>
-        <form id="event-form" class="col margin" action="${pageContext.request.contextPath}/Service?command=addevent" method="post">
+        <form id="event-form" class="col margin" action="AddEvent" method="post">
             <div style="margin-top: 1rem; line-height: 0">
                 <h4><fmt:message key="label.button.topic"/> </h4>
                 <input name="topic" class="form-control reg" type="text" placeholder="" aria-label="Search" required>
@@ -46,14 +30,14 @@
                         </h2>
                         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
-                                <% for (Tag tag : tags){%>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="tag<%=tag.getId()%>" id="flexCheckDefault<%=tag.getId()%>">
-                                    <label class="form-check-label" for="flexCheckDefault<%=tag.getId()%>">
-                                        <%=tag.getName()%>
-                                    </label>
-                                </div>
-                                <%}%>
+                                <c:forEach items="${requestScope.tags}" var="tag">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="tag${tag.getId()}" id="flexCheckDefault${tag.getId()}">
+                                        <label class="form-check-label" for="flexCheckDefault${tag.getId()}">
+                                                ${tag.getName()}
+                                        </label>
+                                    </div>
+                                </c:forEach>
                             </div>
                         </div>
 
@@ -62,7 +46,7 @@
             </div>
             <div style="margin-top: 1rem; line-height: 0">
                 <h4><fmt:message key="label.date"/> </h4>
-                <input name="date" class="form-control reg" type="date" placeholder="" aria-label="Search" min="<%=LocalDate.now().toString()%>" required>
+                <input name="date" class="form-control reg" type="date" placeholder="" aria-label="Search" min="${LocalDate.now().toString()}" required>
             </div>
             <div style="margin-top: 1rem; line-height: 0">
                 <h4><fmt:message key="label.from"/> </h4>
@@ -81,14 +65,6 @@
         </form>
     </div>
 </section>
-
-<!--Footer-->
-<section class="container-xl rowsb">
-    <div id="reg-sec" class="margin col">
-        All rights reserved
-    </div>
-</section>
-
 <jsp:include page="footer.jsp"/>
 </body>
 </html>

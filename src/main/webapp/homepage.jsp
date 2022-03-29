@@ -33,11 +33,6 @@
         </div>
     </c:if>
 
-    <%
-        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
-        Connection connection = pool.getConnection();
-        request.setAttribute("connection",connection);
-    %>
     <div class="margin col">
         <h2 class="display-6 margin"><fmt:message key="label.button.events"/></h2>
         <c:forEach var="event" items="${requestScope.events}">
@@ -74,8 +69,8 @@
                     </p>
                     <caption><fmt:message key="label.button.lectures"/>: </caption>
                     <ol>
-                        <c:forEach var="lecture" items="${requestScope.lecdao.select(connection,event.getId(),3)}">
-                            <li>${lecture.getTopic()} <fmt:message key="label.events.by"/> ${requestScope.udao.getByID(connection,lecture.getSpeaker())}</li>
+                        <c:forEach var="lecture" items="${event.getLectures()}">
+                            <li>${lecture.getTopic()} <fmt:message key="label.events.by"/> ${lecture.getSpeaker().toString()}</li>
                         </c:forEach>
                     </ol>
                 </div>
@@ -90,9 +85,6 @@
             </div>
         </c:forEach>
     </div>
-    <%
-        pool.putBackConnection(connection);
-    %>
 </section>
 </body>
 <jsp:include page="footer.jsp"/>

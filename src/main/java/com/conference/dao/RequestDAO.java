@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RequestDAO  {
+    UserDAO udao = new UserDAO();
 
     public boolean createRequest(Connection c, int speaker, int lecture) {
         try (PreparedStatement ps = c.prepareStatement(
@@ -78,7 +79,7 @@ public class RequestDAO  {
                 int status = speakerSet.getInt("status");
                 String topic = speakerSet.getString("topic");
                 int event = speakerSet.getInt("event");
-                Lecture lecture = new Lecture(id, topic, status, event, speaker);
+                Lecture lecture = new Lecture(id, topic, status, event, udao.getByID(c,set.getInt(speaker)));
                 lectures.add(lecture);
                 speakerSet.close();
             }
@@ -126,7 +127,7 @@ public class RequestDAO  {
                 String topic = set.getString(2);
                 int status = set.getInt(3);
                 int event = set.getInt(4);
-                ownRequests.add(new Lecture(id, topic, status, event, speaker));
+                ownRequests.add(new Lecture(id, topic, status, event, udao.getByID(c,set.getInt(speaker))));
             }
             set.close();
             return ownRequests;
@@ -153,7 +154,8 @@ public class RequestDAO  {
                         set1.getString(2),
                         set1.getInt(3),
                         set1.getInt(4),
-                        set1.getInt(5)));
+                        udao.getByID(c,set.getInt(set1.getInt(5)))
+                ));
                 set1.close();
             }
             set.close();

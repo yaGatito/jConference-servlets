@@ -20,13 +20,13 @@ import java.util.List;
 @WebServlet(name = "Homepage", value = "/Homepage")
 public class Homepage extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(Homepage.class);
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
         Connection connection = pool.getConnection();
         UserDAO udao = new UserDAO();
         EventDAO edao = new EventDAO();
-        request.setAttribute("udao",udao);
 
         //Display only 5 future nearest events
         String lang = (String) request.getSession().getAttribute("lang");
@@ -39,7 +39,6 @@ public class Homepage extends HttpServlet {
         Badges badges = new Badges();
         request.setAttribute("badges",badges);
         request.setAttribute("events",events);
-        request.setAttribute("lecdao", lecdao);
 
         request.getRequestDispatcher("homepage.jsp").forward(request,response);
         pool.putBackConnection(connection);

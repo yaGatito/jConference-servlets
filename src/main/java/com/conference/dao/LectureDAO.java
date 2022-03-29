@@ -1,6 +1,7 @@
 package com.conference.dao;
 
 import com.conference.entity.Lecture;
+import com.conference.entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,13 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LectureDAO  {
+    UserDAO udao = new UserDAO();
+
     public boolean insertLecture(Connection c, Lecture lecture) {
         try (PreparedStatement ps = c.prepareStatement(
                      "INSERT INTO lectures (id, topic, status, event, speaker) VALUES (DEFAULT,?,?,?,?)")) {
             ps.setString(1, lecture.getTopic());
             ps.setInt(2, lecture.getStatus());
             ps.setInt(3, lecture.getEvent());
-            ps.setInt(4, lecture.getSpeaker());
+            ps.setInt(4, lecture.getSpeaker().getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -54,8 +57,8 @@ public class LectureDAO  {
                         set.getString("topic"),
                         set.getInt("status"),
                         set.getInt("event"),
-                        set.getInt("speaker")
-                ));
+                        udao.getByID(c,set.getInt(set.getInt("speaker"))
+                )));
             }
             set.close();
             return lectures;
@@ -78,8 +81,8 @@ public class LectureDAO  {
                         set.getString("topic"),
                         set.getInt("status"),
                         set.getInt("event"),
-                        set.getInt("speaker")
-                ));
+                        udao.getByID(c,set.getInt(set.getInt("speaker"))
+                )));
             }
             set.close();
             return lectures;
@@ -111,8 +114,8 @@ public class LectureDAO  {
                             set.getString("topic"),
                             set.getInt("status"),
                             set.getInt("event"),
-                            set.getInt("speaker")
-                    ));
+                            udao.getByID(c,set.getInt(set.getInt("speaker"))
+                    )));
                 }
             }
             set.close();
@@ -137,8 +140,8 @@ public class LectureDAO  {
                         set.getString("topic"),
                         set.getInt("status"),
                         set.getInt("event"),
-                        set.getInt("speaker")
-                ));
+                        udao.getByID(c,set.getInt(set.getInt("speaker"))
+                )));
             }
             set.close();
             return lectures;

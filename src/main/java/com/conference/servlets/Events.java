@@ -67,11 +67,8 @@ public class Events extends HttpServlet {
                 pages.add(temp);
             }
         }
-
         Badges badges = new Badges();
         request.setAttribute("badges",badges);
-        request.setAttribute("udao", udao);
-        request.setAttribute("lecdao", lecdao);
         request.setAttribute("pages", pages);
         request.getRequestDispatcher("events.jsp").forward(request, response);
     }

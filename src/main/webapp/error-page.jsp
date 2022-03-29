@@ -10,9 +10,8 @@
 <jsp:include page="nav.jsp"/>
 <body>
   <section class="container-xl col">
-    <!--Login-->
     <div class="margin col reg-sec" style="width: 50rem">
-      <h2 class="display-10"><%=(String)request.getAttribute("message")%></h2>
+      <h2 class="display-10">${requestScope.message}</h2>
     </div>
   </section>
 <jsp:include page="footer.jsp"/>
