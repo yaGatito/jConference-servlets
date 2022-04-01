@@ -21,7 +21,7 @@ public class EventDAO {
                      "UPDATE events SET status = ? WHERE id = ?")) {
 
             //Creating unique status for fast searching just created event
-            int uniqueStatus = (int) (Math.random() * 1000000);
+            int uniqueStatus = (int) (Math.random() * 1000000) + 2;
 
             //Creating event
             con.setAutoCommit(false);
@@ -153,9 +153,9 @@ public class EventDAO {
                             new Lecture(lecturesSet.getInt(1),
                                     lecturesSet.getString(2),
                                     lecturesSet.getInt(3),
-                                    lecturesSet.getInt(4),
-                                    udao.getByID(con,lecturesSet.getInt(5))
-                                    ));
+                                    event,
+                                    udao.getByID(con, lecturesSet.getInt(5))
+                            ));
                 }
                 event.setLectures(lectures);
                 events.add(event);
@@ -182,7 +182,7 @@ public class EventDAO {
             ResultSet listenersSet = listenersStmt.executeQuery();
             while (listenersSet.next()) {
                 User user = udao.getByID(c, listenersSet.getInt(1));
-                if(user.getNotify()) {
+                if (user.getNotify()) {
                     recipients.add(user);
                 }
             }
@@ -191,7 +191,7 @@ public class EventDAO {
             ResultSet speakersSet = speakersStmt.executeQuery();
             while (speakersSet.next()) {
                 User user = udao.getByID(c, speakersSet.getInt(1));
-                if(user.getNotify()) {
+                if (user.getNotify()) {
                     recipients.add(user);
                 }
             }

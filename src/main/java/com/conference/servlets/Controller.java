@@ -8,8 +8,8 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.HashMap;
 
-@WebServlet(name = "OfferController", value = "/OfferController")
-public class OfferController extends HttpServlet {
+@WebServlet(name = "Controller", value = "/Controller")
+public class Controller extends HttpServlet {
     private HashMap<String, Command> commands;
 
     @Override
@@ -22,6 +22,7 @@ public class OfferController extends HttpServlet {
         commands.put("rejectRequest", new RejectRequestCommand());
         commands.put("assign", new AssignFreeLectureCommand());
         commands.put("setlang", new SwitchLocaleCommand());
+        commands.put("logout", new LogoutCommand());
     }
 
     @Override

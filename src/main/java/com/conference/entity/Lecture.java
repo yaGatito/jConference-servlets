@@ -11,17 +11,17 @@ public class Lecture {
      * 3 - secured;
      */
     private int status;
-    private int event;
+    private Event event;
     private User speaker;
 
-    public Lecture(String topic, int status, int event, User speaker) {
+    public Lecture(String topic, int status, Event event, User speaker) {
         this.topic = topic;
         this.status = status;
         this.event = event;
         this.speaker = speaker;
     }
 
-    public Lecture(int id, String topic, int status, int event, User speaker) {
+    public Lecture(int id, String topic, int status, Event event, User speaker) {
         this.id = id;
         this.topic = topic;
         this.status = status;
@@ -45,11 +45,11 @@ public class Lecture {
         this.status = status;
     }
 
-    public int getEvent() {
+    public Event getEvent() {
         return event;
     }
 
-    public void setEvent(int event) {
+    public void setEvent(Event event) {
         this.event = event;
     }
 

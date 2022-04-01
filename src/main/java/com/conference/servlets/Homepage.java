@@ -1,21 +1,14 @@
 package com.conference.servlets;
 
-import com.conference.connection.DBCPool;
-import com.conference.entity.Event;
-import com.conference.dao.EventDAO;
-import com.conference.dao.LectureDAO;
-import com.conference.dao.UserDAO;
 import com.conference.entity.User;
-import com.conference.util.Badges;
+import com.conference.service.HomepageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.Connection;
-import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "Homepage", value = "/Homepage")
 public class Homepage extends HttpServlet {
@@ -23,38 +16,20 @@ public class Homepage extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
-        Connection connection = pool.getConnection();
-        UserDAO udao = new UserDAO();
-        EventDAO edao = new EventDAO();
-
-        //Display only 5 future nearest events
         String lang = (String) request.getSession().getAttribute("lang");
-        List<Event> events = edao.select(connection,"status", 1,"5", 0, "date, fromtime", lang);
-
-
-        events = Event.filter(events)[1];
-        LectureDAO lecdao = new LectureDAO();
-
-        Badges badges = new Badges();
-        request.setAttribute("badges",badges);
-        request.setAttribute("events",events);
-
+        Map<String, Object> attributes = HomepageService.pack(lang);
+        attributes.forEach(request::setAttribute);
         request.getRequestDispatcher("homepage.jsp").forward(request,response);
-        pool.putBackConnection(connection);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
-        Connection connection = pool.getConnection();
         String name = request.getParameter("name");
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User user = new User(3,name,lastname,email,password, true);
-
-        if (new UserDAO().insertUser(connection, user)){
-
+        boolean res = HomepageService.createUser(user);
+        if (res){
             request.getSession().setAttribute("user",user);
             if (logger.isInfoEnabled()) {
                 logger.info("SUCCESSFUL REGISTRATION USER: NAME[{}] LASTNAME[{}] EMAIL[{}] ", name, lastname, email);
@@ -67,6 +42,5 @@ public class Homepage extends HttpServlet {
             request.setAttribute("message","Wrong registration");
             request.getRequestDispatcher("error-page.jsp").forward(request,response);
         }
-        pool.putBackConnection(connection);
     }
 }

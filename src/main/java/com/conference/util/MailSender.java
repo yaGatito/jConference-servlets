@@ -2,7 +2,6 @@ package com.conference.util;
 
 import com.conference.entity.Event;
 import com.conference.entity.User;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -13,13 +12,13 @@ import java.io.IOException;
 import java.util.*;
 
 public class MailSender {
-    private static String workMail = "dclazovskyi@gmail.com";
+    private static final String workMail = "dclazovskyi@gmail.com";
     private static MailSender instance;
     Session session;
 
     private MailSender() {
         try (FileReader fis = new FileReader(
-                "C:\\Users\\Никита\\IdeaProjects\\jConference\\src\\main\\resources\\mail.properties")) {
+                "C:\\Users\\Nikita\\IdeaProjects\\jConference\\src\\main\\resources\\mail.properties")) {
             Properties prop = new Properties();
             prop.load(fis);
             session = Session.getInstance(prop, new Authenticator() {

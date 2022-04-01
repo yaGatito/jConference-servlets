@@ -20,6 +20,7 @@ import java.util.List;
 @WebServlet(name = "AddLecture", value = "/AddLecture")
 public class AddLecture extends HttpServlet {
     public static final Logger logger = LoggerFactory.getLogger(AddLecture.class);
+    private static final EventDAO edao = new EventDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,7 +50,7 @@ public class AddLecture extends HttpServlet {
             speaker = Integer.parseInt(request.getParameter("speaker"));
             asOffer = request.getParameter("offer") != null;
         } catch (NumberFormatException e) {
-            logger.warn(e.getMessage(),e);
+            logger.warn(e.getMessage(), e);
             response.sendRedirect("Error");
         }
 
@@ -63,17 +64,19 @@ public class AddLecture extends HttpServlet {
             }
             isFree = false;
         }
-        Lecture lecture = new Lecture(topic, status, event, udao.getByID(connection,speaker));
+        Lecture lecture = new Lecture(topic, status,
+                edao.select(connection, "id", event, "1", 0, "date, fromtime", "en").get(0),
+                udao.getByID(connection, speaker));
 
-        if (isFree && new LectureDAO().insertFreeLecture(connection,lecture) ||
-                !isFree && new LectureDAO().insertLecture(connection,lecture)) {
-            if(logger.isInfoEnabled()) {
-                logger.info("SUCCESSFUL INSERTING LECTURE - TOPIC:{}, STATUS:{}, EVENT:{}, SPEAKER:{}",topic,status,event,speaker);
+        if (isFree && new LectureDAO().insertFreeLecture(connection, lecture) ||
+                !isFree && new LectureDAO().insertLecture(connection, lecture)) {
+            if (logger.isInfoEnabled()) {
+                logger.info("SUCCESSFUL INSERTING LECTURE - TOPIC:{}, STATUS:{}, EVENT:{}, SPEAKER:{}", topic, status, event, speaker);
             }
             response.sendRedirect("Profile");
         } else {
-            if(logger.isInfoEnabled()) {
-                logger.info("FAILURE INSERTING LECTURE - TOPIC:{}, STATUS:{}, EVENT:{}, SPEAKER:{}",topic,status,event,speaker);
+            if (logger.isInfoEnabled()) {
+                logger.info("FAILURE INSERTING LECTURE - TOPIC:{}, STATUS:{}, EVENT:{}, SPEAKER:{}", topic, status, event, speaker);
             }
             response.sendRedirect("Error");
         }

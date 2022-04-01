@@ -11,14 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LectureDAO  {
-    UserDAO udao = new UserDAO();
+    private static final UserDAO udao = new UserDAO();
+    private static final EventDAO edao = new EventDAO();
 
     public boolean insertLecture(Connection c, Lecture lecture) {
         try (PreparedStatement ps = c.prepareStatement(
                      "INSERT INTO lectures (id, topic, status, event, speaker) VALUES (DEFAULT,?,?,?,?)")) {
             ps.setString(1, lecture.getTopic());
             ps.setInt(2, lecture.getStatus());
-            ps.setInt(3, lecture.getEvent());
+            ps.setInt(3, lecture.getEvent().getId());
             ps.setInt(4, lecture.getSpeaker().getId());
             ps.executeUpdate();
             return true;
@@ -33,7 +34,7 @@ public class LectureDAO  {
                      "INSERT INTO lectures (id, topic, status, event) VALUES (DEFAULT,?,?,?)")) {
             ps.setString(1, lecture.getTopic());
             ps.setInt(2, lecture.getStatus());
-            ps.setInt(3, lecture.getEvent());
+            ps.setInt(3, lecture.getEvent().getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -56,9 +57,9 @@ public class LectureDAO  {
                         set.getInt("id"),
                         set.getString("topic"),
                         set.getInt("status"),
-                        set.getInt("event"),
-                        udao.getByID(c,set.getInt(set.getInt("speaker"))
-                )));
+                        edao.select(c, "id", set.getInt("event"), "1", 0, "date, fromtime", "en").get(0),
+                        udao.getByID(c,set.getInt("speaker"))
+                ));
             }
             set.close();
             return lectures;
@@ -80,9 +81,9 @@ public class LectureDAO  {
                         set.getInt("id"),
                         set.getString("topic"),
                         set.getInt("status"),
-                        set.getInt("event"),
-                        udao.getByID(c,set.getInt(set.getInt("speaker"))
-                )));
+                        edao.select(c, "id", set.getInt("event"), "1", 0, "date, fromtime", "en").get(0),
+                        udao.getByID(c,set.getInt("speaker"))
+                ));
             }
             set.close();
             return lectures;
@@ -113,9 +114,9 @@ public class LectureDAO  {
                             id,
                             set.getString("topic"),
                             set.getInt("status"),
-                            set.getInt("event"),
-                            udao.getByID(c,set.getInt(set.getInt("speaker"))
-                    )));
+                            edao.select(c, "id", set.getInt("event"), "1", 0, "date, fromtime", "en").get(0),
+                            udao.getByID(c,set.getInt("speaker"))
+                    ));
                 }
             }
             set.close();
@@ -139,9 +140,9 @@ public class LectureDAO  {
                         set.getInt("id"),
                         set.getString("topic"),
                         set.getInt("status"),
-                        set.getInt("event"),
-                        udao.getByID(c,set.getInt(set.getInt("speaker"))
-                )));
+                        edao.select(c, "id", set.getInt("event"), "1", 0, "date, fromtime", "en").get(0),
+                        udao.getByID(c,set.getInt("speaker"))
+                ));
             }
             set.close();
             return lectures;

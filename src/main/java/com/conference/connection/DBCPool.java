@@ -62,6 +62,10 @@ public class DBCPool {
         return connection;
     }
 
+    public int getConnectionsSize() {
+        return connections.size();
+    }
+
     public void putBackConnection(Connection connection){
         connections.add(connection);
     }

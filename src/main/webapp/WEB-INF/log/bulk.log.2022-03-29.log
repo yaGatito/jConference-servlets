@@ -1,0 +1,54 @@
+2022-03-29 13:14:01,494 [INFO ][ion(4)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 13:14:01,494 [INFO ][ion(4)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 13:14:02,308 [INFO ][ion(4)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 13:20:48,342 [INFO ][ion(8)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 13:20:48,342 [INFO ][ion(8)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 13:20:49,316 [INFO ][ion(8)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 13:33:06,374 [INFO ][on(14)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 13:33:06,374 [INFO ][on(14)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 13:33:07,366 [INFO ][on(14)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 13:35:43,273 [INFO ][on(18)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 13:35:43,281 [INFO ][on(18)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 13:35:44,231 [INFO ][on(18)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 15:13:28,090 [INFO ][on(21)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 15:13:28,091 [INFO ][on(21)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 15:13:43,013 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 15:13:43,013 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 15:13:44,014 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 15:20:17,464 [INFO ][ion(7)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 15:20:17,464 [INFO ][ion(7)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 15:20:18,367 [INFO ][ion(7)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 15:22:07,743 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 15:22:07,743 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 15:22:08,690 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 15:24:33,927 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 15:24:33,928 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 15:24:34,787 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 18:40:39,830 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 18:40:39,830 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 18:40:40,860 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 18:41:03,170 [INFO ][nio-8079-exec-10][com.conference.servlets.UpdateEvent] - SUCCESSFUL UPDATING EVENT - TOPIC:Big Data Engineering with Java, DATE:2022-03-30, TIME:11:00-15:00, LOCATION:Stepova str., 12
+2022-03-29 18:42:33,050 [INFO ][ion(7)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 18:42:33,052 [INFO ][ion(7)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 18:42:34,060 [INFO ][ion(7)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 18:42:55,460 [INFO ][-nio-8079-exec-2][com.conference.servlets.UpdateEvent] - SUCCESSFUL UPDATING EVENT - TOPIC:Big Data Engineering with Java, DATE:2022-03-30, TIME:12:00-16:00, LOCATION:Stepova str., 12
+2022-03-29 18:45:44,680 [INFO ][nio-8079-exec-19][com.conference.servlets.UpdateEvent] - FAILURE UPDATING EVENT - TOPIC:Big Data Engineering with Java, DATE:2022-03-30, TIME:12:00-16:00, LOCATION:Stepova str., 12
+2022-03-29 18:47:54,468 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 18:47:54,468 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 18:47:55,319 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 18:50:44,105 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 18:50:44,105 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 18:50:45,330 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 18:52:40,129 [INFO ][on(16)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 18:52:40,129 [INFO ][on(16)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 18:52:56,159 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 18:52:56,159 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 18:52:56,909 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 18:54:39,533 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 18:54:39,533 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 18:54:40,240 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 18:56:05,335 [INFO ][ion(9)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-03-29 18:56:05,335 [INFO ][ion(9)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-03-29 18:56:06,500 [INFO ][ion(9)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-03-29 18:56:19,689 [INFO ][nio-8079-exec-11][com.conference.servlets.UpdateEvent] - SUCCESSFUL UPDATING EVENT - TOPIC:Big Data Engineering with Java, DATE:2022-03-30, TIME:13:00-17:00, LOCATION:Stepova str., 12
+2022-03-29 18:56:31,870 [INFO ][nio-8079-exec-18][com.conference.servlets.UpdateEvent] - FAILURE UPDATING EVENT - TOPIC:Big Data Engineering with Java, DATE:2022-03-30, TIME:13:00-17:00, LOCATION:Stepova str., 12

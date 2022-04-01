@@ -29,8 +29,7 @@ public class Event implements Comparable<Event> {
     private List<Lecture> lectures;
     private int listeners;
     /**
-     * 0 - past event
-     * 1 - future event
+     * by default 1, need for definition event id after inserting
      */
     private int status;
 
@@ -156,19 +155,7 @@ public class Event implements Comparable<Event> {
 
     @Override
     public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", topic='" + topic + '\'' +
-                ", tags=" + tags +
-                ", fromtime='" + fromtime + '\'' +
-                ", totime='" + totime + '\'' +
-                ", date='" + date + '\'' +
-                ", isOnline=" + isOnline +
-                ", location=" + location.getAddress() +
-                ", lectures=" + lectures +
-                ", listeners=" + listeners +
-                ", status=" + status +
-                '}';
+        return id+"";
     }
 
     private String checkString(String s){

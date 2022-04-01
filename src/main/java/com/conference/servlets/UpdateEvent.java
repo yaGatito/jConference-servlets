@@ -3,6 +3,7 @@ package com.conference.servlets;
 import com.conference.connection.DBCPool;
 import com.conference.dao.EventDAO;
 import com.conference.dao.TagDAO;
+import com.conference.dao.UserDAO;
 import com.conference.entity.Event;
 import com.conference.entity.Tag;
 import com.conference.entity.User;
@@ -25,9 +26,28 @@ import java.util.Set;
 @WebServlet(name = "UpdateEvent", value = "/UpdateEvent")
 public class UpdateEvent extends HttpServlet {
     public static final Logger logger = LoggerFactory.getLogger(UpdateEvent.class);
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("update-event.jsp").forward(request,response);
+        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+        Connection connection = pool.getConnection();
+        String locale = (String) request.getSession().getAttribute("lang");
+        List<Tag> tags = new TagDAO().selectForLocale(connection, locale);
+        int eventId;
+        try {
+            eventId = Integer.parseInt(request.getParameter("id"));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            response.sendRedirect("Error");
+            return;
+        }
+
+        EventDAO edao = new EventDAO();
+        Event event = edao.select(connection, "id", eventId, "1", 0, "id", locale).get(0);
+        request.setAttribute("event", event);
+        request.setAttribute("tags", tags);
+        pool.putBackConnection(connection);
+        request.getRequestDispatcher("update-event.jsp").forward(request, response);
     }
 
     @Override
@@ -39,7 +59,7 @@ public class UpdateEvent extends HttpServlet {
         List<Tag> tagOfEvent = new ArrayList<>();
         for (Tag tag : allTags) {
             String tagParameter = request.getParameter("tag" + tag.getId());
-            if (tagParameter != null){
+            if (tagParameter != null) {
                 tagOfEvent.add(tag);
             }
         }
@@ -54,7 +74,7 @@ public class UpdateEvent extends HttpServlet {
         EventDAO edao = new EventDAO();
         Map<String, String> changes = edao.updateEvent(connection, event);
         Set<User> recipients = edao.selectRecipients(connection, event.getId());
-        MailSender.getInstance().sendChangesMessages(changes,recipients,event);
+        MailSender.getInstance().sendChangesMessages(changes, recipients, event);
 
         if (changes != null && !changes.isEmpty()) {
             if (logger.isInfoEnabled()) {
@@ -66,7 +86,7 @@ public class UpdateEvent extends HttpServlet {
                 logger.info("FAILURE UPDATING EVENT - TOPIC:{}, DATE:{}, TIME:{}, LOCATION:{}", topic, date, fromtime + "-" + totime, location);
             }
             request.setAttribute("message", "Oops. Something goes wrong");
-            request.getRequestDispatcher("error-page.jsp").forward(request,response);
+            request.getRequestDispatcher("error-page.jsp").forward(request, response);
         }
         pool.putBackConnection(connection);
     }

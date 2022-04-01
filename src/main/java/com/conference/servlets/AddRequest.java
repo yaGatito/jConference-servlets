@@ -22,6 +22,7 @@ import java.util.List;
 @WebServlet(name = "AddRequest", value = "/AddRequest")
 public class AddRequest extends HttpServlet {
     public static final Logger logger = LoggerFactory.getLogger(AddRequest.class);
+    private static final EventDAO edao = new EventDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,7 +54,9 @@ public class AddRequest extends HttpServlet {
             logger.warn(e.getMessage(), e);
             response.sendRedirect("Error");
         }
-        Lecture lecture = new Lecture(topic, status, event, udao.getByID(connection,speaker));
+        Lecture lecture = new Lecture(topic, status,
+                edao.select(connection, "id", event, "1", 0, "date, fromtime", "en").get(0),
+                udao.getByID(connection,speaker));
 
         if (new LectureDAO().insertLecture(connection, lecture)) {
             if (logger.isInfoEnabled()) {

@@ -40,18 +40,18 @@ public class AddEvent extends HttpServlet {
         String topic = request.getParameter("topic");
         TagDAO tdao = new TagDAO();
         List<Tag> allTags = tdao.select(connection);
-        List<Tag> tagOfEvent = new ArrayList<>();
+        List<Tag> tagsOfEvent = new ArrayList<>();
         for (Tag tag : allTags) {
             String tagParameter = request.getParameter("tag" + tag.getId());
             if (tagParameter != null){
-                tagOfEvent.add(tag);
+                tagsOfEvent.add(tag);
             }
         }
         String date = request.getParameter("date");
         String fromtime = request.getParameter("fromtime");
         String totime = request.getParameter("totime");
         String location = request.getParameter("location");
-        Event event = new Event(topic, tagOfEvent, fromtime, totime, date, location, 1);
+        Event event = new Event(topic, tagsOfEvent, fromtime, totime, date, location, 1);
 
         if (new EventDAO().createEvent(connection,event)) {
             if (logger.isInfoEnabled()) {

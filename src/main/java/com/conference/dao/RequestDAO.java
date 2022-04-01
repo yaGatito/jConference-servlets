@@ -1,5 +1,6 @@
 package com.conference.dao;
 
+import com.conference.entity.Event;
 import com.conference.entity.Lecture;
 import com.conference.entity.User;
 
@@ -11,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RequestDAO  {
-    UserDAO udao = new UserDAO();
+    private static final UserDAO udao = new UserDAO();
+    private static final EventDAO edao = new EventDAO();
 
     public boolean createRequest(Connection c, int speaker, int lecture) {
         try (PreparedStatement ps = c.prepareStatement(
@@ -78,7 +80,7 @@ public class RequestDAO  {
                 int id = speakerSet.getInt("id");
                 int status = speakerSet.getInt("status");
                 String topic = speakerSet.getString("topic");
-                int event = speakerSet.getInt("event");
+                Event event = edao.select(c, "id", speakerSet.getInt("event"), "1", 0, "date, fromtime", "en").get(0);
                 Lecture lecture = new Lecture(id, topic, status, event, udao.getByID(c,set.getInt(speaker)));
                 lectures.add(lecture);
                 speakerSet.close();
@@ -117,8 +119,7 @@ public class RequestDAO  {
 
     public List<Lecture> historyOfOwnRequests(Connection c, int speaker) {
         try (PreparedStatement own = c.prepareStatement(
-                     "SELECT id, topic, status, event FROM lectures WHERE status = -1 AND speaker = ?");
-        ) {
+                     "SELECT id, topic, status, event FROM lectures WHERE status = -1 AND speaker = ?")){
             List<Lecture> ownRequests = new ArrayList<>();
             own.setInt(1, speaker);
             ResultSet set = own.executeQuery();
@@ -126,8 +127,8 @@ public class RequestDAO  {
                 int id = set.getInt(1);
                 String topic = set.getString(2);
                 int status = set.getInt(3);
-                int event = set.getInt(4);
-                ownRequests.add(new Lecture(id, topic, status, event, udao.getByID(c,set.getInt(speaker))));
+                Event event = edao.select(c, "id", set.getInt(4), "1", 0, "date, fromtime", "en").get(0);
+                ownRequests.add(new Lecture(id, topic, status, event, udao.getByID(c,speaker)));
             }
             set.close();
             return ownRequests;
@@ -153,8 +154,8 @@ public class RequestDAO  {
                 requests.add(new Lecture(set1.getInt(1),
                         set1.getString(2),
                         set1.getInt(3),
-                        set1.getInt(4),
-                        udao.getByID(c,set.getInt(set1.getInt(5)))
+                        edao.select(c, "id", set.getInt(4), "1", 0, "date, fromtime", "en").get(0),
+                        udao.getByID(c,set1.getInt(5))
                 ));
                 set1.close();
             }

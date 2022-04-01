@@ -4,7 +4,6 @@
 <fmt:setBundle basename="resources"/>
 <%@ include file="head.jsp"%>
 <nav class="container-xl navbar sticky-top rowsa">
-    <!-- Navbar content -->
     <div>
         <a class="btn btn-grey" href="Homepage">jConference</a>
         <a class="btn btn-info" href="">FAQ</a>
@@ -17,13 +16,14 @@
         </form>
     </div>
     <div>
-        <%if (request.getSession().getAttribute("user")==null){%>
+        <c:if test="${sessionScope.user==null}">
             <a class="btn btn-info" href="Homepage"><fmt:message key="label.button.signup"/></a>
             <a class="btn btn-info" href="login.jsp"><fmt:message key="label.button.login"/></a>
-        <%}else {%>
+        </c:if>
+        <c:if test="${sessionScope.user!=null}">
             <a class="btn btn-info" href="Profile"><fmt:message key="label.profile"/></a>
-            <a class="btn btn-info" href="logout.jsp"><fmt:message key="label.button.logout"/></a>
-        <%}%>
+            <a class="btn btn-info" href="Controller?command=logout"><fmt:message key="label.button.logout"/></a>
+        </c:if>
         <div class="btn dropdown">
             <button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenuButton2"
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,7 +32,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                 <c:forEach items="${applicationScope.locales}" var="locale">
-                    <li><a class="dropdown-item" href="OfferController?command=setlang&lang=${locale}">${locale}</a></li>
+                    <li><a class="dropdown-item" href="Controller?command=setlang&lang=${locale}">${locale}</a></li>
                 </c:forEach>
             </ul>
         </div>
