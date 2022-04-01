@@ -74,12 +74,12 @@ public class UpdateTag extends HttpServlet {
         response.sendRedirect("Profile");
     }
 
-    public static void main(String[] args) {
-        List<String> locales = new ArrayList<>(List.of("en", "ua", "ru"));
-        Map<String, String> translations = Map.of("en", "Programming", "ua", "Програмування");
-        if (!translations.keySet().containsAll(locales)) {
-            locales.removeAll(translations.keySet());
-            System.out.println(locales);
-        }
-    }
+//    public static void main(String[] args) {
+//        List<String> locales = new ArrayList<>(List.of("en", "ua", "ru"));
+//        Map<String, String> translations = Map.of("en", "Programming", "ua", "Програмування");
+//        if (!translations.keySet().containsAll(locales)) {
+//            locales.removeAll(translations.keySet());
+//            System.out.println(locales);
+//        }
+//    }
 }

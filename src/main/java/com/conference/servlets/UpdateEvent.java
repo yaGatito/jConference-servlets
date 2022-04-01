@@ -7,6 +7,7 @@ import com.conference.dao.UserDAO;
 import com.conference.entity.Event;
 import com.conference.entity.Tag;
 import com.conference.entity.User;
+import com.conference.service.UpdateEventService;
 import com.conference.util.MailSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,31 +30,22 @@ public class UpdateEvent extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
-        Connection connection = pool.getConnection();
         String locale = (String) request.getSession().getAttribute("lang");
-        List<Tag> tags = new TagDAO().selectForLocale(connection, locale);
-        int eventId;
-        try {
-            eventId = Integer.parseInt(request.getParameter("id"));
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
+        String id = request.getParameter("id");
+        Map<String, Object> attributes = UpdateEventService.pack(locale, id);
+        if (attributes == null){
             response.sendRedirect("Error");
             return;
         }
-
-        EventDAO edao = new EventDAO();
-        Event event = edao.select(connection, "id", eventId, "1", 0, "id", locale).get(0);
-        request.setAttribute("event", event);
-        request.setAttribute("tags", tags);
-        pool.putBackConnection(connection);
+        attributes.forEach(request::setAttribute);
         request.getRequestDispatcher("update-event.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
+        DBCPool pool = DBCPool.getInstance();
         Connection connection = pool.getConnection();
+
         TagDAO tdao = new TagDAO();
         List<Tag> allTags = tdao.select(connection);
         List<Tag> tagOfEvent = new ArrayList<>();
@@ -63,7 +55,6 @@ public class UpdateEvent extends HttpServlet {
                 tagOfEvent.add(tag);
             }
         }
-
         int id = Integer.parseInt(request.getParameter("id"));
         String topic = request.getParameter("topic");
         String date = request.getParameter("date");
@@ -71,10 +62,8 @@ public class UpdateEvent extends HttpServlet {
         String totime = request.getParameter("totime");
         String location = request.getParameter("location");
         Event event = new Event(id, topic, tagOfEvent, fromtime, totime, date, location, 1);
-        EventDAO edao = new EventDAO();
-        Map<String, String> changes = edao.updateEvent(connection, event);
-        Set<User> recipients = edao.selectRecipients(connection, event.getId());
-        MailSender.getInstance().sendChangesMessages(changes, recipients, event);
+
+        Map<String, String> changes = UpdateEventService.updateEvent(connection, event);
 
         if (changes != null && !changes.isEmpty()) {
             if (logger.isInfoEnabled()) {
