@@ -1,22 +1,19 @@
 package com.conference.servlets;
 
-import com.conference.connection.DBCPool;
-import com.conference.dao.EventDAO;
-import com.conference.dao.TagDAO;
 import com.conference.entity.Event;
 import com.conference.entity.Tag;
+import com.conference.service.AddEventService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "AddEvent", value = "/AddEvent")
 public class AddEvent extends HttpServlet {
@@ -24,22 +21,15 @@ public class AddEvent extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DBCPool pool = DBCPool.getInstance();
-        Connection connection = pool.getConnection();
         String locale = (String) request.getSession().getAttribute("lang");
-        List<Tag> tags = new TagDAO().selectForLocale(connection, locale);
-        pool.putBackConnection(connection);
-        request.setAttribute("tags",tags);
+        Map<String, Object> attributes = AddEventService.pack(locale);
+        attributes.forEach(request::setAttribute);
         request.getRequestDispatcher("add-event.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
-        Connection connection = pool.getConnection();
-        String topic = request.getParameter("topic");
-        TagDAO tdao = new TagDAO();
-        List<Tag> allTags = tdao.select(connection);
+        List<Tag> allTags = AddEventService.allTags();
         List<Tag> tagsOfEvent = new ArrayList<>();
         for (Tag tag : allTags) {
             String tagParameter = request.getParameter("tag" + tag.getId());
@@ -47,13 +37,14 @@ public class AddEvent extends HttpServlet {
                 tagsOfEvent.add(tag);
             }
         }
+        String topic = request.getParameter("topic");
         String date = request.getParameter("date");
         String fromtime = request.getParameter("fromtime");
         String totime = request.getParameter("totime");
         String location = request.getParameter("location");
         Event event = new Event(topic, tagsOfEvent, fromtime, totime, date, location, 1);
-
-        if (new EventDAO().createEvent(connection,event)) {
+        boolean res = AddEventService.addEvent(event);
+        if (res) {
             if (logger.isInfoEnabled()) {
                 logger.info("SUCCESSFUL INSERTING LECTURE - TOPIC:{}, DATE:{}, TIME:{}, LOCATION:{}", topic, date, fromtime + "-" + totime, location);
             }
@@ -64,6 +55,5 @@ public class AddEvent extends HttpServlet {
             }
             response.sendRedirect("Error");
         }
-        pool.putBackConnection(connection);
     }
 }
