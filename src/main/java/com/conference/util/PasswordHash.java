@@ -1,18 +1,11 @@
 package com.conference.util;
 
-import com.conference.connection.DBCPool;
-import com.conference.entity.User;
-
 import java.security.SecureRandom;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.SecretKeyFactory;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /*
  * PBKDF2 salted password hashing.

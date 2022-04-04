@@ -3,7 +3,7 @@ package com.conference.servlets;
 import com.conference.connection.DBCPool;
 import com.conference.dao.LanguageDAO;
 import com.conference.dao.TagDAO;
-import com.conference.entity.Tag;
+import com.conference.entities.Tag;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

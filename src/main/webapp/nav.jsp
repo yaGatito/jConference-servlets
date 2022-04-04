@@ -10,10 +10,6 @@
         <a class="btn btn-info" href="Events"><fmt:message key="label.button.events"/> </a>
     </div>
     <div>
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="<fmt:message key="label.header.search"/>" aria-label="Search" style="width: 30rem;">
-            <button class="btn btn-outline-info" type="submit"><fmt:message key="label.header.search"/></button>
-        </form>
     </div>
     <div>
         <c:if test="${sessionScope.user==null}">

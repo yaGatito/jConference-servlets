@@ -2,8 +2,8 @@ package com.conference.commands;
 
 import com.conference.connection.DBCPool;
 import com.conference.dao.LectureDAO;
-import com.conference.entity.Lecture;
-import com.conference.entity.User;
+import com.conference.entities.Lecture;
+import com.conference.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.servlet.ServletException;

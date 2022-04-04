@@ -1,4 +1,4 @@
-<%@ page import="com.conference.entity.User" %>
+<%@ page import="com.conference.entities.User" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -27,11 +27,11 @@
                         <td>${User.getNameRole(user.getRole())}
                         </td>
                         <td>
-                            <a href="UserController?upgrade=${user.getId()}"><span class="iconify-inline"
+                            <a href="Controller?command=upgrade&id=${user.getId()}"><span class="iconify-inline"
                                                                                    data-icon="grommet-icons:upgrade"
                                                                                    style="color: #005;"
                                                                                    data-width="24"></span></a>
-                            <a href="UserController?downgrade=${user.getId()}"><span class="iconify-inline"
+                            <a href="Controller?command=downgrade&id=${user.getId()}"><span class="iconify-inline"
                                                                                      data-icon="grommet-icons:upgrade"
                                                                                      style="color: #005;"
                                                                                      data-width="24"

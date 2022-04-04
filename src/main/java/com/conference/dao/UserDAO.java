@@ -1,6 +1,6 @@
 package com.conference.dao;
 
-import com.conference.entity.User;
+import com.conference.entities.User;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package com.conference.util;
 
-import com.conference.entity.Event;
-import com.conference.entity.User;
+import com.conference.entities.Event;
+import com.conference.entities.User;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;

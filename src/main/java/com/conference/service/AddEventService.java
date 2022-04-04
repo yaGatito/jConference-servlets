@@ -3,8 +3,8 @@ package com.conference.service;
 import com.conference.connection.DBCPool;
 import com.conference.dao.EventDAO;
 import com.conference.dao.TagDAO;
-import com.conference.entity.Event;
-import com.conference.entity.Tag;
+import com.conference.entities.Event;
+import com.conference.entities.Tag;
 
 import java.sql.Connection;
 import java.util.HashMap;

@@ -1,8 +1,8 @@
-<%@ page import="com.conference.entity.User" %>
+<%@ page import="com.conference.entities.User" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.conference.entity.Event" %>
+<%@ page import="com.conference.entities.Event" %>
 <%@ page import="java.util.Optional" %>
-<%@ page import="com.conference.entity.Lecture" %>
+<%@ page import="com.conference.entities.Lecture" %>
 <%@ page import="com.conference.dao.*" %>
 <%@ page import="com.conference.connection.DBCPool" %>
 <%@ page import="java.sql.Connection" %>
@@ -156,7 +156,7 @@ Connection connection = pool.getConnection();
                     </td>
                     <%}%>
                     <td>
-                        <a href="ParticipateController?action=unjoin&event=<%=event.getId()%>"><span
+                        <a href="Controller?command=leave&event=<%=event.getId()%>"><span
                                 class="iconify-inline" data-icon="feather:x-square" style="color: #005;"
                                 data-width="24"></span></a>
                     </td>

@@ -1,4 +1,4 @@
-package com.conference.entity;
+package com.conference.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

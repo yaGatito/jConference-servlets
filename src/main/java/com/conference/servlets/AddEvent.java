@@ -1,7 +1,7 @@
 package com.conference.servlets;
 
-import com.conference.entity.Event;
-import com.conference.entity.Tag;
+import com.conference.entities.Event;
+import com.conference.entities.Tag;
 import com.conference.service.AddEventService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

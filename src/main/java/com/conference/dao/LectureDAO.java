@@ -1,7 +1,6 @@
 package com.conference.dao;
 
-import com.conference.entity.Lecture;
-import com.conference.entity.User;
+import com.conference.entities.Lecture;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

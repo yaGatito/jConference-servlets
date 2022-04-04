@@ -3,8 +3,8 @@ package com.conference.service;
 import com.conference.connection.DBCPool;
 import com.conference.dao.EventDAO;
 import com.conference.dao.UserDAO;
-import com.conference.entity.Event;
-import com.conference.entity.User;
+import com.conference.entities.Event;
+import com.conference.entities.User;
 import com.conference.util.Badges;
 import com.conference.util.PasswordHash;
 

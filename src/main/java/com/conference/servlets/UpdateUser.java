@@ -1,22 +1,17 @@
 package com.conference.servlets;
 
-import com.conference.connection.DBCPool;
-import com.conference.entity.User;
-import com.conference.dao.UserDAO;
+import com.conference.entities.User;
+import com.conference.service.UpdateUserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.Connection;
 
 @WebServlet(name = "UpdateUser", value = "/UpdateUser")
 public class UpdateUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DBCPool pool = (DBCPool) request.getServletContext().getAttribute("pool");
-        Connection connection = pool.getConnection();
-        request.setCharacterEncoding("UTF-8");
         User user = (User) request.getSession().getAttribute("user");
         String name = request.getParameter("name");
         String lastname = request.getParameter("lastname");
@@ -26,8 +21,8 @@ public class UpdateUser extends HttpServlet {
         user.setLastname(lastname);
         user.setEmail(email);
         user.setNotify(notify != null);
-        new UserDAO().updateUser(connection,user);
-        pool.putBackConnection(connection);
+
+        UpdateUserService.updateUser(user);
         response.sendRedirect("Profile");
     }
 }

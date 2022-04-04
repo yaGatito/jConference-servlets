@@ -2,7 +2,7 @@ package com.conference.commands;
 
 import com.conference.connection.DBCPool;
 import com.conference.dao.RequestDAO;
-import com.conference.entity.User;
+import com.conference.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,7 +1,7 @@
 package com.conference.servlets;
 
 import com.conference.connection.DBCPool;
-import com.conference.entity.User;
+import com.conference.entities.User;
 import com.conference.service.ProfileService;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -68,6 +68,4 @@ public class Profile extends HttpServlet {
 
         pool.putBackConnection(connection);
     }
-
-
 }

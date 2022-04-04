@@ -23,6 +23,10 @@ public class Controller extends HttpServlet {
         commands.put("assign", new AssignFreeLectureCommand());
         commands.put("setlang", new SwitchLocaleCommand());
         commands.put("logout", new LogoutCommand());
+        commands.put("join", new JoinEventCommand());
+        commands.put("leave", new LeaveEventCommand());
+        commands.put("upgrade", new UpgradeUserCommand());
+        commands.put("downgrade", new DowngradeUserCommand());
     }
 
     @Override

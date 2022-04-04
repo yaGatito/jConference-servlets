@@ -1,4 +1,4 @@
-package com.conference.entity;
+package com.conference.entities;
 
 public class Tag {
     private int id;

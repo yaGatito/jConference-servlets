@@ -10,7 +10,7 @@
 <jsp:include page="nav.jsp"/>
   <section class="container-xl col">
     <div class="margin col reg-sec addevent">
-      <h1 class="display-6">Create topic</h1>
+      <h1 class="display-6"><fmt:message key="to"/> </h1>
         <form id="event-form" class="col margin" action="AddRequest" method="post">
           <div style="margin-top: 1rem; line-height: 0">
             <h4><fmt:message key="label.button.topic"/> </h4>

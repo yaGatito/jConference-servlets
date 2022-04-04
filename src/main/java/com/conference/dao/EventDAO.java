@@ -1,14 +1,12 @@
 package com.conference.dao;
 
-import com.conference.entity.Event;
-import com.conference.entity.Lecture;
-import com.conference.entity.Tag;
-import com.conference.entity.User;
-import com.conference.util.MailSender;
+import com.conference.entities.Event;
+import com.conference.entities.Lecture;
+import com.conference.entities.Tag;
+import com.conference.entities.User;
 
 import java.sql.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class EventDAO {
 

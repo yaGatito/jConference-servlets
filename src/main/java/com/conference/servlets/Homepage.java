@@ -1,6 +1,6 @@
 package com.conference.servlets;
 
-import com.conference.entity.User;
+import com.conference.entities.User;
 import com.conference.service.HomepageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

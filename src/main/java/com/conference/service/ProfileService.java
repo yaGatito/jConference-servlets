@@ -2,10 +2,10 @@ package com.conference.service;
 
 import com.conference.connection.DBCPool;
 import com.conference.dao.*;
-import com.conference.entity.Event;
-import com.conference.entity.Lecture;
-import com.conference.entity.Tag;
-import com.conference.entity.User;
+import com.conference.entities.Event;
+import com.conference.entities.Lecture;
+import com.conference.entities.Tag;
+import com.conference.entities.User;
 import com.conference.util.PasswordHash;
 
 import java.security.NoSuchAlgorithmException;

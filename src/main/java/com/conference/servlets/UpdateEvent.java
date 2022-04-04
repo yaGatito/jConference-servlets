@@ -1,14 +1,10 @@
 package com.conference.servlets;
 
 import com.conference.connection.DBCPool;
-import com.conference.dao.EventDAO;
 import com.conference.dao.TagDAO;
-import com.conference.dao.UserDAO;
-import com.conference.entity.Event;
-import com.conference.entity.Tag;
-import com.conference.entity.User;
+import com.conference.entities.Event;
+import com.conference.entities.Tag;
 import com.conference.service.UpdateEventService;
-import com.conference.util.MailSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +18,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @WebServlet(name = "UpdateEvent", value = "/UpdateEvent")
 public class UpdateEvent extends HttpServlet {

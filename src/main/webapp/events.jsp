@@ -99,7 +99,7 @@
                                         </p>
                                     </c:if>
                                     <p style="margin-left: 10px;">
-                                        <a href="ParticipateController?action=join&event=${event.getId()}"
+                                        <a href="Controller?command=join&event=${event.getId()}"
                                            class="link-info"> <fmt:message key="label.button.participate"/>
                                             <span class="iconify-inline" data-icon="carbon:user-follow"
                                                   data-width="1.1em"></span></a>
