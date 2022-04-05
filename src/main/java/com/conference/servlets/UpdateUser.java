@@ -17,12 +17,7 @@ public class UpdateUser extends HttpServlet {
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
         String notify = request.getParameter("notify");
-        user.setName(name);
-        user.setLastname(lastname);
-        user.setEmail(email);
-        user.setNotify(notify != null);
-
-        UpdateUserService.updateUser(user);
+        UpdateUserService.updateUser(name, lastname, email, notify, user);
         response.sendRedirect("Profile");
     }
 }

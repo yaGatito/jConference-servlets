@@ -12,22 +12,6 @@ import java.util.*;
 
 @WebServlet("/Profile")
 public class Profile extends HttpServlet {
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.setAttribute("user", null);
-        session.setMaxInactiveInterval(3600 * 24);
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        User user = ProfileService.auth(email, password);
-        if (user != null) {
-            session.setAttribute("user", user);
-            response.sendRedirect("Profile");
-        } else {
-            response.sendRedirect("Error");
-        }
-
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,8 +21,7 @@ public class Profile extends HttpServlet {
         Connection connection = pool.getConnection();
 
         if (user == null) {
-            request.setAttribute("message", "Please log in");
-            request.getRequestDispatcher("error-page.jsp").forward(request, response);
+            response.sendRedirect("Error");
         } else {
             String item = request.getParameter("item");
             Map<String, Object> attributes = ProfileService.packByDefault(connection, item, user.getId(), lang);

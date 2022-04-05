@@ -39,8 +39,7 @@ public class Homepage extends HttpServlet {
             if(logger.isInfoEnabled()) {
                 logger.info("FAILURE REGISTRATION USER: NAME[{}] LASTNAME[{}] EMAIL[{}]",name,lastname,email);
             }
-            request.setAttribute("message","Wrong registration");
-            request.getRequestDispatcher("error-page.jsp").forward(request,response);
+            response.sendRedirect("Error");
         }
     }
 }

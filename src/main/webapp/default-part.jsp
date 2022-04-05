@@ -19,7 +19,7 @@
             </div>
             <div class="input-group distance">
                 <span class="input-group-text"><fmt:message key="label.registration.email"/></span>
-                <input type="text" aria-label="First name" class="form-control" name="email"
+                <input type="email" aria-label="First name" class="form-control" name="email"
                        value="${sessionScope.user.getEmail()}">
             </div>
             <div class="form-check form-switch distance">
@@ -30,9 +30,6 @@
             </div>
             <div class="input-group distance">
                 <button type="submit" class="btn btn-info"><fmt:message key="label.profile.save"/></button>
-            </div>
-            <div class="input-group distance">
-                <a class="btn btn-info" href=""><fmt:message key="label.profile.changepass"/></a>
             </div>
         </form>
     </div>
@@ -70,7 +67,7 @@
                             </td>
                         </c:if>
                         <td>
-                            <a href="ParticipateController?action=unjoin&event=${event.getId()}"><span
+                            <a href="Controller?command=leave&event=${event.getId()}"><span
                                     class="iconify-inline" data-icon="feather:x-square" style="color: #005;"
                                     data-width="24"></span></a>
                         </td>

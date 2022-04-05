@@ -7,6 +7,7 @@ import com.conference.entities.Lecture;
 import com.conference.entities.Tag;
 import com.conference.entities.User;
 import com.conference.util.PasswordHash;
+import com.conference.util.Validation;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -33,6 +34,9 @@ public class ProfileService {
         Connection connection = pool.getConnection();
         User user = udao.loginUser(connection, login);
         try {
+            if (user == null){
+                return null;
+            }
             PasswordHash.validatePassword(password, user.getPassword());
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();

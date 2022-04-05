@@ -7,6 +7,7 @@ import com.conference.entities.Event;
 import com.conference.entities.User;
 import com.conference.util.Badges;
 import com.conference.util.PasswordHash;
+import com.conference.util.Validation;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -27,6 +28,12 @@ public class HomepageService {
     public static boolean createUser(User user){
         DBCPool pool = DBCPool.getInstance();
         Connection connection = pool.getConnection();
+        if (!Validation.validate(Validation.PatternString.EMAIL, user.getEmail())
+                || !Validation.validate(Validation.PatternString.NAME, user.getName())
+                || !Validation.validate(Validation.PatternString.PASSWORD, user.getPassword())
+                || !Validation.validate(Validation.PatternString.NAME, user.getLastname())){
+            return false;
+        }
         try {
             user.setPassword(PasswordHash.createHash(user.getPassword()));
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {

@@ -27,6 +27,7 @@ public class JoinEventCommand implements Command {
                 response.sendRedirect("Error");
             }
         }catch (NullPointerException | NumberFormatException exception){
+            exception.printStackTrace();
             response.sendRedirect("Error");
         }
     }

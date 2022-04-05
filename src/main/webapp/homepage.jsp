@@ -16,14 +16,14 @@
             <h1 class="display-6"> <fmt:message key="message.welcome"/> </h1>
             <h4 style="width: 30rem;"><fmt:message key="message.welcome.cap"/> - <a href="login.jsp" class="link-info"> <fmt:message key="label.button.login"/> </a></h4>
             <form class="col margin" action="Homepage" method="post">
-                <input name="name" class="form-control reg" type="text" placeholder="<fmt:message key="label.registration.firstname"/>" aria-label="Search" required>
-                <input name="lastname" class="form-control reg" type="text" placeholder="<fmt:message key="label.registration.lastname"/>" aria-label="Search"
+                <input pattern="^\p{L}+$" minlength="2" maxlength="20" name="name" class="form-control reg" type="text" placeholder="<fmt:message key="label.registration.firstname"/>" aria-label="Search" required>
+                <input pattern="^\p{L}+$" minlength="2" maxlength="20" name="lastname" class="form-control reg" type="text" placeholder="<fmt:message key="label.registration.lastname"/>" aria-label="Search"
                        required>
-                <input name="email" class="form-control reg" type="Email" placeholder="<fmt:message key="label.registration.email"/>" aria-label="Search"
+                <input name="email" class="form-control reg" type="email" placeholder="<fmt:message key="label.registration.email"/>" aria-label="Search"
                        required>
-                <input name="password" class="form-control reg" type="password" placeholder="<fmt:message key="label.registration.password"/>"
+                <input pattern="^[\p{L}0-9]+$" minlength="8" maxlength="20" name="password" class="form-control reg" type="password" placeholder="<fmt:message key="label.registration.password"/>"
                        aria-label="Search" required>
-                <input class="form-control reg" type="password" placeholder="<fmt:message key="label.registration.password.again"/>" aria-label="Search"
+                <input pattern="^[\p{L}0-9]+$" minlength="8" maxlength="20" class="form-control reg" type="password" placeholder="<fmt:message key="label.registration.password.again"/>" aria-label="Search"
                        required>
                 <p></p>
                 <button class="btn btn-info" type="submit"><fmt:message key="label.button.signup"/> </button>
