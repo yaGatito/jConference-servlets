@@ -1,5 +1,6 @@
 package com.conference.servlets;
 
+import com.conference.connection.DBCPool;
 import com.conference.entities.User;
 import com.conference.service.HomepageService;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.Map;
 
 @WebServlet(name = "Homepage", value = "/Homepage")
@@ -28,7 +30,10 @@ public class Homepage extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User user = new User(3,name,lastname,email,password, true);
-        boolean res = HomepageService.createUser(user);
+        DBCPool pool = DBCPool.getInstance();
+        Connection connection = pool.getConnection();
+        boolean res = HomepageService.createUser(connection,user);
+        pool.putBackConnection(connection);
         if (res){
             request.getSession().setAttribute("user",user);
             if (logger.isInfoEnabled()) {

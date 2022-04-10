@@ -25,9 +25,10 @@ public class HomepageService {
      * @param user which will be registered
      * @return result of operation
      */
-    public static boolean createUser(User user){
-        DBCPool pool = DBCPool.getInstance();
-        Connection connection = pool.getConnection();
+    public static boolean createUser(Connection connection,User user){
+        if (user.getName() == null || user.getLastname() == null || user.getEmail() == null || user.getPassword() == null){
+            return false;
+        }
         if (!Validation.validate(Validation.PatternString.EMAIL, user.getEmail())
                 || !Validation.validate(Validation.PatternString.NAME, user.getName())
                 || !Validation.validate(Validation.PatternString.PASSWORD, user.getPassword())
@@ -40,7 +41,6 @@ public class HomepageService {
             e.printStackTrace();
             return false;
         }
-        pool.putBackConnection(connection);
         return udao.insertUser(connection, user);
     }
 
