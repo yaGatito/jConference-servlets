@@ -26,13 +26,7 @@ public class HomepageService {
      * @return result of operation
      */
     public static boolean createUser(Connection connection,User user){
-        if (user.getName() == null || user.getLastname() == null || user.getEmail() == null || user.getPassword() == null){
-            return false;
-        }
-        if (!Validation.validate(Validation.PatternString.EMAIL, user.getEmail())
-                || !Validation.validate(Validation.PatternString.NAME, user.getName())
-                || !Validation.validate(Validation.PatternString.PASSWORD, user.getPassword())
-                || !Validation.validate(Validation.PatternString.NAME, user.getLastname())){
+        if(!Validation.validateUser(user)){
             return false;
         }
         try {

@@ -1070,3 +1070,8 @@
 2022-04-09 19:38:51,055 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
 2022-04-09 19:38:51,055 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
 2022-04-09 19:38:51,990 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-04-10 13:32:42,609 [INFO ][ion(2)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-04-10 13:32:42,613 [INFO ][ion(2)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-04-10 13:32:43,636 [INFO ][ion(2)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-04-10 13:33:12,043 [INFO ][-nio-8079-exec-9][             servlets.Homepage] - SUCCESSFUL REGISTRATION USER: NAME[Nikita] LASTNAME[Lazovskyi] EMAIL[admin@admin.com] 
+2022-04-10 13:47:08,626 [INFO ][-nio-8079-exec-5][             servlets.AddEvent] - SUCCESSFUL INSERTING LECTURE - TOPIC:Java conference 2220 APRIL, DATE:2022-04-11, TIME:12:03-15:01, LOCATION:m. Arnautskaya str., 6B

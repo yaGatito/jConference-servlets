@@ -1,5 +1,6 @@
 package com.conference.servlets;
 
+import com.conference.connection.DBCPool;
 import com.conference.entities.Event;
 import com.conference.entities.Tag;
 import com.conference.service.AddEventService;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +31,8 @@ public class AddEvent extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DBCPool pool = DBCPool.getInstance();
+        Connection connection = pool.getConnection();
         List<Tag> allTags = AddEventService.allTags();
         List<Tag> tagsOfEvent = new ArrayList<>();
         for (Tag tag : allTags) {
@@ -43,7 +47,7 @@ public class AddEvent extends HttpServlet {
         String totime = request.getParameter("totime");
         String location = request.getParameter("location");
         Event event = new Event(topic, tagsOfEvent, fromtime, totime, date, location, 1);
-        boolean res = AddEventService.addEvent(event);
+        boolean res = AddEventService.addEvent(connection, event);
         if (res) {
             if (logger.isInfoEnabled()) {
                 logger.info("SUCCESSFUL INSERTING LECTURE - TOPIC:{}, DATE:{}, TIME:{}, LOCATION:{}", topic, date, fromtime + "-" + totime, location);

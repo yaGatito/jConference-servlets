@@ -5,6 +5,7 @@ import com.conference.dao.EventDAO;
 import com.conference.dao.TagDAO;
 import com.conference.entities.Event;
 import com.conference.entities.Tag;
+import com.conference.util.Validation;
 
 import java.sql.Connection;
 import java.util.HashMap;
@@ -32,11 +33,10 @@ public class AddEventService {
         return allTags;
     }
 
-    public static boolean addEvent(Event event){
-        DBCPool pool = DBCPool.getInstance();
-        Connection connection = pool.getConnection();
-        boolean res = edao.createEvent(connection,event);
-        pool.putBackConnection(connection);
-        return res;
+    public static boolean addEvent(Connection connection,Event event){
+        if(!Validation.validateEvent(event)){
+            return false;
+        }
+        return edao.createEvent(connection,event);
     }
 }
