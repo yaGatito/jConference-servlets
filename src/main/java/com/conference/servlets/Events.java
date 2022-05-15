@@ -1,5 +1,6 @@
 package com.conference.servlets;
 
+import com.conference.entities.User;
 import com.conference.service.EventsService;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -19,7 +20,7 @@ public class Events extends HttpServlet {
         String future = request.getParameter("future");
         String lang = (String) request.getSession().getAttribute("lang");
 
-        Map<String, Object> attributes = EventsService.pack(lang,sort,descending,past,future,PAGE_LIMIT);
+        Map<String, Object> attributes = EventsService.pack((User) request.getSession().getAttribute("user"),lang,sort,descending,past,future,PAGE_LIMIT);
         attributes.forEach(request::setAttribute);
 
         request.getRequestDispatcher("events.jsp").forward(request, response);

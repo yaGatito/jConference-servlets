@@ -98,9 +98,9 @@
                                                                              data-width="1.1em"></span>${event.getLocation().getShortName()}
                                         </p>
                                     </c:if>
-                                    <p style="margin-left: 10px;">
+                                    <p style="margin-left: 10px; <c:if test="${requestScope.participation == null || requestScope.participation.contains(event)}"> display: none; </c:if>">
                                         <a href="Controller?command=join&event=${event.getId()}"
-                                           class="link-info"> <fmt:message key="label.button.participate"/>
+                                           class="link-info" > <fmt:message key="label.button.participate"/>
                                             <span class="iconify-inline" data-icon="carbon:user-follow"
                                                   data-width="1.1em"></span></a>
                                     </p>

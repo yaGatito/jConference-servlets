@@ -2,15 +2,18 @@ package com.conference.service;
 
 import com.conference.connection.DBCPool;
 import com.conference.dao.EventDAO;
+import com.conference.dao.ListenersDAO;
 import com.conference.entities.Event;
+import com.conference.entities.User;
 import com.conference.util.Badges;
 import java.sql.Connection;
 import java.util.*;
 
 public class EventsService {
     private static final EventDAO edao = new EventDAO();
+    private static final ListenersDAO ldao = new ListenersDAO();
 
-    public static Map<String, Object> pack(String lang, String sort, String descendingStr, String pastStr, String futureStr, int PAGE_LIMIT){
+    public static Map<String, Object> pack(User user, String lang, String sort, String descendingStr, String pastStr, String futureStr, int PAGE_LIMIT){
         Map<String, Object> attributes = new HashMap<>();
         DBCPool pool = DBCPool.getInstance();
         Connection connection = pool.getConnection();
@@ -57,6 +60,9 @@ public class EventsService {
         }
         Badges badges = new Badges();
 
+        if (user != null) {
+            attributes.put("participation", ldao.selectEventsOfListeners(connection, user.getId(), lang));
+        }
         attributes.put("badges", badges);
         attributes.put("pages", pages);
         return attributes;

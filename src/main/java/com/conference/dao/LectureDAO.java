@@ -30,7 +30,7 @@ public class LectureDAO  {
 
     public boolean insertFreeLecture(Connection c, Lecture lecture) {
         try (PreparedStatement ps = c.prepareStatement(
-                     "INSERT INTO lectures (id, topic, status, event) VALUES (DEFAULT,?,?,?)")) {
+                     "INSERT INTO lectures (topic, status, event) VALUES (?,?,?)")) {
             ps.setString(1, lecture.getTopic());
             ps.setInt(2, lecture.getStatus());
             ps.setInt(3, lecture.getEvent().getId());

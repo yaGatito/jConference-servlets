@@ -1,5 +1,59 @@
-2022-04-10 13:32:42,609 [INFO ][ion(2)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
-2022-04-10 13:32:42,613 [INFO ][ion(2)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
-2022-04-10 13:32:43,636 [INFO ][ion(2)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
-2022-04-10 13:33:12,043 [INFO ][-nio-8079-exec-9][com.conference.servlets.Homepage] - SUCCESSFUL REGISTRATION USER: NAME[Nikita] LASTNAME[Lazovskyi] EMAIL[admin@admin.com] 
-2022-04-10 13:47:08,626 [INFO ][-nio-8079-exec-5][com.conference.servlets.AddEvent] - SUCCESSFUL INSERTING LECTURE - TOPIC:Java conference 2220 APRIL, DATE:2022-04-11, TIME:12:03-15:01, LOCATION:m. Arnautskaya str., 6B
+2022-05-15 09:17:21,034 [INFO ][ion(2)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 09:17:21,043 [INFO ][ion(2)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 09:17:22,434 [INFO ][ion(2)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 09:19:48,942 [INFO ][nio-8079-exec-10][com.conference.servlets.Homepage] - SUCCESSFUL REGISTRATION USER: NAME[Alexander] LASTNAME[Korney] EMAIL[korey@gmail.com] 
+2022-05-15 09:23:34,503 [INFO ][-nio-8079-exec-8][com.conference.servlets.Homepage] - SUCCESSFUL REGISTRATION USER: NAME[Ярослав] LASTNAME[Тростинюк] EMAIL[trostinuk@gmail.com] 
+2022-05-15 09:26:04,057 [INFO ][-nio-8079-exec-1][com.conference.servlets.Homepage] - SUCCESSFUL REGISTRATION USER: NAME[Kirill] LASTNAME[Gregov] EMAIL[grekov@gmail.com] 
+2022-05-15 09:28:54,973 [INFO ][-nio-8079-exec-9][com.conference.servlets.AddLecture] - SUCCESSFUL INSERTING LECTURE - TOPIC:Stream API, EVENT:6, SPEAKER:12
+2022-05-15 09:29:14,869 [INFO ][-nio-8079-exec-4][com.conference.servlets.AddLecture] - SUCCESSFUL INSERTING LECTURE - TOPIC:Java Collection Framework, EVENT:6, SPEAKER:13
+2022-05-15 09:41:48,305 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 09:41:48,305 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 09:41:49,473 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 09:54:58,024 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 09:54:58,024 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 09:54:58,944 [INFO ][on(10)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 09:59:45,607 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 09:59:45,607 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 09:59:46,853 [INFO ][on(13)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 10:01:58,223 [INFO ][on(17)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 10:01:58,223 [INFO ][on(17)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 10:01:59,325 [INFO ][on(17)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 10:02:18,788 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 10:02:18,788 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 10:02:19,798 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 10:05:08,576 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 10:05:08,576 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 10:05:09,803 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 10:06:34,253 [INFO ][ion(9)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 10:06:34,253 [INFO ][ion(9)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 10:06:35,373 [INFO ][ion(9)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 10:07:14,776 [INFO ][on(12)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 10:07:14,776 [INFO ][on(12)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 10:07:16,255 [INFO ][on(12)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 10:08:37,833 [INFO ][nio-8079-exec-22][com.conference.servlets.UpdateEvent] - SUCCESSFUL UPDATING EVENT - TOPIC:Java conference 2220 APRIL, DATE:2022-05-17, TIME:11:00-12:00, LOCATION:m. Arnautskaya str., 6B
+2022-05-15 10:11:47,046 [INFO ][on(16)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 10:11:47,046 [INFO ][on(16)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 10:11:48,084 [INFO ][on(16)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 10:12:21,054 [INFO ][on(20)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 10:12:21,058 [INFO ][on(20)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 10:12:40,569 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 10:12:40,569 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 10:12:41,913 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 10:16:36,016 [INFO ][-nio-8079-exec-5][com.conference.servlets.AddLecture] - FAILURE INSERTING LECTURE - TOPIC:JakartaEE, EVENT:6, SPEAKER:0
+2022-05-15 10:16:52,526 [INFO ][nio-8079-exec-10][com.conference.servlets.AddLecture] - FAILURE INSERTING LECTURE - TOPIC:JakartaEE, EVENT:6, SPEAKER:0
+2022-05-15 10:18:32,757 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 10:18:32,759 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 10:18:33,763 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 10:18:52,794 [INFO ][nio-8079-exec-11][com.conference.servlets.AddLecture] - FAILURE INSERTING LECTURE - TOPIC:JakartaEE , EVENT:6, SPEAKER:0
+2022-05-15 10:18:59,434 [INFO ][nio-8079-exec-15][com.conference.servlets.AddLecture] - FAILURE INSERTING LECTURE - TOPIC:ФВыфвфвыфывфasdasd, EVENT:6, SPEAKER:0
+2022-05-15 10:19:08,105 [INFO ][nio-8079-exec-11][com.conference.servlets.AddLecture] - FAILURE INSERTING LECTURE - TOPIC:DADAD12 asADsada, EVENT:6, SPEAKER:0
+2022-05-15 10:19:37,644 [INFO ][nio-8079-exec-15][com.conference.servlets.UpdateEvent] - SUCCESSFUL UPDATING EVENT - TOPIC:Java conference 2220 APRIL, DATE:2022-05-17, TIME:11:00-13:00, LOCATION:m. Arnautskaya str., 6B
+2022-05-15 10:22:49,060 [INFO ][nio-8079-exec-18][com.conference.servlets.UpdateEvent] - SUCCESSFUL UPDATING EVENT - TOPIC:Java conference 2220 APRIL, DATE:2022-05-17, TIME:11:00-12:00, LOCATION:m. Arnautskaya str., 6B
+2022-05-15 10:52:57,885 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 10:52:57,885 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 10:52:59,224 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 10:53:19,615 [INFO ][nio-8079-exec-10][com.conference.servlets.AddLecture] - FAILURE INSERTING LECTURE - TOPIC:JakartaEE, EVENT:6, SPEAKER:0
+2022-05-15 10:57:56,270 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 10:57:56,270 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 10:57:57,235 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 11:10:23,547 [INFO ][-nio-8079-exec-5][com.conference.servlets.AddLecture] - SUCCESSFUL INSERTING LECTURE - TOPIC:JakartaEE, EVENT:6, SPEAKER:0
