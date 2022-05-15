@@ -1137,3 +1137,9 @@
 2022-05-15 10:57:56,270 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
 2022-05-15 10:57:57,235 [INFO ][ion(3)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
 2022-05-15 11:10:23,547 [INFO ][-nio-8079-exec-5][           servlets.AddLecture] - SUCCESSFUL INSERTING LECTURE - TOPIC:JakartaEE, EVENT:6, SPEAKER:0
+2022-05-15 15:16:04,839 [INFO ][ion(6)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 15:16:04,841 [INFO ][ion(6)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 15:16:05,921 [INFO ][ion(6)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-15 15:17:58,221 [INFO ][on(10)-127.0.0.1][     listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-15 15:17:58,221 [INFO ][on(10)-127.0.0.1][     listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-15 15:17:59,061 [INFO ][on(10)-127.0.0.1][     listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
