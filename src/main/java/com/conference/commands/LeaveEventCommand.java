@@ -30,5 +30,6 @@ public class LeaveEventCommand implements Command {
         }catch (NullPointerException | NumberFormatException exception){
             response.sendRedirect("Error");
         }
+        pool.putBackConnection(connection);
     }
 }

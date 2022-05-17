@@ -40,5 +40,6 @@ public class UpgradeUserCommand implements Command{
             dao.setRole(connection,1,id);
         }
         response.sendRedirect("Profile?item=Users");
+        pool.putBackConnection(connection);
     }
 }

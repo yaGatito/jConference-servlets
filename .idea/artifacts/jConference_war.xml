@@ -8,7 +8,7 @@
       </options>
     </properties>
     <root id="archive" name="jConference-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="jConference:war exploded" />
+      <element id="artifact" artifact-name="jConference" />
     </root>
   </artifact>
 </component>

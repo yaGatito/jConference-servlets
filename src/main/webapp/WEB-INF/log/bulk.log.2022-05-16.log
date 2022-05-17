@@ -1,0 +1,32 @@
+2022-05-16 20:22:23,635 [INFO ][ion(2)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-16 20:22:23,635 [INFO ][ion(2)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-16 20:22:24,615 [INFO ][ion(2)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-16 20:22:32,224 [INFO ][ion(4)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-16 20:22:32,224 [INFO ][ion(4)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-16 20:22:33,077 [INFO ][ion(4)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-16 20:24:06,206 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-16 20:24:06,206 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-16 20:24:07,279 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-16 20:28:12,991 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-16 20:28:12,991 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-16 20:28:14,063 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-16 20:28:34,300 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-16 20:28:34,317 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-16 20:28:35,496 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-16 20:29:27,586 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-16 20:29:27,586 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-16 20:29:28,639 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-16 20:31:06,126 [INFO ][-nio-8079-exec-1][com.conference.servlets.Homepage] - SUCCESSFUL REGISTRATION USER: NAME[Segiy] LASTNAME[Shtembulyak] EMAIL[shtemb@gmail.com] 
+2022-05-16 20:32:39,697 [INFO ][-nio-8079-exec-3][com.conference.servlets.AddEvent] - SUCCESSFUL INSERTING LECTURE - TOPIC:.NET conference 2022 APRIL, DATE:2022-05-17, TIME:12:03-14:15, LOCATION:https://www.youtube.com/watch?v=Czkk1Kgqxjs
+2022-05-16 21:39:12,076 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-16 21:39:12,077 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-16 21:39:13,112 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-16 21:41:00,773 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-16 21:41:00,773 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-16 21:41:02,316 [INFO ][ion(6)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-16 21:41:11,230 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED LOG4J SYSTEM
+2022-05-16 21:41:11,230 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED I18N SYSTEM
+2022-05-16 21:41:12,082 [INFO ][ion(3)-127.0.0.1][com.conference.listeners.ContextListener] - INITIALIZED DBCPool SYSTEM
+2022-05-16 21:42:20,146 [INFO ][-nio-8079-exec-9][com.conference.servlets.AddEvent] - SUCCESSFUL INSERTING LECTURE - TOPIC:Unreal Engine, DATE:2022-05-18, TIME:16:00-19:00, LOCATION:https://metanit.com/java/tutorial/4.2.php
+2022-05-16 21:46:51,623 [INFO ][-nio-8079-exec-2][com.conference.servlets.AddRequest] - SUCCESSFUL INSERTING REQUEST-LECTURE - TOPIC:Reymarching, EVENT:8, SPEAKER:Alexander Korney
+2022-05-16 21:46:59,927 [INFO ][-nio-8079-exec-5][com.conference.commands.MakeRequestCommand] - REQUEST FOR FREE LECTURE[16] WAS SUCCESSFUL CREATED BY USER[12]

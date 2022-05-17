@@ -40,5 +40,6 @@ public class DowngradeUserCommand implements Command{
             dao.setRole(connection,2,id);
         }
         response.sendRedirect("Profile?item=Users");
+        pool.putBackConnection(connection);
     }
 }

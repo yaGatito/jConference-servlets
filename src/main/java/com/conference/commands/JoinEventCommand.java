@@ -30,5 +30,6 @@ public class JoinEventCommand implements Command {
             exception.printStackTrace();
             response.sendRedirect("Error");
         }
+        pool.putBackConnection(connection);
     }
 }
